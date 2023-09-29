@@ -24,18 +24,19 @@ const LoginPage = () => {
     useLoginManager(email);
 
   const handleSubmission = async () => {
-    const details = {
-      id: email,
-      password: password,
-    };
+    // const details = {
+    //   id: email,
+    //   password: password,
+    // };
 
-    console.log(email);
-    console.log(password);
+    // console.log(email);
+    // console.log(password);
 
-    await postCaller(details);
+    // await postCaller(details);
 
-    setEmail("");
-    setPassword("");
+    // setEmail("");
+    // setPassword("");
+    navigate('/dashboard')
   };
   return (
     <AuthenticationBase

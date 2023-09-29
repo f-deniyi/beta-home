@@ -22,7 +22,7 @@ module.exports = {
         whiteColor: "#FFFFFF",
         brandRed: "#FF0000",
         blackColor: "#000000",
-        brandYellow: "#FFA800",
+        brandYellow: "#FFF122",
         offCoffee: "#EFC5A7",
         brandOrange: "#F6BD60",
         brandGreen: "#06E401",
