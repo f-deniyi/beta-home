@@ -10,6 +10,7 @@ import ForgotPasswordPage from "./modules/authentication/view/ForgotPasswordPage
 import ResetPasswordPage from "./modules/authentication/view/ResetPasswordPage";
 import AccountVerification from "./modules/authentication/view/AccountVerificationPage";
 import CreateAccountPage from "./modules/authentication/view/CreateAccountPage";
+import ProductsManagement from "./modules/products/view";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products-management" element={<ProductsManagement />} />
+
           {/* <Route
             path="/dashboard/user-details/:userId"
             element={<UserDetailsPage />}

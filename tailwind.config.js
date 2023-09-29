@@ -22,17 +22,32 @@ module.exports = {
         whiteColor: "#FFFFFF",
         brandRed: "#FF0000",
         blackColor: "#000000",
-        brandYellow: "#FFF112",
+        brandYellow: "#FFA800",
         offCoffee: "#EFC5A7",
         brandOrange: "#F6BD60",
-        brandGreen: "#84A59D",
+        brandGreen: "#06E401",
         lightGrey: "#F2F2F2",
         deepGrey: "#CEC1B4",
+        brandPrimary: '#FFF122'
       },
     },
   },
   daisyui: {
     base: false,
+    themes: ["light"]
   },
-  plugins: [require("tailwind-scrollbar-hide"), require("daisyui")],
+
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("daisyui"),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.mask-gradient': {
+          maskImage: 'linear-gradient(to top, rgba(0,0,0,0) , white )',
+          WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0), white)'
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 };

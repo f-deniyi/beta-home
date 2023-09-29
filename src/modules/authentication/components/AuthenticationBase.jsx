@@ -22,15 +22,15 @@ const AuthenticationBase = ({
             alt="BetaHome logo"
           />
 
-          <p className="flex flex-col items-center justify-center text-[50px] md:text-[100px] font-bold leading-tight ">
+          <p className="flex flex-col items-center justify-center text-[50px] md:text-[100px] font-bold leading-tight z-0 ">
             <span className="-mb-4 md:-mb-8">Vendor</span>{" "}
-            <span className="text-[100px] md:text-[200px] -mt-6 md:-mt-10 ">
+            <span className="text-[100px] md:text-[200px] -mt-6 md:-mt-10 mask-gradient">
               Store
             </span>
           </p>
 
           <img
-            className="w-full md:max-w-[70%] mx-auto 2xl:py-0 object-contain -mt-10 md:-mt-20"
+            className="w-full md:max-w-[70%] mx-auto 2xl:py-0 object-contain -mt-10 md:-mt-20 z-10"
             src={authentication}
             alt=""
           />
