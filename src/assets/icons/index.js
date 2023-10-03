@@ -26,7 +26,9 @@ import close from './close.svg'
 import gallery from './gallery.svg'
 import colorPicker from './colorPicker.svg'
 import plusIcon from './plus.svg'
-
+import edit from './edit.svg'
+import deleteIcon from './deleteIcon.svg'
+import warning from './delete.svg'
 
 
 export {
@@ -57,5 +59,8 @@ export {
     close,
     gallery,
     colorPicker,
-    plusIcon
+    plusIcon,
+    edit,
+    deleteIcon,
+    warning
 };
