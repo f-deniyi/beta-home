@@ -11,6 +11,9 @@ import ResetPasswordPage from "./modules/authentication/view/ResetPasswordPage";
 import AccountVerification from "./modules/authentication/view/AccountVerificationPage";
 import CreateAccountPage from "./modules/authentication/view/CreateAccountPage";
 import ProductsManagement from "./modules/products/view";
+import ServiceManagement from './modules/services/view'
+import Wallet from './modules/wallet/view'
+
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/products-management" element={<ProductsManagement />} />
+          <Route path="/services-management" element={<ServiceManagement />} />
+          <Route path="/wallet" element={<Wallet />} />
+
+          
 
           {/* <Route
             path="/dashboard/user-details/:userId"

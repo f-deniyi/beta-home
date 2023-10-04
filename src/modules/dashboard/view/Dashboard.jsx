@@ -8,8 +8,6 @@ import ProductTable from "../../../constants/Table/Products";
 
 
 const Dashboard = () => {
-
-
   return (
     <BaseDashboardNavigation title={"Dashboard"} hideSearch={false}>
       <div class="relative w-full">

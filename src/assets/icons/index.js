@@ -6,7 +6,7 @@ import product_active from './product_active.svg'
 import services from './services.svg'
 import services_active from './services_active.svg'
 import wallet from './wallet.svg'
-import wallet_active from './wallet_active.svg'
+import wallet_active from './new_wallet.svg'
 import message from './messages.svg'
 import message_active from './message.svg'
 import account from './account.svg'
@@ -29,6 +29,9 @@ import plusIcon from './plus.svg'
 import edit from './edit.svg'
 import deleteIcon from './deleteIcon.svg'
 import warning from './delete.svg'
+import depositIcon from './deposit_icon.svg'
+import withdrawIcon from './withdraw.svg'
+import miniMenu from './mini_menu.svg'
 
 
 export {
@@ -62,5 +65,8 @@ export {
     plusIcon,
     edit,
     deleteIcon,
-    warning
+    warning,
+    depositIcon,
+    withdrawIcon,
+    miniMenu
 };
