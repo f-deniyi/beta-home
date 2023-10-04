@@ -28,14 +28,17 @@ const ColorAttribute = () => {
                     }
 
                 </div>
-                <div role='button' className='flex bg-[#F2F2F2] rounded-full p-1 items-center justify-between' onClick={() => document.getElementById('color_picker').showModal()}>
-                    <div className={`h-[36px] w-[36px]  me-1 rounded-full`} style={{ background: color }} />
-                    <p className={`text-[#8E8E8E] text-[12px] me-1 font-normal`}>Pick Colours</p>
-                    <div className='ml-1 pr-2'>
-                        <img src={colorPicker} alt='icon' />
-                    </div>
+                <div className='flex-end ml-auto'>
+                    <div role='button' className='flex bg-[#F2F2F2] rounded-full p-1 items-center justify-between' onClick={() => document.getElementById('color_picker').showModal()}>
+                        <div className={`h-[36px] w-[36px]  me-1 rounded-full`} style={{ background: color }} />
+                        <p className={`text-[#8E8E8E] text-[12px] me-1 font-normal`}>Pick Colours</p>
+                        <div className='ml-1 pr-2'>
+                            <img src={colorPicker} alt='icon' />
+                        </div>
 
+                    </div>
                 </div>
+
 
             </div>
 
