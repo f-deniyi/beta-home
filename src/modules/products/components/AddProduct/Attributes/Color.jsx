@@ -16,10 +16,18 @@ const ColorAttribute = () => {
     };
 
     return (
-        <div className='flex  justify-between w-full'>
+        <div className='flex   w-full'>
             <p className='me-2 text-[15px] font-normal'>Color: </p>
 
-            <div className='flex items-center ml-3'>
+            <div className='flex items-center  flex-grow gap-3'>
+                <div className='flex'>
+                    {
+                        colorArray.slice(-4).map(el =>
+                            <div className='h-[36px] rounded-full w-[36px]  mr-1' style={{ background: el }} />
+                        )
+                    }
+
+                </div>
                 <div role='button' className='flex bg-[#F2F2F2] rounded-full p-1 items-center justify-between' onClick={() => document.getElementById('color_picker').showModal()}>
                     <div className={`h-[36px] w-[36px]  me-1 rounded-full`} style={{ background: color }} />
                     <p className={`text-[#8E8E8E] text-[12px] me-1 font-normal`}>Pick Colours</p>
@@ -28,13 +36,7 @@ const ColorAttribute = () => {
                     </div>
 
                 </div>
-                <div className='flex'>
-                    {
-                        colorArray.slice(-4).map(el =>
-                            <div className='h-[36px] rounded-full w-[36px]  mr-1' style={{ background: el }} />
-                        )
-                    }
-                </div>
+
             </div>
 
             <ModalManagement

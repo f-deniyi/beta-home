@@ -18,9 +18,9 @@ const SizeAttribute = () => {
     }
 
     return (
-        <div className='flex items-centr justify-between'>
+        <div className='flex items-centr gap-2 w-full'>
             <p>Size: </p>
-            <div>
+            <div className='flex-grow'>
                 <div className="flex items-center bg-[#EDEDED] rounded-md w-full ml-3">
                     <input type="number"
                         className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[60px] flex-1 px-4 py-2 bg-transparent focus:border-none hover:border-none focus:outline-none focus:shadow-none appearance-none"
