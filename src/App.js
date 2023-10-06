@@ -13,6 +13,8 @@ import CreateAccountPage from "./modules/authentication/view/CreateAccountPage";
 import ProductsManagement from "./modules/products/view";
 import ServiceManagement from './modules/services/view'
 import Wallet from './modules/wallet/view'
+import Profile from './modules/profile/view'
+
 
 
 function App() {
@@ -25,9 +27,7 @@ function App() {
           <Route path="/products-management" element={<ProductsManagement />} />
           <Route path="/services-management" element={<ServiceManagement />} />
           <Route path="/wallet" element={<Wallet />} />
-
-          
-
+          <Route path="/profile" element={<Profile />} />
           {/* <Route
             path="/dashboard/user-details/:userId"
             element={<UserDetailsPage />}

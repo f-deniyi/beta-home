@@ -32,7 +32,14 @@ import warning from './delete.svg'
 import depositIcon from './deposit_icon.svg'
 import withdrawIcon from './withdraw.svg'
 import miniMenu from './mini_menu.svg'
-
+import profile from './outline_profile.svg'
+import arrowRight from './rigt_arrwo.svg'
+import terms from './terms.svg'
+import logout from './logout.svg'
+import deleteAccount from './delete_account.svg'
+import password from './password.svg'
+import user from './user.svg'
+import camera from './camera.svg'
 
 export {
     authPlacementImage,
@@ -68,5 +75,13 @@ export {
     warning,
     depositIcon,
     withdrawIcon,
-    miniMenu
+    miniMenu,
+    profile,
+    terms,
+    deleteAccount,
+    logout,
+    arrowRight,
+    password,
+    user,
+    camera
 };
