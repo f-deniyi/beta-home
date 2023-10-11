@@ -5,3 +5,4 @@ class GlobalVariables {
 }
 
 export default new GlobalVariables();
+

@@ -48,6 +48,8 @@ import {
   searchIcon
 } from '../assets/icons'
 
+import { adminMenu, vendorMenu } from "../constants/Menu";
+
 const BaseDashboardNavigation = ({
   children,
   title,
@@ -104,27 +106,13 @@ const BaseDashboardNavigation = ({
 
   // const tokenExists = localStorage.getItem("token") !== null;
 
+  const activeMenu = !isAdmin ? adminMenu : vendorMenu
+
   return (
     <div className="relative md:fixed flex h-[100vh] w-full text-blackColor p-3">
-      <ModalManagement
-        id={"my_modal_1"}
-        hideCancel={true}
-        className={"bg-white"}
-      >
-        <div className="text-center text-blackColor space-y-8 m-5 bg-white">
-          <p className=" font-bold text-28px">Welcome</p>
-          <p className="">
-            We noticed you have not set up your profile yet. To continue, please
-            set up your account profile.
-          </p>
-          <CustomButton
-            buttonText={"Setup my profile"}
-            onClick={() => navigate("/dashboard/settings")}
-          />
-        </div>
-      </ModalManagement>
+
       <div
-        className={`hidden md:flex ease-in-out duration-500 w-[20%] bg-[#fff122] z-50 h-full pt-2  md:overflow-auto scrollbar-hide  flex-col  items-start space-y-10  pb-10 rounded-[10px]`}
+        className={`hidden md:flex ease-in-out duration-500 w-[25%] bg-[#fff122] z-50 h-full pt-2  md:overflow-auto scrollbar-hide  flex-col  items-start space-y-10  pb-10 rounded-[10px]`}
       >
         <div className="pb-2 border-b border-black w-[90%] mx-auto mb-3">
           <img
@@ -138,252 +126,26 @@ const BaseDashboardNavigation = ({
           RAIZON
         </p> */}
 
-        <Link
-          className="w-[90%] mx-auto"
-          to={
-            isAdmin
-              ? "/admin/dashboard"
 
-              : "/dashboard"
-          }
-        >
-          <IconsWithText
-            icon={home}
-            activeIcon={home_active}
-            path={
-              isAdmin
-                ? "/admin/dashboard"
-                // : data.data.user.fullname === "" ||
-                //   data.data.user.sex === "" ||
-                //   data.data.user.phone === ""
-                // ? "/dashboard/settings"
-                : "/dashboard"
-            }
-            iconSize="28px"
-            text="Home"
-          />
-        </Link>
+        {
+          activeMenu.map(
+            el => <Link
+              className="w-[90%] mx-auto cursor-pointer"
+              to={ el?.path}
+            >
+              <IconsWithText
+                icon={el?.icon}
+                activeIcon={el?.activeIcon}
+                path={
+                  el?.path
+                }
+                iconSize="28px"
+                text={el?.title}
+              />
+            </Link>
+          )
+        }
 
-        <Link
-          className="w-[90%] mx-auto"
-          to={
-            isAdmin
-              ? "/admin/products-management"
-
-              : "/products-management"
-          }
-        >
-          <IconsWithText
-            icon={product}
-            activeIcon={product_active}
-            path={
-              isAdmin
-                ? "/admin/products-management"
-                // : data.data.user.fullname === "" ||
-                //   data.data.user.sex === "" ||
-                //   data.data.user.phone === ""
-                // ? "/dashboard/settings"
-                : "/products-management"
-            }
-            iconSize="28px"
-            text="Products Management"
-          />
-        </Link>
-
-        <Link
-          className="w-[90%] mx-auto"
-          to={
-            isAdmin
-              ? "/admin/services-management"
-
-              : "/services-management"
-          }
-        >
-          <IconsWithText
-
-            icon={services}
-            activeIcon={services_active}
-            path={
-              isAdmin
-                ? "/admin/services-management"
-                : "/services-management"
-            }
-            iconSize="28px"
-            text="Services Management"
-          />
-        </Link>
-
-
-        <Link
-          className="w-[90%] mx-auto"
-          to={
-            isAdmin
-              ? "/admin/messages"
-
-              : "/messages"
-          }
-        >
-          <IconsWithText
-
-            icon={message}
-            activeIcon={message_active}
-            path={
-              isAdmin
-                ? "/admin/messages"
-                : "/messages"
-            }
-            iconSize="28px"
-            text="Messages"
-          />
-        </Link>
-
-        <Link
-          className="w-[90%] mx-auto"
-          to={
-            isAdmin
-              ? "/admin/wallet"
-
-              : "/wallet"
-          }
-        >
-          <IconsWithText
-            icon={wallet}
-            activeIcon={wallet_active}
-            path={
-              isAdmin
-                ? "/admin/wallet"
-                : "/wallet"
-            }
-            iconSize="28px"
-            text="Wallet"
-          />
-        </Link>
-
-        <Link
-          className="w-[90%] mx-auto"
-          to={
-            isAdmin
-              ? "/admin/profile"
-
-              : "/profile"
-          }
-        >
-          <IconsWithText
-            icon={account}
-            activeIcon={account_active}
-            path={
-              isAdmin
-                ? "/admin/profile"
-                : "/profile"
-            }
-            iconSize="28px"
-            text="Account"
-          />
-        </Link>
-
-        {/* 
-        {isAdmin && (
-          <Link
-          className="w-[90%] mx-auto" to={"/admin/user-management"}>
-            <IconsWithText
-              icon={<AiOutlineSolution />}
-              iconSize="28px"
-              path={"/admin/user-management"}
-              text={"User Management"}
-            />
-          </Link>
-        )}
-        <Link
-        className="w-[90%] mx-auto" to={isAdmin ? "/admin/all-feeds" : "/dashboard/feeds"}>
-          <IconsWithText
-            icon={<AiOutlineFund />}
-            iconSize="28px"
-            path={isAdmin ? "/admin/all-feeds" : "/dashboard/feeds"}
-            text="Feeds"
-          />
-        </Link>
-        {!isAdmin && (
-          <Link
-          className="w-[90%] mx-auto" to={"/dashboard/new-profile"}>
-            <IconsWithText
-              icon={<AiOutlineUserAdd />}
-              iconSize="28px"
-              path={"/dashboard/new-profile"}
-              text={"New Profiles"}
-            />
-          </Link>
-        )}
-        <Link
-        className="w-[90%] mx-auto" to={isAdmin ? "/admin/all-profiles" : "/dashboard/all-profiles"}>
-          <IconsWithText
-            icon={<AiOutlineTeam />}
-            iconSize="28px"
-            path={isAdmin ? "/admin/all-profiles" : "/dashboard/all-profiles"}
-            text="Profiles"
-          />
-        </Link>
-        {isAdmin && (
-          <Link
-          className="w-[90%] mx-auto" to={"/admin/pricing"}>
-            <IconsWithText
-              icon={<AiOutlinePercentage />}
-              iconSize="28px"
-              path={"/admin/pricing"}
-              text="Pricing"
-            />
-          </Link>
-        )}
-        {isAdmin && (
-          <Link
-          className="w-[90%] mx-auto" to={"/admin/measurements"}>
-            <IconsWithText
-              icon={<AiOutlineScissor />}
-              iconSize="28px"
-              path={"/admin/measurements"}
-              text="Measurement"
-            />
-          </Link>
-        )}
-        <Link
-        className="w-[90%] mx-auto" to={isAdmin ? "/admin/settings" : "/dashboard/settings"}>
-          <IconsWithText
-            icon={<AiOutlineSetting />}
-            iconSize="28px"
-            path={isAdmin ? "/admin/settings" : "/dashboard/settings"}
-            text="Settings"
-          />
-        </Link>
-        {isAdmin && (
-          <Link
-          className="w-[90%] mx-auto" to={"/admin/tickets"}>
-            <IconsWithText
-              icon={<AiOutlineMail />}
-              iconSize="28px"
-              path={"/admin/tickets"}
-              text="Tickets"
-            />
-          </Link>
-        )}
-        {isAdmin && (
-          <Link
-          className="w-[90%] mx-auto" to={"/admin/broadcast"}>
-            <IconsWithText
-              icon={<AiOutlineNotification />}
-              iconSize="28px"
-              path={"/admin/broadcast"}
-              text="Broadcasts"
-            />
-          </Link>
-        )} */}
-        <div className="w-[90%] mx-auto">
-          <button onClick={handleLogout} className="w-full" >
-            <IconsWithText
-              icon={<AiOutlineLogout />}
-              iconSize="28px"
-              text="Logout"
-            />
-          </button>
-        </div>
       </div>
       {/* this is where the mobile menu is */}
       <div

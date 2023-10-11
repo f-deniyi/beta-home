@@ -14,6 +14,7 @@ import ProductsManagement from "./modules/products/view";
 import ServiceManagement from './modules/services/view'
 import Wallet from './modules/wallet/view'
 import Profile from './modules/profile/view'
+import UsersManagement from "./modules/UsersManagament";
 
 
 
@@ -34,6 +35,8 @@ function App() {
           /> */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin/users-management" element={<UsersManagement />} />
+
           <Route
             path="/admin/verification"
             element={<AdminLoginVerification />}

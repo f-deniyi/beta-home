@@ -23,6 +23,7 @@ import menu from './menu.svg'
 import cart from './cart.svg'
 import star from './star.png'
 import close from './close.svg'
+import camera from './camera.svg'
 import gallery from './gallery.svg'
 import colorPicker from './colorPicker.svg'
 import plusIcon from './plus.svg'
@@ -39,7 +40,19 @@ import logout from './logout.svg'
 import deleteAccount from './delete_account.svg'
 import password from './password.svg'
 import user from './user.svg'
-import camera from './camera.svg'
+import dashboard from './dashboard.svg'
+import dashboard_active from './dashboard_active.svg'
+import users from './users.svg'
+// import vendor from './vendor.svg'
+import vendor_active from './vendor_active.svg'
+import promotion from './promotion.svg'
+import replacement from './replacement.svg'
+import referal from './referal.svg'
+import shop from './shop.svg'
+import packageIcon from './package.svg'
+import replayment from './replacement.svg'
+import customers from './customers.svg'
+import users_active from './users_active.svg'
 
 export {
     authPlacementImage,
@@ -83,5 +96,17 @@ export {
     arrowRight,
     password,
     user,
-    camera
+    camera,
+    dashboard,
+    promotion,
+    referal,
+    users,
+    shop,
+    replacement,
+    vendor_active,
+    packageIcon,
+    replayment,
+    dashboard_active,
+    customers,
+    users_active
 };
