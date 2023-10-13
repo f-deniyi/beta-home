@@ -22,7 +22,8 @@ import {
     dashboard_active,
     users_2_active,
     vendor,
-    shop_active
+    shop_active,
+    referral_active
 
 } from '../assets/icons'
 
@@ -99,8 +100,14 @@ export const adminMenu = [
     },
     {
         title: 'Refferal Management',
-        path: '/admin/services-management',
+        path: '/admin/referral-management',
         icon: referal,
+        activeIcon: referral_active
+    },
+    {
+        title: 'Promotion Management',
+        path: '/admin/promotion-management',
+        icon: promotion,
         activeIcon: services_active
     },
     {
@@ -109,12 +116,7 @@ export const adminMenu = [
         icon: replayment,
         activeIcon: services_active
     },
-    {
-        title: 'Promotion Management',
-        path: '/admin/services-management',
-        icon: promotion,
-        activeIcon: services_active
-    },
+   
     {
         title: 'Package Management',
         path: '/admin/services-management',

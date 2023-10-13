@@ -60,6 +60,8 @@ import shop_active from './shopm_active.svg'
 import productCategory from './category.svg'
 import brand from './brand.svg'
 import new_cart from './new_cart.svg'
+import referral_active from './referral_active.svg'
+
 
 
 
@@ -124,6 +126,6 @@ export {
     shop_active,
     productCategory,
     brand,
-    new_cart
-
+    new_cart,
+    referral_active
 };

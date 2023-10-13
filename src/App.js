@@ -17,6 +17,9 @@ import Profile from './modules/profile/view'
 import UsersManagement from "./modules/UsersManagament";
 import VendorRequest from "./modules/vendorRequest";
 import ShopManagement from "./modules/shopManagement";
+import ReferralManagement from "./modules/referralManagement";
+
+
 
 
 
@@ -41,6 +44,8 @@ function App() {
           <Route path="/admin/vendor-request" element={<VendorRequest />} />
           <Route path="/admin/shop-management" element={<ShopManagement />} />
           <Route path="/admin/products-management" element={<ProductsManagement />} />
+          <Route path="/admin/referral-management" element={<ReferralManagement />} />
+
 
 
           <Route
