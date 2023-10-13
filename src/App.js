@@ -15,6 +15,8 @@ import ServiceManagement from './modules/services/view'
 import Wallet from './modules/wallet/view'
 import Profile from './modules/profile/view'
 import UsersManagement from "./modules/UsersManagament";
+import VendorRequest from "./modules/vendorRequest";
+import ShopManagement from "./modules/shopManagement";
 
 
 
@@ -36,6 +38,10 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin/users-management" element={<UsersManagement />} />
+          <Route path="/admin/vendor-request" element={<VendorRequest />} />
+          <Route path="/admin/shop-management" element={<ShopManagement />} />
+          <Route path="/admin/products-management" element={<ProductsManagement />} />
+
 
           <Route
             path="/admin/verification"

@@ -15,6 +15,8 @@ import Chart from "../../generalComponents/Chart";
 import BarChart from "../../generalComponents/BarChart";
 
 import { FiArrowRight } from 'react-icons/fi'
+import UserTable from "./components/Table";
+
 
 const UsersManagement = () => {
     const formatDate = (dateString) => {
@@ -26,8 +28,15 @@ const UsersManagement = () => {
 
     const navigate = useNavigate();
 
+    const [selectedUser, setSelectedUser] = useState('All Users')
+    const userType = [
+        'All Users',
+        'Customers',
+        'Vendors'
+    ]
+
     return (
-        <BaseDashboardNavigation title={"Dashboard"} hideSearch={true}>
+        <BaseDashboardNavigation title={"User Management"} hideSearch={true}>
             <div className="grid grid-cols-1 md:space-x-[46px] space-y-10 md:space-y-0 relative bg-white p-3 rounded-[10px] mb-4">
                 <div className=" md:overflow-y-scroll scrollbar-hide  relative md:mr-0">
                     <div>
@@ -63,6 +72,26 @@ const UsersManagement = () => {
                     </div>
                 </div>
             </div>
+
+            <p className="text-[20px] font-normal mb-3">List of users</p>
+
+            <div className="bg-white p-3 rounded-[10px]">
+                <div className='flex gap-2 mb-3'>
+                    {
+                        userType.map(el => <p
+                            onClick={() => {
+                                setSelectedUser(el)
+                            }}
+                            className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${selectedUser !== el ? 'bg-[#F2F2F2]' : 'bg-brandPrimary text-black'} rounded-[20px] `}>{el}</p>)
+                    }
+                </div>
+                <div>
+                <UserTable />
+            </div>
+            </div>
+           
+
+
         </BaseDashboardNavigation>
     );
 };

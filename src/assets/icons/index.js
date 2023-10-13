@@ -53,6 +53,15 @@ import packageIcon from './package.svg'
 import replayment from './replacement.svg'
 import customers from './customers.svg'
 import users_active from './users_active.svg'
+import users_2_active from './users_2_active.svg'
+import vendor from './vendorr.svg'
+import filterIcon from './filter.svg'
+import shop_active from './shopm_active.svg'
+import productCategory from './category.svg'
+import brand from './brand.svg'
+import new_cart from './new_cart.svg'
+
+
 
 export {
     authPlacementImage,
@@ -108,5 +117,13 @@ export {
     replayment,
     dashboard_active,
     customers,
-    users_active
+    users_active,
+    users_2_active,
+    vendor,
+    filterIcon,
+    shop_active,
+    productCategory,
+    brand,
+    new_cart
+
 };

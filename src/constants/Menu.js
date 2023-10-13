@@ -19,7 +19,10 @@ import {
     packageIcon,
     replayment,
     shop,
-    dashboard_active
+    dashboard_active,
+    users_2_active,
+    vendor,
+    shop_active
 
 } from '../assets/icons'
 
@@ -74,25 +77,25 @@ export const adminMenu = [
         title: 'Users Management',
         path: '/admin/users-management',
         icon: users,
-        activeIcon: product_active
+        activeIcon: users_2_active
     },
     {
         title: 'Vendor Request Management',
-        path: '/admin/products-management',
-        icon: shop,
+        path: '/admin/vendor-request',
+        icon: vendor,
         activeIcon: vendor_active
     },
     {
         title: 'Shop Management',
-        path: '/admin/services-management',
+        path: '/admin/shop-management',
         icon: shop,
-        activeIcon: services_active
+        activeIcon: shop_active
     },
     {
         title: 'Products Management',
-        path: '/admin/services-management',
+        path: '/admin/products-management',
         icon: product,
-        activeIcon: services_active
+        activeIcon: product_active
     },
     {
         title: 'Refferal Management',
