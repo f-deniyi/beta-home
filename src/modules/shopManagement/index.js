@@ -21,8 +21,8 @@ const ShopManagement = () => {
                             setCategoryType('product')
                             document.getElementById('add_category').showModal()
                         }}>
-                            <AiOutlinePlus />
-                            <p className="text-[12px] font-medium">Add a Category</p>
+                            {/* <AiOutlinePlus /> */}
+                            <p className="text-[12px] font-medium">+Add a Category</p>
                         </button>
                     </div>
                 </div>

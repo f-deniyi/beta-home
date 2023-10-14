@@ -23,7 +23,8 @@ import {
     users_2_active,
     vendor,
     shop_active,
-    referral_active
+    referral_active,
+    promotion_active
 
 } from '../assets/icons'
 
@@ -108,7 +109,7 @@ export const adminMenu = [
         title: 'Promotion Management',
         path: '/admin/promotion-management',
         icon: promotion,
-        activeIcon: services_active
+        activeIcon: promotion_active
     },
     {
         title: 'Repayment Management',

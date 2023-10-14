@@ -18,6 +18,7 @@ import UsersManagement from "./modules/UsersManagament";
 import VendorRequest from "./modules/vendorRequest";
 import ShopManagement from "./modules/shopManagement";
 import ReferralManagement from "./modules/referralManagement";
+import PromotionManagement from "./modules/promotionManagement"
 
 
 
@@ -45,6 +46,8 @@ function App() {
           <Route path="/admin/shop-management" element={<ShopManagement />} />
           <Route path="/admin/products-management" element={<ProductsManagement />} />
           <Route path="/admin/referral-management" element={<ReferralManagement />} />
+          <Route path="/admin/promotion-management" element={<PromotionManagement />} />
+
 
 
 
