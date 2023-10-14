@@ -3,23 +3,28 @@ import { profile, password, terms, deleteAccount, logout } from "../../../../ass
 const profileMenu = [
     {
         icon: profile,
-        name: 'Profile'
+        name: 'Profile',
+        showInAdmin:true
     },
     {
         icon: password,
-        name: 'Change password'
+        name: 'Change password',
+        showInAdmin:true
     },
     {
         icon: terms,
-        name: 'Terms and Conditions'
+        name: 'Terms and Conditions',
+        showInAdmin:true
     },
     {
         icon: deleteAccount,
-        name: 'Delete Account'
+        name: 'Delete Account',
+        showInAdmin:false
     },
     {
         icon: logout,
-        name: 'Logout'
+        name: 'Logout',
+        showInAdmin:true
     }
 ]
 export default profileMenu

@@ -24,7 +24,8 @@ import {
     vendor,
     shop_active,
     referral_active,
-    promotion_active
+    promotion_active,
+    repayment_active
 
 } from '../assets/icons'
 
@@ -113,9 +114,9 @@ export const adminMenu = [
     },
     {
         title: 'Repayment Management',
-        path: '/admin/services-management',
+        path: '/admin/repayment-management',
         icon: replayment,
-        activeIcon: services_active
+        activeIcon: repayment_active
     },
    
     {
