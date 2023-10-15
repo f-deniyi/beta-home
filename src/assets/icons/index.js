@@ -66,6 +66,8 @@ import banner_img from './banner_img.svg'
 import repayment_active from './repayment_active.svg'
 import walletbg from './wallet_bg.svg'
 import walletbg2 from './wallet_bg2.svg'
+import package_active from './package_icon.svg'
+import beta from './beta.svg'
 
 
 
@@ -137,6 +139,8 @@ export {
     banner_img,
     repayment_active,
     walletbg,
-    walletbg2
+    walletbg2,
+    package_active,
+    beta
 
 };

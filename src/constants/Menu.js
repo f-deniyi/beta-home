@@ -25,7 +25,8 @@ import {
     shop_active,
     referral_active,
     promotion_active,
-    repayment_active
+    repayment_active,
+    package_active
 
 } from '../assets/icons'
 
@@ -123,7 +124,7 @@ export const adminMenu = [
         title: 'Package Management',
         path: '/admin/package-management',
         icon: packageIcon,
-        activeIcon: services_active
+        activeIcon: package_active
     },
     {
         title: 'Wallet',

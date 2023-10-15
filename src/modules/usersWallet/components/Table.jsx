@@ -32,7 +32,7 @@ const UserTable = () => {
                                 </thead>
 
                                 <tbody>
-                                    <tr class="bg-white">
+                                    <tr class="bg-">
                                         <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
                                             <div class="flex items-center">
                                                 1
