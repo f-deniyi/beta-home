@@ -20,7 +20,7 @@ import ShopManagement from "./modules/shopManagement";
 import ReferralManagement from "./modules/referralManagement";
 import PromotionManagement from "./modules/promotionManagement"
 import RepaymentManagement from "./modules/repaymentManagement"
-
+import WalletManagement from "./modules/usersWallet"
 
 
 
@@ -51,12 +51,7 @@ function App() {
           <Route path="/admin/promotion-management" element={<PromotionManagement />} />
           <Route path="/admin/repayment-management" element={<RepaymentManagement />} />
           <Route path="/admin/profile" element={<Profile />} />
-
-
-          
-
-
-
+          <Route path="/admin/wallet" element={<WalletManagement />} />
 
           <Route
             path="/admin/verification"

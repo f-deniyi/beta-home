@@ -64,6 +64,8 @@ import referral_active from './referral_active.svg'
 import promotion_active from './promotion_active.svg'
 import banner_img from './banner_img.svg'
 import repayment_active from './repayment_active.svg'
+import walletbg from './wallet_bg.svg'
+import walletbg2 from './wallet_bg2.svg'
 
 
 
@@ -133,5 +135,8 @@ export {
     referral_active,
     promotion_active,
     banner_img,
-    repayment_active
+    repayment_active,
+    walletbg,
+    walletbg2
+
 };

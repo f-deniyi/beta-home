@@ -121,7 +121,7 @@ export const adminMenu = [
    
     {
         title: 'Package Management',
-        path: '/admin/services-management',
+        path: '/admin/package-management',
         icon: packageIcon,
         activeIcon: services_active
     },

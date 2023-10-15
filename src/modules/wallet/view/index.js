@@ -5,6 +5,8 @@ import logo from '../../../assets/images/new_logo.svg'
 import locker from '../../../assets/images/locker.svg'
 import FundWallet from "../component/Fund";
 import Withdraw from "../component/Withdraw";
+import {  walletbg2 } from '../../../assets/icons'
+
 
 const ProductsManagement = () => {
 
@@ -12,7 +14,14 @@ const ProductsManagement = () => {
         <BaseDashboardNavigation title={"Wallet"} hideSearch={false}>
             <div class="grid grid-cols-7 h-screen gap-2">
                 <div class="col-span-5 w-full">
-                    <div className="w-full bg-brandPrimary h-[310px] mb-1 rounded-[10px] flex items-center justify-center text-center">
+                    <div className="w-full  h-[310px] mb-1 rounded-[10px] flex items-center justify-center text-center"
+                        style={{
+                            backgroundImage: `linear-gradient(180deg, rgba(255, 241, 18, 0.83) 0%, #FFF112 100%), url(${walletbg2})`,
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: ', cover'
+                        }}
+                    >
                         <div>
                             <p className="text-[20px] font-normal -mb-6">Wallet Balance</p>
                             <h3 className='text-[89.564px] font-semibold mb-0' >N10,400</h3>
