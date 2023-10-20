@@ -22,7 +22,7 @@ import PromotionManagement from "./modules/promotionManagement"
 import RepaymentManagement from "./modules/repaymentManagement"
 import WalletManagement from "./modules/usersWallet"
 import PackageManagement from "./modules/packageManagement"
-
+import PaymentVerification from "./modules/paymentVerification/view";
 
 
 
@@ -39,6 +39,8 @@ function App() {
           <Route path="/services-management" element={<ServiceManagement />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/payment/confirmation" element={<PaymentVerification />} />
+
           {/* <Route
             path="/dashboard/user-details/:userId"
             element={<UserDetailsPage />}

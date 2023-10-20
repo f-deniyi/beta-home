@@ -5,10 +5,13 @@ import logo from '../../../assets/images/new_logo.svg'
 import locker from '../../../assets/images/locker.svg'
 import FundWallet from "../component/Fund";
 import Withdraw from "../component/Withdraw";
-import {  walletbg2 } from '../../../assets/icons'
+import { walletbg2 } from '../../../assets/icons'
+import useGetWalletBalanceQuery from "../controller/get_wallet_balance";
+import moment from 'moment'
 
 
-const ProductsManagement = () => {
+const WalletManagement = () => {
+    const { wallet_balance, lastRefetchTime } = useGetWalletBalanceQuery({ enabled: true })
 
     return (
         <BaseDashboardNavigation title={"Wallet"} hideSearch={false}>
@@ -24,8 +27,8 @@ const ProductsManagement = () => {
                     >
                         <div>
                             <p className="text-[20px] font-normal -mb-6">Wallet Balance</p>
-                            <h3 className='text-[89.564px] font-semibold mb-0' >N10,400</h3>
-                            <p className="text-[13.93px] font-normal mb-0 -mt-5">Last Updated: Today 12:12pm</p>
+                            <h3 className='text-[89.564px] font-semibold mb-0' >{`N${wallet_balance?.toLocaleString()}`}</h3>
+                            <p className="text-[13.93px] font-normal mb-0 -mt-5">{`Last Updated: ${moment(lastRefetchTime).calendar()}`}</p>
                         </div>
                     </div>
                     <div>
@@ -66,4 +69,4 @@ const ProductsManagement = () => {
     );
 };
 
-export default ProductsManagement;
+export default WalletManagement;
