@@ -4,16 +4,22 @@ import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
 import { BiSolidLeftArrow, BiSolidRightArrow } from 'react-icons/bi'
 
-export default function PaginationRounded({ count }) {
+export default function PaginationRounded({ count, onChange }) {
     return (
         <Stack spacing={2}>
-            <Pagination count={count} variant="outlined" shape="rounded"
+            <Pagination
+                count={count}
+                variant="outlined"
+                shape="rounded"
+                onChange={(e, page) => {
+                    onChange(page)
+                }}
                 renderItem={(item) => (
                     <PaginationItem
                         slots={{ previous: BiSolidLeftArrow, next: BiSolidRightArrow }}
                         {...item}
                         style={{
-                            backgroundColor: item.selected ? '#FFF112' : 'transparent', 
+                            backgroundColor: item.selected ? '#FFF112' : 'transparent',
                             border: 'none'
                         }}
                     />

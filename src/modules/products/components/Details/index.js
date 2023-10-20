@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel'
 import product from '../../../../assets/images/product_details.png'
 import DeleteProduct from '../DeleteProduct';
+import useGetSingleProductQuery from '../../controllers/get_single_product';
 
 const customIndicator = (onClickHandler, isSelected, index, label) => {
     const indicatorStyle = {
@@ -14,8 +15,10 @@ const customIndicator = (onClickHandler, isSelected, index, label) => {
         display: 'inline-block',
         margin: '0 5px',
         cursor: 'pointer',
-        background: isSelected ? '#fff122' : '#fff', // Change colors as needed
+        background: isSelected ? '#fff122' : '#fff',
+        border: !isSelected ? 'solid 1px rgba(0,0,0,0.4)' : "" // Change colors as needed
     };
+
 
     return (
         <span
@@ -32,7 +35,14 @@ const customIndicator = (onClickHandler, isSelected, index, label) => {
 };
 
 
-const ProductDetails = () => {
+const ProductDetails = ({ productId, setProductId }) => {
+
+    const { product } = useGetSingleProductQuery({
+        productId,
+        enabled: Boolean(productId)
+    })
+
+
     return (
         <>
             <ModalManagement
@@ -41,41 +51,51 @@ const ProductDetails = () => {
             >
                 <div className='flex items-center justify-between mb-6'>
                     <p className='text-[18px] font-medium '>Product </p>
-                    <div onClick={() => document.getElementById('product_details').close()} role='button'>
+                    <div onClick={() => {
+                        document.getElementById('product_details').close()
+                        setProductId(null)
+                    }} role='button'>
                         <img src={close} alt='close-icon' className='h-[23px] w-[23px]' />
                     </div>
                 </div>
                 <div className=''>
                     <Carousel
+                        infiniteLoop={true}
+                        autoPlay
                         showArrows={false}
                         showStatus={false}
                         showThumbs={false}
                         renderIndicator={customIndicator}
                     >
-                        <div>
-                            <img src={product} alt='img' className='object-cover rounded-lg h-[263px]' />
-                        </div>
-                        <div>
-                            <img src={product} alt='img' className='object-cover rounded-lg h-[263px]' />
-                        </div>
-                        <div>
-                            <img src={product} alt='img' className='object-cover rounded-lg h-[263px]' />
-                        </div>
+                        {
+                            product?.gallery?.map(el =>
+                                <div>
+                                    <img src={el?.original} alt='img' className='object-cover rounded-lg h-[263px]' />
+                                </div>
+                            )
+                        }
                     </Carousel>
                     <div className='mt-[21px] mb-[17px] flex items-center justify-between'>
                         <div>
                             <div className="flex items-center mb-[9px]">
-                                <p className="font-normal text-[10px] text-[#696969] mb-0 mr-3">Furniture</p>
+                                <p className="font-normal text-[10px] text-[#696969] mb-0 mr-3 capitalize">
+                                    {product?.tags?.map(
+                                        (element, index) => (
+                                            <span key={index}>
+                                                {element}
+                                                {index !== product?.tags.length - 1 && ', '}
+                                            </span>))}
+                                </p>
                                 <div className="flex items-center">
                                     <img src={star} alt='icon' />
-                                    <span className="text-[#696969] text-[10px] ps-1">4.5</span>
+                                    <span className="text-[#696969] text-[10px] ps-1">{product?.rating?.value ?? 0}</span>
                                 </div>
                             </div>
-                            <p className="font-semibold text-[12px] mb-[9px]">Single sitter chair</p>
-                            <div className="flex items-center mb-2 mb-[9px]">
+                            <p className="font-semibold text-[12px] mb-[9px]">{product?.name}</p>
+                            {/* <div className="flex items-center mb-2 mb-[9px]">
                                 <img src={locationIcon} className="object-cover  w-[9px] h-[10.74px] p-[0.7px] rounded-full mr-1" />
                                 <p className="text-[11px] text-[#696969] font-normal mr-2">Silverline Estate Lekki Lagos</p>
-                            </div>
+                            </div> */}
                         </div>
                         <div className='flex gap-2'>
                             <div className='cursor-pointer flex items-center justify-center bg-brandPrimary border-2 border-black h-[60px] w-[60px] rounded-full'>
@@ -95,31 +115,39 @@ const ProductDetails = () => {
 
                     </div>
                     <div className='mb-3 '>
-                        <div className="flex w-full">
-                            <div className="grid mr-3">
-                                <p className='text-[#696969] text-[15px] font-normal mb-[10px]'>Colour</p>
-                                <div className='flex gap-1'>
-                                    <div className='h-[36px] rounded-full w-[36px]  bg-[#FF0000]' />
-                                    <div className='h-[36px] rounded-full w-[36px]  bg-[#04A701]' />
-                                    <div className='h-[36px] rounded-full w-[36px]  bg-[#00A3FF]' />
-                                    <div className='h-[36px] rounded-full w-[36px]  bg-[#9747FF]' />
-                                </div>
-                            </div>
-                            <div className="divider divider-horizontal w-[0.3px] bg-[#A5A5A5]" />
-                            <div className="grid  flex-grow text-center">
-                                <p className='mb-0 text-[#696969] text-[15px] font-normal'>Size</p>
-                                <h3 className='text-[18px] font-medium '>34cm</h3>
-                            </div>
-                            <div className="divider divider-horizontal w-[0.3px] bg-[#A5A5A5]" />
-                            <div className="grid  flex-grow text-center">
-                                <p className='mb-0 text-[#696969] text-[15px] font-normal'>Weight</p>
-                                <h3 className='text-[18px] font-medium '>13kg</h3>
-                            </div>
 
+                        <div className="flex w-full">
+                            {product?.attributes?.map((attribute, index) => (
+                                <React.Fragment key={index}>
+                                    <div className="grid mr-3 flex-grow">
+                                        <p className={`text-[#696969] text-[15px] font-normal mb-[10px] capitalize ${attribute?.name !== 'colour' ? 'text-center' : ""}`} >{attribute?.name}</p>
+                                        {
+                                            attribute?.name === 'colour' ? (
+                                                <div className='flex gap-1'>
+                                                    {attribute?.values?.map((el, subIndex) => (
+                                                        <div className='h-[36px] rounded-full w-[36px] bg-[#FF0000]' style={{ background: el?.value }} key={subIndex} />
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    {attribute?.values?.map((el, subIndex) => (
+                                                        <h3 className='text-[18px] font-medium text-center' key={subIndex}>{el.value}</h3>
+                                                    ))}
+                                                </>
+                                            )
+                                        }
+                                    </div>
+                                    {index !== product?.attributes.length - 1 &&
+                                        <div className="divider divider-horizontal w-[0.3px] bg-[#A5A5A5]" />
+                                    }
+                                </React.Fragment>
+                            ))}
                         </div>
                     </div>
                     <h3 className='text-[#696969] text-[30px] font-semibold mb-4'>
-                        N56,000
+                        {
+                            `N${product?.sale_price ?? product?.price}`
+                        }
                     </h3>
                     <div className=''>
                         <div className='flex items-center gap-3 mb-2'>
@@ -131,13 +159,17 @@ const ProductDetails = () => {
                                 </div>
                             </div>
                         </div>
-                        <p className='text-[12px] font-light '>Lorem ipsum dolor sit amet consectetur. Consequat elit mauris pretium fermentum sed ac dui. Facilisis facilisis nibh turpis libero volutpat maecenas egestas augue bibendum. Ut ac aenean leo tellus ut quis. Posuere magna nunc vitae tempor lorem nisi ultricies. </p>
+                        <p className='text-[12px] font-light '>
+                            {
+                                `${product?.description}`
+                            }
+                        </p>
                     </div>
 
                 </div>
 
             </ModalManagement>
-            <DeleteProduct />
+            <DeleteProduct productId={productId} />
         </>
 
 

@@ -1,7 +1,16 @@
 import React from 'react'
 import { close, warning } from '../../../../assets/icons'
-
+import { useNavigate } from 'react-router-dom'
 const Logout = () => {
+    const navigate = useNavigate()
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        localStorage.removeItem('beta-vendor-token')
+        localStorage.removeItem('beta-vendor-shop')
+        navigate('/login')
+    }
+
     return (
 
         <div className='h-[calc(100vh-185px)] flex items-center justify-center '>
@@ -14,7 +23,7 @@ const Logout = () => {
                 </div>
                 <div className='flex items-center gap-2 w-3/4 mx-auto justify-center mt-[10px]'>
                     <button className='text-[15px] rounded-[30px] bg-brandPrimary w-1/2 py-3 hover:opacity-70  transition duration-300'
-
+                        onClick={handleLogout}
                     >
                         Yes
                     </button>

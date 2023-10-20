@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ModalManagement from '../../../../generalComponents/ModalManagement'
 import { close, warning } from '../../../../assets/icons'
+import { DeleteProfile } from '../../controller/delete_profile'
+import CustomButton from '../../../../generalComponents/Button'
+import { useNavigate } from 'react-router-dom'
 
 const DeleteAccount = () => {
+    const navigate = useNavigate()
+    const { isLoading, deleteProfileCaller, isSuccess } = DeleteProfile()
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate('/login')
+        }
+    }, [isSuccess])
+
     return (
 
         <div className='h-[calc(100vh-185px)] flex items-center justify-center '>
@@ -15,11 +27,17 @@ const DeleteAccount = () => {
                     <p className='text-[#8B8B8B] text-[12px] font-medium my-[18px] w-[60%] text-center'>This action will permanently delete your account from our database.</p>
                 </div>
                 <div className='flex items-center gap-2 w-3/4 mx-auto justify-center mt-[10px]'>
-                    <button className='text-[15px] rounded-[30px] bg-brandPrimary w-1/2 py-3 hover:opacity-70  transition duration-300'
-
-                    >
-                        Yes
-                    </button>
+                    <CustomButton
+                        isLoading={isLoading}
+                        disabled={isLoading}
+                        buttonText={'Yes'}
+                        type='submit'
+                        className=' text-[15px] rounded-[30px] bg-brandPrimary w-1/2 !py-3 hover:opacity-70  transition duration-300'
+                        onClick={(e) => {
+                            e.preventDefault()
+                            // deleteProfileCaller()
+                        }}
+                    />
                     <button className='text-[15px] rounded-[30px] bg-[#f2f2f2] w-1/2 py-3 hover:opacity-70 transition duration-300'
                     >
                         No

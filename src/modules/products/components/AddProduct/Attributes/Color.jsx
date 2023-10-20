@@ -3,9 +3,11 @@ import { colorPicker } from '../../../../../assets/icons'
 import { SketchPicker } from 'react-color'
 import ModalManagement from '../../../../../generalComponents/ModalManagement'
 
-const ColorAttribute = () => {
+const ColorAttribute = ({
+    colorArray,
+    setColorArray
+}) => {
     const [color, setColor] = useState('#000')
-    const [colorArray, setColorArray] = useState([])
 
     const handleChangeComplete = (color) => {
         setColor(color.hex)
@@ -22,7 +24,7 @@ const ColorAttribute = () => {
             <div className='flex items-center  flex-grow gap-3'>
                 <div className='flex'>
                     {
-                        colorArray.slice(-4).map(el =>
+                        colorArray?.slice(-4)?.map(el =>
                             <div className='h-[36px] rounded-full w-[36px]  mr-1' style={{ background: el }} />
                         )
                     }

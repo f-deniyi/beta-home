@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ModalManagement from '../../../../generalComponents/ModalManagement'
 import { close, warning } from '../../../../assets/icons'
+import useDeleteProductMutation from '../../controllers/delete_product'
+import CustomButton from '../../../../generalComponents/Button'
 
-const DeleteProduct = () => {
+const DeleteProduct = ({ productId }) => {
+    const {
+        deleteCaller: deleteProduct,
+        isSuccess,
+        isLoading
+    } = useDeleteProductMutation()
+
+
+    useEffect(() => {
+        document.getElementById('delete_product').close()
+    }, [isSuccess])
+
     return (
         <ModalManagement id='delete_product'>
             {/* <div className='flex items-center justify-between mb-6'>
@@ -21,11 +34,21 @@ const DeleteProduct = () => {
                     <p className='text-[#8B8B8B] text-[12px] font-medium my-[18px] w-[60%] text-center'>This action will permanently delete this product from our data base.</p>
                 </div>
                 <div className='flex items-center gap-2 w-3/4 mx-auto justify-center mt-[10px]'>
-                    <button className='text-[15px] rounded-[30px] bg-brandPrimary w-1/2 py-3 hover:opacity-70  transition duration-300'
-                        onClick={() => document.getElementById('delete_product').close()}
+                    <CustomButton
+                        onClick={(e) => {
+                            e.preventDefault()
+                            deleteProduct(productId)
+                        }}
+                        disabled={isLoading}
+                        isLoading={isLoading}
+                        buttonText={'Yes'}
+                        className={'!text-[15px]  rounded-[30px] bg-brandPrimary w-1/2 !py-3 hover:opacity-70  transition duration-300]'}
+                    />
+                    {/* <button className=''
+                        onClick={() => }
                     >
                         Yes
-                    </button>
+                    </button> */}
                     <button className='text-[15px] rounded-[30px] bg-[#f2f2f2] w-1/2 py-3 hover:opacity-70 transition duration-300'
                         onClick={() => document.getElementById('delete_product').close()}>
                         No

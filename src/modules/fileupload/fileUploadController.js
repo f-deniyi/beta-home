@@ -1,5 +1,6 @@
 import { useMutation } from "react-query";
-import Axios from "../../constants/api_management/MyHttpHelper";
+// import Axios from "../../constants/api_management/MyHttpHelper";
+import AxiosWithToken from "../../constants/api_management/MyHttpHelperWithToken";
 import axios from "axios";
 
 const useFileUpload = () => {
@@ -10,7 +11,7 @@ const useFileUpload = () => {
     // Step 1: Get signed request and URL
     try {
       const [response] = [
-        await Axios.post(
+        await AxiosWithToken.post(
           `/services/file/presign-url/?file_name=${fileName}&file_type=${fileType}`
         ),
       ];

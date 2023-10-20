@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { plusIcon } from '../../../../../assets/icons'
 import { IoIosClose } from 'react-icons/io'
 
-const SizeAttribute = () => {
-    const [sizeArray, setSizeArray] = useState([])
+const SizeAttribute = ({
+    sizeArray,
+    setSizeArray
+}) => {
     const [sizeValue, setSizeValue] = useState('')
 
     const handleChangeComplete = () => {
@@ -28,7 +30,8 @@ const SizeAttribute = () => {
                             setSizeValue(e.target.value)
                         }}
                     />
-                    <button className="px-5 py-2 bg-brandPrimary text-white rounded-r-md text-[#000] h-[60px]" onClick={() => {
+                    <button className="px-5 py-2 bg-brandPrimary text-white rounded-r-md text-[#000] h-[60px]" onClick={(e) => {
+                        e.preventDefault()
                         handleChangeComplete()
                     }}>
                         <img src={plusIcon} alt='icon' />
@@ -37,7 +40,7 @@ const SizeAttribute = () => {
                 </div>
                 <div className='mt-[17px] ml-3 flex gap-2'>
                     {
-                        sizeArray.map(el =>
+                        sizeArray?.map(el =>
                             <div className='flex items-center bg-black rounded-full w-[90px]'>
                                 <p className='text-[#f2f2f2] py-[5px] px-[10px]  font-medium'>{`${el}cm`}</p>
                                 <div className='cursor-pointer' onClick={() => {

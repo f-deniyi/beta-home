@@ -15,7 +15,10 @@ const useGetUserDetailsManager = (enabled = true) => {
         throw new Error(`Sorry: ${error.response.data.message}`);
       }
     },
-    { enabled: enabled }
+    {
+      enabled: enabled,
+      refetchOnWindowFocus: false
+    }
   );
 };
 

@@ -60,8 +60,7 @@ const BaseDashboardNavigation = ({
   const [showMenu, setShowMenu] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
-  // const { data, isError, error, isLoading, isSuccess } =
-  //   useGetUserDetailsManager();
+  const { data, isError, error, isLoading, isSuccess } = useGetUserDetailsManager();
   const [isAdmin, setIsAdmin] = useState(false);
   const handleOpenMenu = () => {
     setShowMenu(!showMenu);
@@ -106,7 +105,10 @@ const BaseDashboardNavigation = ({
 
   // const tokenExists = localStorage.getItem("token") !== null;
 
-  const activeMenu = !isAdmin ? adminMenu : vendorMenu
+  // console.log('--->>user<<---', data)
+
+
+  const activeMenu = data?.data?.user?.isVendor ? vendorMenu : adminMenu
 
   return (
     <div className="relative md:fixed flex h-[100vh] w-full text-blackColor p-3">
@@ -131,7 +133,7 @@ const BaseDashboardNavigation = ({
           activeMenu.map(
             el => <Link
               className="w-[90%] mx-auto cursor-pointer"
-              to={ el?.path}
+              to={el?.path}
             >
               <IconsWithText
                 icon={el?.icon}
@@ -273,6 +275,7 @@ const BaseDashboardNavigation = ({
         </div>
 
       </div>
+
       {/* this is where the top section starts */}
       <div className="w-screen">
         <div className="flex flex-col   max-h-[100vh] overflow-auto">
@@ -321,9 +324,9 @@ const BaseDashboardNavigation = ({
                 <img
                   className=" object-cover h-[44px] w-[44px] p-[0.7px] rounded-full "
                   src={
-                    // data.data.user.profile_picture !== ""
-                    //   ? data.data.user.profile_picture
-                    //   : 
+                    data?.data?.user?.profile_picture !== ""
+                      ? data?.data?.user?.profile_picture
+                      : 
                     `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`
                   }
                   alt="user avatar"
@@ -332,10 +335,10 @@ const BaseDashboardNavigation = ({
               <div>
                 <p className="flex items-center text-blackColor text-[13px] font-semibold mb-0">
                   {/* {data.data.user.fullname} */}
-                  {'Davide Mark'}
+                  {data?.data?.user?.fullname}
                   {/* <MdOutlineKeyboardArrowDown size={30} /> */}
                 </p>
-                <p className="text-[#8E8E8E] text-[10px]">Vendor</p>
+                <p className="text-[#8E8E8E] text-[10px]">{data?.data?.user?.isVendor ? 'Vendor' : 'Admin'}</p>
               </div>
 
             </div>

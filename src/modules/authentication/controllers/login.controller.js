@@ -24,32 +24,28 @@ const useLoginManager = (email) => {
   const mutation = useMutation(loginController, {
     onSuccess: async (data) => {
       const token = data.data.token;
-      localStorage.setItem("token", token);
+      const hasShop = data.data.user.shops.length > 0
+      if (hasShop) {
+        localStorage.setItem("beta-vendor-shop", data.data.user.shops[0])
+      }
+      localStorage.setItem("beta-vendor-token", token);
       toast.success(data.message);
       await new Promise((resolve) => {
         // Check for token in localStorage every 100 milliseconds
         const intervalId = setInterval(() => {
-          if (localStorage.getItem("token") === token) {
+          if (localStorage.getItem("beta-vendor-token") === token) {
             clearInterval(intervalId);
             resolve();
           }
         }, 100);
       });
-      console.log(`this is the token ${localStorage.getItem("token")} `);
-      navigate(
-        data.data.user.role.name === "admin"
-          ? `/admin/dashboard`
-          : data.data.user.fullname === "" ||
-            data.data.user.sex === "" ||
-            data.data.user.phone === ""
-          ? `/dashboard/settings`
-          : `/dashboard`
-      );
+      console.log(`this is the token ${localStorage.getItem("beta-vendor-token")} `);
+      navigate(`/dashboard`);
     },
 
     onError: (error) => {
       // Handle error if necessary
-      toast.success(error.message);
+      toast.error(error.message);
       console.log(`this is the status code for error: ${statusCode}`);
       if (statusCode === 402) {
         navigate(`/registration-confirmation?email=${email}`);

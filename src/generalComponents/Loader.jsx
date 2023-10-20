@@ -8,7 +8,7 @@ const Loader = () => {
         height="80"
         width="80"
         radius={1}
-        color="#D58A1F"
+        color="#fff122"
         ariaLabel="puff-loading"
         wrapperStyle={{}}
         wrapperClass=""

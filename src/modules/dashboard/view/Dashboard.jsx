@@ -5,15 +5,34 @@ import background from '../../../assets/images/background.png'
 import { verifiedIcon, locationIcon, accountOutline, walletOutline, rightArrow } from "../../../assets/icons";
 import ServicesTable from "../../../constants/Table/Services";
 import ProductTable from "../../../constants/Table/Products";
-
+import useGetShopsQuery from "../../shopManagement/controllers/get_shops";
+import useGetUserDetailsManager from "../../../modules/settings/controllers/get_UserDetails_controller";
+import { formatAddress } from "../../../utils/format_address";
+import { formatMonth } from "../../../utils/format_month";
 
 const Dashboard = () => {
+  const { data } = useGetUserDetailsManager();
+
+  const {
+    data: userShop,
+    isError,
+    error,
+    isLoading,
+  } = useGetShopsQuery({
+    enabled: Boolean(data?.data?.user),
+    owner_id: data?.data?.user?.id
+  });
+
+
+  console.log('---users-shops---', userShop)
+
+
   return (
     <BaseDashboardNavigation title={"Dashboard"} hideSearch={false}>
       <div class="relative w-full">
-        <div class="bg-cover bg-center h-[207px]  rounded-bl-[10px] rounded-br-[10px] w-full" style={{ backgroundImage: `url(${coverImage})` }}></div>
+        <div class="bg-cover bg-center h-[207px]  rounded-bl-[10px] rounded-br-[10px] w-full" style={{ backgroundImage: `url(${userShop?.shops[0]?.cover_image?.original})` }}></div>
         <div class="absolute bottom-[0px] left-[80px] transform -translate-x-1/2 translate-y-1/2 rounded-full overflow-hidden border-4 border-brandPrimary">
-          <img class="object-cover h-[120px] w-[120px] " src={background} alt="Profile Picture" />
+          <img class="object-cover h-[120px] w-[120px] " src={userShop?.shops[0]?.logo?.original} alt="Profile Picture" />
         </div>
 
         <div class="absolute bottom-[0px] right-[0px] transform -translate-x-1/2 translate-y-1/2  overflow-hidden ">
@@ -30,16 +49,16 @@ const Dashboard = () => {
       <div class="ml-40">
         <div className="mt-3">
           <div className="flex items-center ">
-            <h3 className="text-[21.457px] text-black font-medium mr-2">Apex funitures</h3>
+            <h3 className="text-[21.457px] text-black font-medium mr-2">{userShop?.shops[0]?.name}</h3>
             <img src={verifiedIcon} className="object-cover h-[15px] w-[15px] p-[0.7px] rounded-full " />
           </div>
           <div className="flex items-center mb-2">
             <img src={locationIcon} className="object-cover  p-[0.7px] rounded-full mr-1" />
-            <p className="text-[15.735px] text-[#696969] font-normal mr-2">Silverline Estate Lekki Lagos</p>
+            <p className="text-[15.735px] text-[#696969] font-normal mr-2">{formatAddress(userShop?.shops[0]?.address)}</p>
           </div>
           <div className="flex items-center ">
             <p className="bg-brandPrimary border-1 border-black rounded-full font-medium px-2 py-1 text-[11.44px] me-2">Created</p>
-            <p className="font-light text-[11.444px] text-[#69696]">3months ago</p>
+            <p className="font-light text-[11.444px] text-[#69696]">{`${formatMonth(userShop?.shops[0]?.createdAt)} ago`}</p>
           </div>
         </div>
       </div>

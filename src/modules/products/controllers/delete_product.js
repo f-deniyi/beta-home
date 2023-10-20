@@ -1,15 +1,14 @@
 import { useMutation, useQueryClient } from "react-query";
-// import Axios from "../../../constants/api_management/MyHttpHelper";
-import AxiosWithToken from "../api_management/MyHttpHelperWithToken";
+import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithToken";
 import { toast } from "react-toastify";
 
-const useDeleteManager = (endpoint, queryKey) => {
+const useDeleteProductMutation = () => {
   const queryClient = useQueryClient();
 
-  const deleteController = async (details) => {
+  const deleteController = async (productId) => {
     try {
-      const [response] = [await AxiosWithToken.delete(endpoint, details)];
-      console.log(`i am checking this ${response.status}`);
+      const [response] = [await AxiosWithToken.delete(`/products/${productId}`)];
+    //   console.log(`i am checking this ${response.status}`);
 
       return response.data;
     } catch (error) {
@@ -22,7 +21,7 @@ const useDeleteManager = (endpoint, queryKey) => {
     onSuccess: async (data) => {
       // Update other caches using useQuery
       toast.success(data.message);
-      const updateQueryKeys = [queryKey];
+      const updateQueryKeys = ['shop_products'];
       if (updateQueryKeys.length) {
         updateQueryKeys.forEach((key) => queryClient.invalidateQueries(key));
       }
@@ -52,4 +51,4 @@ const useDeleteManager = (endpoint, queryKey) => {
   };
 };
 
-export default useDeleteManager;
+export default useDeleteProductMutation;

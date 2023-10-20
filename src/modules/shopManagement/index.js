@@ -11,6 +11,9 @@ const ShopManagement = () => {
     const brandItems = [...Array(3).keys()];
     const [categoryType, setCategoryType] = useState('product')
 
+
+
+
     return (
         <BaseDashboardNavigation title={"Shop Management"} hideSearch={true}>
             <div className="mb-5">

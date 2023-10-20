@@ -16,6 +16,7 @@ const InputWithFullBoarder = ({
   icon,
   accept,
   isTextArea = false,
+  ...props
 }) => {
   return (
     <div className="flex flex-col mb-4">
@@ -31,6 +32,7 @@ const InputWithFullBoarder = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          {...props}
         ></textarea>
       ) : hasSuffix ? (
         <div
@@ -46,6 +48,7 @@ const InputWithFullBoarder = ({
             color="white"
             value={value}
             onChange={onChange}
+            {...props}
             className={` bg-transparent outline-none focus:outline-none w-full placeholder:text-[12px] mr-4 `}
           />{" "}
           <div>{icon}</div>
@@ -61,6 +64,7 @@ const InputWithFullBoarder = ({
           color="white"
           value={value}
           onChange={onChange}
+          {...props}
           className={
             type !== "password" &&
             `border border-lightGrey bg-lightGrey/30 p-2 rounded-md ${className} placeholder:text-[12px] outline-none focus:outline-none `

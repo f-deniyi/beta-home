@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import BaseDashboardNavigation from "../../../generalComponents/BaseDashboardNavigation";
-import { cart,new_cart } from "../../../assets/icons";
+import { cart, new_cart } from "../../../assets/icons";
 import ProductGrid from "../components/ProductGrid";
 import AddProduct from "../components/AddProduct";
 import ProductOrders from "./orders";
 import { useLocation } from 'react-router-dom';
+import useGetShopsProductsQuery from "../../shopManagement/controllers/get_shops_products";
 
 const ProductsManagement = () => {
     let location = useLocation();
     const isAdmin = location.pathname.includes('/admin');
+
+    const shopId = localStorage.getItem('beta-vendor-shop')
+    const [activePage, setActivePage] = useState(1)
+
+    const { products, pagination } = useGetShopsProductsQuery({
+        enabled: Boolean(shopId),
+        shopId,
+        page: activePage
+    })
+
+    const handlePage = (page) => {
+        setActivePage(page)
+    }
 
     const [selectedCategory, setSelectedCategory] = useState('All')
     const productCategory = [
@@ -66,7 +80,7 @@ const ProductsManagement = () => {
                         </div>
                     }
 
-                    <ProductGrid />
+                    <ProductGrid products={products} pagination={pagination} paginationChange={handlePage} />
                 </div>
             </div>
             <AddProduct />

@@ -9,7 +9,18 @@ import ColorAttribute from './Attributes/Color';
 import SizeAttribute from './Attributes/Size';
 import WeightAttribute from './Attributes/Weight';
 
-const AddProductAttribute = () => {
+const AddProductAttribute = (
+    {
+        weightArray,
+        setWeightArray,
+        sizeArray,
+        setSizeArray,
+        colorArray,
+        setColorArray
+    }
+) => {
+
+   
     return (
         <Timeline
             sx={{
@@ -27,7 +38,10 @@ const AddProductAttribute = () => {
                     <TimelineConnector style={{ width: '1px', margin: '0' }} />
                 </TimelineSeparator>
                 <TimelineContent >
-                    <ColorAttribute />
+                    <ColorAttribute
+                        colorArray={colorArray}
+                        setColorArray={setColorArray}
+                    />
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>
@@ -38,7 +52,11 @@ const AddProductAttribute = () => {
                     <TimelineConnector style={{ width: '1px', margin: '0' }} />
                 </TimelineSeparator>
                 <TimelineContent>
-                    <SizeAttribute />
+                    <SizeAttribute
+
+                        sizeArray={sizeArray}
+                        setSizeArray={setSizeArray}
+                    />
                 </TimelineContent>
             </TimelineItem>
             <TimelineItem>
@@ -48,7 +66,10 @@ const AddProductAttribute = () => {
                     />
                 </TimelineSeparator>
                 <TimelineContent>
-                    <WeightAttribute />
+                    <WeightAttribute
+                        weightArray={weightArray}
+                        setWeightArray={setWeightArray}
+                    />
                 </TimelineContent>
             </TimelineItem>
         </Timeline>

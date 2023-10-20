@@ -14,7 +14,7 @@ let retryCount = 0;
 
 AxiosWithToken.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("beta-vendor-token");
     if (!token && retryCount < 3) {
       // Retry the request after 100 milliseconds if the token is not available
       await new Promise((resolve) => setTimeout(resolve, 100));
@@ -25,7 +25,7 @@ AxiosWithToken.interceptors.request.use(
       // Send the request without a token after 3 retries
       return config;
     }
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `${token}`;
     return config;
   },
   (error) => {
@@ -51,3 +51,6 @@ AxiosWithToken.interceptors.response.use(
 );
 
 export default AxiosWithToken;
+
+
+

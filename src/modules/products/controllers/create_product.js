@@ -1,16 +1,14 @@
 import { useMutation, useQueryClient } from "react-query";
-// import Axios from "../../../constants/api_management/MyHttpHelper";
-import AxiosWithToken from "../api_management/MyHttpHelperWithToken";
-import { toast } from "react-toastify";
 
-const useDeleteManager = (endpoint, queryKey) => {
+import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithToken";
+
+const useCreateProduct = () => {
   const queryClient = useQueryClient();
 
-  const deleteController = async (details) => {
+  const postController = async (data) => {
     try {
-      const [response] = [await AxiosWithToken.delete(endpoint, details)];
-      console.log(`i am checking this ${response.status}`);
-
+      const [response] = [await AxiosWithToken.post(`/products/`, data)];
+    //   console.log(`i am checking this ${response.status}`);
       return response.data;
     } catch (error) {
       console.log(error.response.data);
@@ -18,33 +16,32 @@ const useDeleteManager = (endpoint, queryKey) => {
     }
   };
 
-  const mutation = useMutation(deleteController, {
+  const mutation = useMutation(postController, {
     onSuccess: async (data) => {
       // Update other caches using useQuery
-      toast.success(data.message);
-      const updateQueryKeys = [queryKey];
+      const updateQueryKeys = ["shop_products"];
       if (updateQueryKeys.length) {
         updateQueryKeys.forEach((key) => queryClient.invalidateQueries(key));
       }
     },
     onError: (error) => {
       // Handle error if necessary
-      toast.error(error.message);
-      console.error("Delete error:", error);
+      console.error("Post error:", error);
+      throw new Error(`Sorry: ${error.response.data.message}`);
     },
   });
 
-  const deleteCaller = async (details) => {
+  const postCaller = async (details) => {
     try {
       await mutation.mutateAsync(details);
     } catch (error) {
       // Handle error if necessary
-      console.error("Delete error:", error);
+      console.error("Post error:", error);
     }
   };
 
   return {
-    deleteCaller,
+    postCaller,
     data: mutation.data,
     isLoading: mutation.isLoading,
     isSuccess: mutation.isSuccess,
@@ -52,4 +49,4 @@ const useDeleteManager = (endpoint, queryKey) => {
   };
 };
 
-export default useDeleteManager;
+export default useCreateProduct;
