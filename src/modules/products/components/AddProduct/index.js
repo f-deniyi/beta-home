@@ -46,7 +46,7 @@ const AddProduct = () => {
         enabled: true
     })
 
-    const { postCaller: createProduct, isLoading ,isSuccess} = useCreateProduct()
+    const { postCaller: createProduct, isLoading, isSuccess } = useCreateProduct()
 
     const {
         error: fileUploadError,
@@ -68,36 +68,36 @@ const AddProduct = () => {
         const data = {
             name,
             description,
-            price:Number(price),
+            price: Number(price),
             "shop_id": shopId,
             "quantity": Number(quantity),
             "attributes": [
                 {
                     "name": "colour",
-                    "values": [
+                    "values":
                         colorArray.map(el => ({
                             "value": el,
                             "price": Number(price)
                         }))
-                    ]
+
                 },
                 {
                     "name": "size",
-                    "values": [
+                    "values":
                         sizeArray.map(el => ({
                             "value": el,
                             "price": Number(price)
                         }))
-                    ]
+
                 },
                 {
                     "name": "weight",
-                    "values": [
+                    "values":
                         weightArray.map(el => ({
                             "value": el,
                             "price": Number(price)
                         }))
-                    ]
+
                 },
 
             ],
@@ -105,7 +105,7 @@ const AddProduct = () => {
                 "original": galleries[0],
                 "thumbnail": galleries[0]
             },
-            "gallery": [
+            "gallery":
                 galleries.map(el => (
                     {
                         "original": el,
@@ -114,7 +114,7 @@ const AddProduct = () => {
                 )
                 )
 
-            ],
+            ,
             "categories": [
                 selectedCategories.map(el => el?.id)
             ]
@@ -124,9 +124,9 @@ const AddProduct = () => {
     }
 
 
-    useEffect(()=>{
+    useEffect(() => {
         document.getElementById('add_product').close()
-    },[isSuccess])
+    }, [isSuccess])
 
     return (
 

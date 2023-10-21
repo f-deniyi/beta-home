@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import AxiosWithToken from "../api_management/MyHttpHelperWithToken";
 import { toast } from "react-toastify";
 
-const useUpdateManager = (endpoint, queryKey) => {
+const useUpdateManager = (endpoint, queryKey, isMulti = false) => {
   const queryClient = useQueryClient();
 
   const updateController = async (data) => {
@@ -22,7 +22,7 @@ const useUpdateManager = (endpoint, queryKey) => {
     onSuccess: async (data) => {
       // Update other caches using useQuery
       toast.success(data.message);
-      const updateQueryKeys = [queryKey];
+      const updateQueryKeys = isMulti ? queryKey : [queryKey];
       if (updateQueryKeys.length) {
         updateQueryKeys.forEach((key) => queryClient.invalidateQueries(key));
       }

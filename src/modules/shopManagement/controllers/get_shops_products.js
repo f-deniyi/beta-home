@@ -4,7 +4,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 
 
 const useGetShopsProductsQuery = ({ enabled, shopId, ...params }) => {
-    const { data } = useQuery(["shop_products", enabled, params.page],
+    const { data,isLoading } = useQuery(["shop_products", enabled, params.page],
         async () => {
             try {
                 const [response] = [await AxiosWithToken.get(`/shops/${shopId}/products`, { params })];
@@ -20,6 +20,7 @@ const useGetShopsProductsQuery = ({ enabled, shopId, ...params }) => {
     console.log(data)
     return {
         products: data?.products ?? [],
+        isLoading,
         pagination: data?.pagination ?? {}
     }
 };
