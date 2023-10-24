@@ -1,5 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import the CSS for styling
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./modules/authentication/view/LoginPage";
 import Dashboard from "./modules/dashboard/view/Dashboard";

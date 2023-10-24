@@ -3,13 +3,13 @@ import ModalManagement from '../../../generalComponents/ModalManagement'
 import { close } from '../../../assets/icons'
 import ServicesTable from './table'
 
-const ServicesOrder = () => {
+const ServicesOrder = ({ requests, pagination }) => {
     const [selectedOrder, setSelectedOrder] = useState('All')
     const orderStatus = [
         'All',
-        'Pending',
+        'Requested',
         'Accepted',
-        'Ongoing',
+        'On-going',
         'Declined',
         'Cancelled',
         'Confirmed'
@@ -18,7 +18,7 @@ const ServicesOrder = () => {
 
     return (
         <ModalManagement
-            id='service_order'
+            id='services_request'
             type='large'
         >
             <div style={{
@@ -30,7 +30,7 @@ const ServicesOrder = () => {
                         <p className='text-[12px] font-normal '>List of service orders this customer have.</p>
 
                     </div>
-                    <div onClick={() => document.getElementById('service_order').close()} role='button'>
+                    <div onClick={() => document.getElementById('services_request').close()} role='button'>
                         <img src={close} alt='close-icon' className='h-[23px] w-[23px]' />
                     </div>
 
@@ -46,7 +46,7 @@ const ServicesOrder = () => {
                 }
             </div>
 
-            <ServicesTable />
+            <ServicesTable requests={requests} pagination={pagination} selectedOrder={selectedOrder} />
         </ModalManagement>
     )
 }
