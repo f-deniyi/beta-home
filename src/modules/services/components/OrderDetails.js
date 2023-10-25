@@ -135,7 +135,7 @@ const OrderDetails = ({ orderId, setOrderId }) => {
 
                 </div>
                 {
-                    orderDetails?.status === 'requested' && <div className='flex gap-x-2'>
+                   <div className='flex gap-x-2'>
                         <CustomButton
                             buttonText={'Accept'}
                             className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary !py-[15px]'}

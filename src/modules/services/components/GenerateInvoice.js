@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ModalManagement from '../../../generalComponents/ModalManagement'
 import { close } from '../../../assets/icons'
 import useGetOrderDetails from '../controller.js/get_order_details'
@@ -19,7 +19,7 @@ const GenerateInvoice = ({ requestId }) => {
     const [sales_tax, setSalesTax] = useState('')
 
     const { isLoading: accepting, acceptRequestCaller } = AcceptRequestMutation(requestId)
-    const { isLoading: generating, generateInvoiceCaller } = GenerateInvoicetMutation()
+    const { isLoading: generating, generateInvoiceCaller, isSuccess } = GenerateInvoicetMutation()
 
 
     const [formData, setFormData] = useState({
@@ -41,13 +41,12 @@ const GenerateInvoice = ({ requestId }) => {
     const handleItemChange = (e, index) => {
         const { name, value } = e.target;
         const newItems = [...formData.items];
-        newItems[index][name] = value;
+        newItems[index][name] = name === 'quantity' || name === 'total' ? Number(value) : value;;
         setFormData({
             ...formData,
             items: newItems,
         });
     }
-
 
     const acceptRequest = async (e) => {
         e.preventDefault();
@@ -65,6 +64,11 @@ const GenerateInvoice = ({ requestId }) => {
         generateInvoiceCaller(data)
     }
 
+    useEffect(() => {
+        if (isSuccess) {
+            document.getElementById('generate_invoice').close()
+        }
+    }, [isSuccess])
 
 
     return (
@@ -136,7 +140,7 @@ const GenerateInvoice = ({ requestId }) => {
                                 <div>
                                     <InputWithFullBoarder
                                         type="text"
-                                        name="itemName"
+                                        name="item"
                                         value={item.item}
                                         placeholder={'Enter item name'}
                                         className='!bg-[#EDEDED] !py-4 !px-[24px]'
@@ -148,7 +152,7 @@ const GenerateInvoice = ({ requestId }) => {
                                     <InputWithFullBoarder
                                         type="number"
                                         name="quantity"
-                                        value={Number(item.quantity)}
+                                        value={item.quantity}
                                         placeholder={'Enter number of items'}
                                         className='!bg-[#EDEDED] !py-4 !px-[24px]'
                                         onChange={(e) => handleItemChange(e, i)}
@@ -159,7 +163,7 @@ const GenerateInvoice = ({ requestId }) => {
                                     <InputWithFullBoarder
                                         type="number"
                                         name="total"
-                                        value={Number(item.total)}
+                                        value={item.total}
                                         placeholder={'Enter total price'}
                                         className='!bg-[#EDEDED] !py-4 !px-[24px]'
                                         onChange={(e) => handleItemChange(e, i)}
