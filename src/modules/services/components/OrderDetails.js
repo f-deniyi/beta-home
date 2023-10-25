@@ -6,6 +6,8 @@ import { formatAddress } from '../../../utils/format_address'
 import moment from 'moment'
 import { Carousel } from 'react-responsive-carousel'
 import CustomButton from '../../../generalComponents/Button'
+import GenerateInvoice from './GenerateInvoice'
+import { RejectRequestMutation } from '../controller.js/service_request'
 
 
 const customIndicator = (onClickHandler, isSelected, index, label) => {
@@ -39,10 +41,18 @@ const customIndicator = (onClickHandler, isSelected, index, label) => {
 
 const OrderDetails = ({ orderId, setOrderId }) => {
 
+    const { isLoading: rejecting, rejectRequestCaller } = RejectRequestMutation(orderId)
+
+
     const { orderDetails } = useGetOrderDetails({
         enabled: Boolean(orderId),
         requestId: orderId
     })
+
+    const rejectRequest = (e) => {
+        e.preventDefault()
+        rejectRequestCaller()
+    }
 
 
     return (
@@ -129,15 +139,23 @@ const OrderDetails = ({ orderId, setOrderId }) => {
                         <CustomButton
                             buttonText={'Accept'}
                             className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary !py-[15px]'}
+                            onClick={() => {
+                                document.getElementById('generate_invoice').showModal()
+                            }}
                         />
                         <CustomButton
+                            isLoading={rejecting}
                             buttonText={'Reject'}
+                            onClick={() => {
+                                rejectRequest()
+                            }}
                             className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandGrey  !py-[15px]'}
                         />
                     </div>
                 }
 
             </div>
+            <GenerateInvoice requestId={orderId} />
 
         </ModalManagement>
     )

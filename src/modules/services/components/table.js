@@ -65,14 +65,14 @@ const ServicesTable = ({ requests, pagination, selectedOrder }) => {
                                                 <summary className="m-1 btn !bg-[#FAFAFA] border-none m-0">
                                                     <img src={menu} alt="icon" />
                                                 </summary>
-                                                <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                                <ul className="px-1 py-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 left">
                                                     <li
                                                         onClick={() => {
                                                             setOrderId(request?.id)
                                                             document.getElementById('order-details').showModal()
                                                         }}
                                                     ><a>View Details</a></li>
-                                                    <li><a>Item 2</a></li>
+                                                    <li><a>Report Dispute</a></li>
                                                 </ul>
                                             </details>
                                             {/* <button className="">

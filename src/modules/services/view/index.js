@@ -32,7 +32,6 @@ const ServicesManagement = () => {
         'Confirmed'
     ]
 
-    console.log('---user-shop---', userShop)
 
     const { requests, pagination } = useGetProviderServiceRequest({ enabled: true })
 

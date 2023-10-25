@@ -108,7 +108,7 @@ const BaseDashboardNavigation = ({
   // console.log('--->>user<<---', data)
 
 
-  const activeMenu = data?.data?.user?.isVendor ? vendorMenu : adminMenu
+  const activeMenu =  adminMenu
 
   return (
     <div className="relative md:fixed flex h-[100vh] w-full text-blackColor p-3">
