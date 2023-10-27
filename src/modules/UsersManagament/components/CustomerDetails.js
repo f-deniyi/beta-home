@@ -8,6 +8,8 @@ import ServicesOrder from "../../services/components/ServicesOrder";
 import useGetProductOrdersManager from "../../products/controllers/get_product_orders_controller";
 import useGetOrderStatusManager from "../../products/controllers/get_order_statuses";
 import Loader from "../../../generalComponents/Loader";
+import useGetProviderServiceRequest from "../../services/controller.js/get_service_request";
+import useGetCustomerServiceRequests from "../../services/controller.js/get_customer_service_requests";
 
 const CustomerDetails = ({ userDetails, orderStatuses }) => {
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -39,7 +41,16 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
     enable: Boolean(userDetails._id),
   });
 
-  if (isLoading) {
+  const {
+    data: serviceRequests,
+    isLoading: loadingRequests,
+    refetch: refetchServices,
+  } = useGetCustomerServiceRequests({
+    filter: userDetails._id,
+    enabled: Boolean(userDetails._id),
+  });
+
+  if (isLoading || loadingRequests) {
     return <Loader />;
   }
 
@@ -150,9 +161,10 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
               <div classNmw="w-1/3 mx-auto">
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={async () => {
+                    refetchServices();
                     document.getElementById("customer_details").close();
-                    document.getElementById("service_order").showModal();
+                    document.getElementById("services_request").showModal();
                   }}
                   class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
                 >
@@ -198,7 +210,12 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
           }}
         />
       )}
-      {userDetails && <ServicesOrder userId={userDetails._id} />}
+      {serviceRequests && (
+        <ServicesOrder
+          pagination={serviceRequests.pagination}
+          requests={serviceRequests.requests}
+        />
+      )}
     </>
   );
 };
