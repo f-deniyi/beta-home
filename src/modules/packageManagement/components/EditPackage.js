@@ -1,18 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalManagement from "../../../generalComponents/ModalManagement";
 import CustomButton from "../../../generalComponents/Button";
 import InputWithFullBoarder from "../../../generalComponents/InputWithFullBoarder";
 import { close } from "../../../assets/icons";
 import { AiOutlinePlus } from "react-icons/ai";
-import { AddPackageManager } from "../controller/add_package_controller";
+import useAddPackageManager from "../controller/add_package_controller";
+import PackageDetails from "./PackageDetails";
+import { UpdatePackageManager } from "../controller/update_package_controller";
 
-const AddCategory = () => {
+const EditPackage = ({ packageDetails }) => {
   const [count, setCount] = useState(1);
-  const { addPackageController, isLoading } = AddPackageManager();
+  const { editPackageController, isLoading } = UpdatePackageManager(
+    packageDetails._id
+  );
   const initialItem = {
     name: "",
     quantity: 1,
   };
+
+  useEffect(() => {
+    setCount(packageDetails.items.length);
+    setTitle(packageDetails.title);
+    setAmount(packageDetails.amount);
+    setPackageItems(packageDetails.items);
+  }, [packageDetails]);
   const items = [...Array(count).keys()];
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -28,19 +39,21 @@ const AddCategory = () => {
       items: packageItems,
       amount: parseInt(amount),
     };
-    await addPackageController(details);
+    await editPackageController(details);
     setTitle("");
     setAmount("");
+    document.getElementById("edit_package").close();
     setPackageItems([initialItem]);
+    setCount(1);
   };
 
   return (
     <>
-      <ModalManagement id={"add_package"} hideCancel={true}>
+      <ModalManagement id={"edit_package"} hideCancel={true}>
         <div className="flex items-center justify-between mb-6">
-          <p className="text-[18px] font-medium ">Add a Package</p>
+          <p className="text-[18px] font-medium ">Edit Package</p>
           <div
-            onClick={() => document.getElementById("add_package").close()}
+            onClick={() => document.getElementById("edit_package").close()}
             role="button"
           >
             <img src={close} alt="close-icon" className="h-[23px] w-[23px]" />
@@ -124,7 +137,7 @@ const AddCategory = () => {
             </div>
 
             <CustomButton
-              buttonText={"Proceed"}
+              buttonText={"Update"}
               isLoading={isLoading}
               type="submit"
               className={
@@ -138,4 +151,4 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default EditPackage;

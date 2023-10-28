@@ -45,8 +45,8 @@ import {
   account_active,
   messageIcon,
   notificationIcon,
-  searchIcon
-} from '../assets/icons'
+  searchIcon,
+} from "../assets/icons";
 
 import { adminMenu, vendorMenu } from "../constants/Menu";
 
@@ -60,7 +60,8 @@ const BaseDashboardNavigation = ({
   const [showMenu, setShowMenu] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
-  const { data, isError, error, isLoading, isSuccess } = useGetUserDetailsManager();
+  const { data, isError, error, isLoading, isSuccess } =
+    useGetUserDetailsManager();
   const [isAdmin, setIsAdmin] = useState(false);
   const handleOpenMenu = () => {
     setShowMenu(!showMenu);
@@ -107,12 +108,10 @@ const BaseDashboardNavigation = ({
 
   // console.log('--->>user<<---', data)
 
-
-  const activeMenu =  adminMenu
+  const activeMenu = adminMenu;
 
   return (
     <div className="relative md:fixed flex h-[100vh] w-full text-blackColor p-3">
-
       <div
         className={`hidden md:flex ease-in-out duration-500 w-[25%] bg-[#fff122] z-50 h-full pt-2  md:overflow-auto scrollbar-hide  flex-col  items-start space-y-10  pb-10 rounded-[10px]`}
       >
@@ -120,50 +119,38 @@ const BaseDashboardNavigation = ({
           <img
             className="object-contain w-[64px] h-[67.98px] mx-2"
             src={logo}
-            alt="Raizon logo"
+            alt="BetaHomeNg logo"
           />
         </div>
 
-        {/* <p className="w-auto text-logo font-playfair-sc text-blackColor flex mx-7">
-          RAIZON
-        </p> */}
-
-
-        {
-          activeMenu.map(
-            el => <Link
-              className="w-[90%] mx-auto cursor-pointer"
-              to={el?.path}
-            >
-              <IconsWithText
-                icon={el?.icon}
-                activeIcon={el?.activeIcon}
-                path={
-                  el?.path
-                }
-                iconSize="28px"
-                text={el?.title}
-              />
-            </Link>
-          )
-        }
-
+        {activeMenu.map((el) => (
+          <Link className="w-[90%] mx-auto cursor-pointer" to={el?.path}>
+            <IconsWithText
+              icon={el?.icon}
+              activeIcon={el?.activeIcon}
+              path={el?.path}
+              iconSize="28px"
+              text={el?.title}
+            />
+          </Link>
+        ))}
       </div>
       {/* this is where the mobile menu is */}
       <div
-        className={`fixed md:hidden ${showMenu ? "left-0" : "left-[-100%]"
-          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
+        className={`fixed md:hidden ${
+          showMenu ? "left-0" : "left-[-100%]"
+        } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
       >
         <img
           className="object-contain w-[10rem] mx-7"
           src={logo}
-          alt="Raizon logo"
+          alt="BetaHomeNg logo"
         />
-        {/* <p className="w-auto text-logo font-playfair-sc text-blackColor flex mx-7 ">
-          RAIZON
-        </p> */}
+
         <Link
-          className="w-[90%] mx-auto" to={isAdmin ? "/admin/dashboard" : "/dashboard"}>
+          className="w-[90%] mx-auto"
+          to={isAdmin ? "/admin/dashboard" : "/dashboard"}
+        >
           <IconsWithText
             icon={<AiOutlineHome />}
             iconSize="28px"
@@ -172,8 +159,7 @@ const BaseDashboardNavigation = ({
           />
         </Link>
         {isAdmin && (
-          <Link
-            className="w-[90%] mx-auto" to={"/admin/user-management"}>
+          <Link className="w-[90%] mx-auto" to={"/admin/user-management"}>
             <IconsWithText
               icon={<AiOutlineSolution />}
               iconSize="28px"
@@ -183,17 +169,26 @@ const BaseDashboardNavigation = ({
           </Link>
         )}
         <Link
-          className="w-[90%] mx-auto" to={isAdmin ? "/admin/products-management" : "/dashboard/products-management"}>
+          className="w-[90%] mx-auto"
+          to={
+            isAdmin
+              ? "/admin/products-management"
+              : "/dashboard/products-management"
+          }
+        >
           <IconsWithText
             icon={<AiOutlineFund />}
             iconSize="28px"
-            path={isAdmin ? "/admin/products-management" : "/dashboard/products-management"}
+            path={
+              isAdmin
+                ? "/admin/products-management"
+                : "/dashboard/products-management"
+            }
             text="Products Management"
           />
         </Link>
         {!isAdmin && (
-          <Link
-            className="w-[90%] mx-auto" to={"/dashboard/new-profile"}>
+          <Link className="w-[90%] mx-auto" to={"/dashboard/new-profile"}>
             <IconsWithText
               icon={<AiOutlineUserAdd />}
               iconSize="28px"
@@ -203,7 +198,9 @@ const BaseDashboardNavigation = ({
           </Link>
         )}
         <Link
-          className="w-[90%] mx-auto" to={isAdmin ? "/admin/all-profiles" : "/dashboard/all-profiles"}>
+          className="w-[90%] mx-auto"
+          to={isAdmin ? "/admin/all-profiles" : "/dashboard/all-profiles"}
+        >
           <IconsWithText
             icon={<AiOutlineTeam />}
             iconSize="28px"
@@ -212,8 +209,7 @@ const BaseDashboardNavigation = ({
           />
         </Link>
         {isAdmin && (
-          <Link
-            className="w-[90%] mx-auto" to={"/admin/pricing"}>
+          <Link className="w-[90%] mx-auto" to={"/admin/pricing"}>
             <IconsWithText
               icon={<AiOutlinePercentage />}
               iconSize="28px"
@@ -223,8 +219,7 @@ const BaseDashboardNavigation = ({
           </Link>
         )}
         {isAdmin && (
-          <Link
-            className="w-[90%] mx-auto" to={"/admin/measurements"}>
+          <Link className="w-[90%] mx-auto" to={"/admin/measurements"}>
             <IconsWithText
               icon={<AiOutlineScissor />}
               iconSize="28px"
@@ -234,7 +229,9 @@ const BaseDashboardNavigation = ({
           </Link>
         )}
         <Link
-          className="w-[90%] mx-auto" to={isAdmin ? "/admin/settings" : "/dashboard/settings"}>
+          className="w-[90%] mx-auto"
+          to={isAdmin ? "/admin/settings" : "/dashboard/settings"}
+        >
           <IconsWithText
             icon={<AiOutlineSetting />}
             iconSize="28px"
@@ -243,8 +240,7 @@ const BaseDashboardNavigation = ({
           />
         </Link>
         {isAdmin && (
-          <Link
-            className="w-[90%] mx-auto" to={"/admin/tickets"}>
+          <Link className="w-[90%] mx-auto" to={"/admin/tickets"}>
             <IconsWithText
               icon={<AiOutlineMail />}
               iconSize="28px"
@@ -254,8 +250,7 @@ const BaseDashboardNavigation = ({
           </Link>
         )}
         {isAdmin && (
-          <Link
-            className="w-[90%] mx-auto" to={"/admin/broadcast"}>
+          <Link className="w-[90%] mx-auto" to={"/admin/broadcast"}>
             <IconsWithText
               icon={<AiOutlineNotification />}
               iconSize="28px"
@@ -265,7 +260,7 @@ const BaseDashboardNavigation = ({
           </Link>
         )}
         <div className="w-[90%] mx-auto">
-          <button onClick={handleLogout} className="w-full" >
+          <button onClick={handleLogout} className="w-full">
             <IconsWithText
               icon={<AiOutlineLogout />}
               iconSize="28px"
@@ -273,7 +268,6 @@ const BaseDashboardNavigation = ({
             />
           </button>
         </div>
-
       </div>
 
       {/* this is where the top section starts */}
@@ -281,9 +275,7 @@ const BaseDashboardNavigation = ({
         <div className="flex flex-col   max-h-[100vh] overflow-auto">
           <div className="flex flex-col md:flex-row items-center justify-between text-left ml-3 z-40 bg-white rounded-[10px] px-4 py-[15px] mb-[12px]">
             <div className="w-full md:w-auto flex items-center justify-between">
-              <h3 className="text-[20px] font-bold ">
-                {title}
-              </h3>
+              <h3 className="text-[20px] font-bold ">{title}</h3>
               <div
                 onClick={handleOpenMenu}
                 className=" md:hidden  bg-white shadow-md p-3.5 h-14 border w-14 rounded-full"
@@ -297,8 +289,9 @@ const BaseDashboardNavigation = ({
             </div>
             <div className="hidden md:flex justify-end items-center">
               <div
-                className={` ${hideSearch ? "hidden" : "flex"
-                  }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
+                className={` ${
+                  hideSearch ? "hidden" : "flex"
+                }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
               >
                 <input
                   className="text-[12px] font-normal text-[#8E8E8E] bg-transparent outline-none focus:outline-none w-full"
@@ -307,13 +300,16 @@ const BaseDashboardNavigation = ({
                   value={value}
                   onChange={onChange}
                 />
-                <img src={searchIcon} alt='search_icon' />
+                <img src={searchIcon} alt="search_icon" />
               </div>
-              <button onClick={() => setShowNotification(!showNotification)} className="mr-[10px]">
-                <img src={notificationIcon} alt='notification_icon' />
+              <button
+                onClick={() => setShowNotification(!showNotification)}
+                className="mr-[10px]"
+              >
+                <img src={notificationIcon} alt="notification_icon" />
               </button>
               <button className="mr-[10px]">
-                <img src={messageIcon} alt='message_icon' />
+                <img src={messageIcon} alt="message_icon" />
               </button>
               {/* notification display */}
               {showNotification && (
@@ -326,8 +322,7 @@ const BaseDashboardNavigation = ({
                   src={
                     data?.data?.user?.profile_picture !== ""
                       ? data?.data?.user?.profile_picture
-                      : 
-                    `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`
+                      : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`
                   }
                   alt="user avatar"
                 />
@@ -338,15 +333,16 @@ const BaseDashboardNavigation = ({
                   {data?.data?.user?.fullname}
                   {/* <MdOutlineKeyboardArrowDown size={30} /> */}
                 </p>
-                <p className="text-[#8E8E8E] text-[10px]">{data?.data?.user?.isVendor ? 'Vendor' : 'Admin'}</p>
+                <p className="text-[#8E8E8E] text-[10px]">
+                  {data?.data?.user?.isVendor ? "Vendor" : "Admin"}
+                </p>
               </div>
-
             </div>
           </div>
           <div className="max-h-[90%] ml-3  pb-10"> {children}</div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
