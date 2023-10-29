@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import ModalManagement from "../../../generalComponents/ModalManagement";
 import { close } from "../../../assets/icons";
 import ServicesTable from "./table";
+import { useLocation } from "react-router-dom";
+
 
 const ServicesOrder = ({ requests, pagination }) => {
+  const location = useLocation()
+  
+
   const [selectedOrder, setSelectedOrder] = useState("All");
   const orderStatus = [
     "All",
@@ -43,11 +48,10 @@ const ServicesOrder = ({ requests, pagination }) => {
             onClick={() => {
               setSelectedOrder(el);
             }}
-            className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
-              selectedOrder !== el
+            className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${selectedOrder !== el
                 ? "bg-[#F2F2F2]"
                 : "bg-brandPrimary text-black"
-            } rounded-[20px] `}
+              } rounded-[20px] `}
           >
             {el}
           </p>
