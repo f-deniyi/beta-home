@@ -25,6 +25,7 @@ import WalletManagement from "./modules/usersWallet";
 import PackageManagement from "./modules/packageManagement";
 import PaymentVerification from "./modules/paymentVerification/view";
 import AdminSettingsPage from "./modules/admin/view/AdminSettingsPage";
+import ShopDetails from "./modules/shopManagement/ShopDetails";
 
 function App() {
   return (
@@ -89,6 +90,7 @@ function App() {
             element={<AccountVerification />}
           />
           <Route path="/create-account" element={<CreateAccountPage />} />
+          <Route path='/admin/shop-details/:shopId' element={<ShopDetails />} />
 
           {/* <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route

@@ -108,7 +108,9 @@ const BaseDashboardNavigation = ({
 
   // console.log('--->>user<<---', data)
 
-  const activeMenu =data?.data?.user?.isVendor ? vendorMenu : adminMenu;
+  // const activeMenu =data?.data?.user?.isVendor ? vendorMenu : adminMenu;
+  const activeMenu = adminMenu;
+
 
   return (
     <div className="relative md:fixed flex h-[100vh] w-full text-blackColor p-3">
@@ -137,9 +139,8 @@ const BaseDashboardNavigation = ({
       </div>
       {/* this is where the mobile menu is */}
       <div
-        className={`fixed md:hidden ${
-          showMenu ? "left-0" : "left-[-100%]"
-        } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
+        className={`fixed md:hidden ${showMenu ? "left-0" : "left-[-100%]"
+          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
       >
         <img
           className="object-contain w-[10rem] mx-7"
@@ -289,9 +290,8 @@ const BaseDashboardNavigation = ({
             </div>
             <div className="hidden md:flex justify-end items-center">
               <div
-                className={` ${
-                  hideSearch ? "hidden" : "flex"
-                }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
+                className={` ${hideSearch ? "hidden" : "flex"
+                  }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
               >
                 <input
                   className="text-[12px] font-normal text-[#8E8E8E] bg-transparent outline-none focus:outline-none w-full"

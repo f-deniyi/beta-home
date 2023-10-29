@@ -8,9 +8,12 @@ import { Carousel } from 'react-responsive-carousel'
 import CustomButton from '../../../generalComponents/Button'
 import GenerateInvoice from './GenerateInvoice'
 import { RejectRequestMutation } from '../controller.js/service_request'
+import { useLocation } from "react-router-dom";
 
 
 const customIndicator = (onClickHandler, isSelected, index, label) => {
+
+
     const indicatorStyle = {
         width: '7px',
         height: '7px',
@@ -40,7 +43,8 @@ const customIndicator = (onClickHandler, isSelected, index, label) => {
 
 
 const OrderDetails = ({ orderId, setOrderId }) => {
-
+    const location = useLocation()
+    const isAdmin = location.pathname.includes("/admin");
     const { isLoading: rejecting, rejectRequestCaller } = RejectRequestMutation(orderId)
 
 
@@ -135,7 +139,8 @@ const OrderDetails = ({ orderId, setOrderId }) => {
 
                 </div>
                 {
-                   <div className='flex gap-x-2'>
+                    !isAdmin &&
+                    <div className='flex gap-x-2'>
                         <CustomButton
                             buttonText={'Accept'}
                             className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary !py-[15px]'}

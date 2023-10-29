@@ -6,9 +6,12 @@ import moment from 'moment'
 import { formatStatus } from '../../../utils/fomat_status'
 import OrderDetails from './OrderDetails'
 
+import { useLocation } from "react-router-dom";
 
 
 const ServicesTable = ({ requests, pagination, selectedOrder }) => {
+  const location = useLocation()
+  const isAdmin = location.pathname.includes("/admin");
 
     const [orderId, setOrderId] = useState(null)
 
@@ -61,7 +64,32 @@ const ServicesTable = ({ requests, pagination, selectedOrder }) => {
                                     </td>
                                     <td className=" p-2 w-[150px] relative text-[14px] font-normal text-center">
                                         <div>
-                                            <details className="dropdown flex items-center justify-center w-full h-full bg-white">
+                                            <button className="flex items-center justify-center text-blue-600 w-full h-full cursor-pointer">
+                                                <div className="dropdown dropdown-bottom dropdown-end">
+                                                    {/* <label tabIndex={0} className="btn m-1">Click</label> */}
+                                                    <img src={menu} alt="icon" tabIndex={0} />
+                                                    <ul
+                                                        tabIndex={0}
+                                                        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                                                    >
+                                                        <li className="text-[12px] font-normal bg-brandPrimary px-2 py-1 text-center rounded-full mb-2  text-black"
+                                                            onClick={() => {
+                                                                setOrderId(request?.id)
+                                                                document.getElementById('order-details').showModal()
+                                                            }}
+                                                        >
+                                                            View Order
+                                                        </li>
+                                                        {
+                                                            !isAdmin && <li className="text-[12px] font-normal bg-[#F2F2F2] px-2 py-1 text-center rounded-full text-black">
+                                                                Report dispute
+                                                            </li>
+                                                        }
+
+                                                    </ul>
+                                                </div>
+                                            </button>
+                                            {/* <details className="dropdown flex items-center justify-center w-full h-full bg-white">
                                                 <summary className="m-1 btn !bg-[#FAFAFA] border-none m-0">
                                                     <img src={menu} alt="icon" />
                                                 </summary>
@@ -74,7 +102,7 @@ const ServicesTable = ({ requests, pagination, selectedOrder }) => {
                                                     ><a>View Details</a></li>
                                                     <li><a>Report Dispute</a></li>
                                                 </ul>
-                                            </details>
+                                            </details> */}
                                             {/* <button className="">
                                             <img src={menu} alt="icon" />
                                         </button> */}

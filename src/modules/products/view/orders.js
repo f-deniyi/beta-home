@@ -6,8 +6,12 @@ import { close } from "../../../assets/icons";
 import useGetProductOrdersManager from "../controllers/get_product_orders_controller";
 import Loader from "../../../generalComponents/Loader";
 import useGetOrderStatusManager from "../controllers/get_order_statuses";
+import { useLocation } from "react-router-dom";
 
 const ProductOrders = ({ refetch, orders, pagination, orderStatuses }) => {
+  const location = useLocation()
+  const isAdmin = location.pathname.includes("/admin");
+
   const [selectedOrder, setSelectedOrder] = useState("All");
 
   useEffect(() => {
@@ -30,7 +34,10 @@ const ProductOrders = ({ refetch, orders, pagination, orderStatuses }) => {
           <div>
             <p className="text-[18px] font-medium ">Product Order</p>
             <p className="text-[12px] font-normal ">
-              List of product orders you have.
+              {
+                isAdmin ? 'List of products orders' : 'List of product orders you have.'
+              }
+
             </p>
           </div>
           <div
@@ -41,17 +48,16 @@ const ProductOrders = ({ refetch, orders, pagination, orderStatuses }) => {
           </div>
         </div>
         {
-          <div className="flex gap-2 mb-3">
-            {orderStatuses.map((el) => (
+          <div className="flex gap-1 mb-3 flex-wrap">
+            {orderStatuses?.map((el) => (
               <p
                 onClick={() => {
                   setSelectedOrder(el.name);
                 }}
-                className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
-                  selectedOrder !== el.name
-                    ? "bg-[#F2F2F2]"
-                    : "bg-brandPrimary text-black"
-                } rounded-[20px] `}
+                className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${selectedOrder !== el.name
+                  ? "bg-[#F2F2F2]"
+                  : "bg-brandPrimary text-black"
+                  } rounded-[20px] `}
               >
                 {el.name}
               </p>
@@ -60,8 +66,8 @@ const ProductOrders = ({ refetch, orders, pagination, orderStatuses }) => {
         }
         <table className="min-w-full  rounded-lg overflow-hidden border-separate border-spacing-y-3">
           <tbody>
-            {orders.length > 0 &&
-              orders.map((order, index) => (
+            {orders?.length > 0 &&
+              orders?.map((order, index) => (
                 <tr
                   key={index}
                   className="bg-[#FAFAFA]  rounded-lg p-5 relative mb-2 "
@@ -112,9 +118,12 @@ const ProductOrders = ({ refetch, orders, pagination, orderStatuses }) => {
                             <li className="text-[12px] font-normal bg-brandPrimary px-2 py-1 text-center rounded-full mb-2  text-black">
                               View Order
                             </li>
-                            <li className="text-[12px] font-normal bg-[#F2F2F2] px-2 py-1 text-center rounded-full text-black">
-                              Report dispute
-                            </li>
+                            {
+                              !isAdmin && <li className="text-[12px] font-normal bg-[#F2F2F2] px-2 py-1 text-center rounded-full text-black">
+                                Report dispute
+                              </li>
+                            }
+
                           </ul>
                         </div>
                       </button>

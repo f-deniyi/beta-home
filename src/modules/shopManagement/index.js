@@ -10,8 +10,10 @@ import Loader from "../../generalComponents/Loader";
 import { locationIcon, verifiedIcon } from "../../assets/icons";
 import { formatAddress } from "../../utils/format_address";
 import { formatMonth } from "../../utils/format_month";
+import { useNavigate } from "react-router-dom";
 
 const ShopManagement = () => {
+  const navigate = useNavigate()
   const { isLoading, data } = useGetShopsQuery({ enabled: true });
 
   return (
@@ -22,7 +24,10 @@ const ShopManagement = () => {
         <>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 ">
             {data.shops.map((shop, index) => (
-              <div className="flex flex-col bg-whiteColor h-[184px] w-full md:w-[266px] rounded-lg mb-5">
+              <div className="flex flex-col bg-whiteColor h-[184px] w-full md:w-[266px] rounded-lg mb-5 cursor-pointer"
+                onClick={() => {
+                  navigate(`/admin/shop-details/${shop?._id}`)
+                }}>
                 <img
                   className="w-full rounded-t-lg h-[77px]"
                   src={shop.cover_image?.original}
