@@ -5,25 +5,20 @@ import { MdOutlineArrowForwardIos } from 'react-icons/md'
 import CustomButton from '../../../generalComponents/Button'
 import ProductOrders from '../../products/view/orders'
 import ServicesOrder from '../../services/components/ServicesOrder'
+import { UpdateVendorRequestsMutation } from '../controllers/update_requests'
 
-const RequestDetails = () => {
-    const [uploadedImages, setUploadedImages] = useState([]);
-    const handleFileUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                const newImage = { url: reader.result, file };
-                setUploadedImages([...uploadedImages, newImage]);
-            };
-            reader.readAsDataURL(file);
+const RequestDetails = ({ user }) => {
+
+    const { updateRequest, isLoading } = UpdateVendorRequestsMutation()
+
+    const handleUpdateRequest = (status) => {
+        const data = {
+            "request": user?.serviceId,
+            "status": status,
+            "reason": ""
         }
-    };
-
-    const handleDeleteImage = (index) => {
-        const updatedImages = uploadedImages.filter((_, i) => i !== index);
-        setUploadedImages(updatedImages);
-    };
+        updateRequest(data)
+    }
 
     return (
         <>
@@ -38,14 +33,14 @@ const RequestDetails = () => {
                     </div>
 
                 </div>
-                <div className='flex itens-center justify-center mb-[26px]'>
-                    <div>
-                        <div className='border-2 border-brandPrimary h-[135px] w-[135px] rounded-full flex items-center justify-center mb-1'>
-                            <img src={user} alt='icon' />
+                <div className='flex items-center justify-center mb-[26px]'>
+                    <div className='flex items-center justify-center flex-col'>
+                        <div className='border-2 border-brandPrimary h-[135px] w-[135px] rounded-full flex items-center justify-center mb-1 overflow-hidden'>
+                            <img src={user?.profile_picture.length !== '' ? user?.profile_picture : user} alt='icon' className='object-cover rounded-full' />
                         </div>
                         <div className='text-center'>
-                            <h3 className='text-[20px] font-bold '>Faith May</h3>
-                            <p className='text-[12px] font-medium'>faithmay@gmail.com</p>
+                            <h3 className='text-[20px] font-bold '>{user?.fullname}</h3>
+                            <p className='text-[12px] font-medium'>{user?.email}</p>
                         </div>
                     </div>
 
@@ -54,87 +49,50 @@ const RequestDetails = () => {
                     <div className="flex w-full">
                         <div className="grid  flex-grow text-center">
                             <p className='mb-0 text-[#696969] text-[12px] font-semibold'>Gender</p>
-                            <h3 className='text-[18px] font-medium '>Female</h3>
+                            <h3 className='text-[18px] font-medium '>{user?.gender ?? 'N/A'}</h3>
                         </div>
                         <div className="divider divider-horizontal w-[0.3px] bg-[#A5A5A5]" />
                         <div className="grid  flex-grow text-center">
                             <p className='mb-0 text-[#696969] text-[12px] font-semibold'>Phone No.</p>
-                            <h3 className='text-[18px] font-medium '>+234 810 123 4567</h3>
+                            <h3 className='text-[18px] font-medium '>{user?.phone ?? 'N/A'}</h3>
                         </div>
                         <div className="divider divider-horizontal w-[0.3px] bg-[#A5A5A5]" />
                         <div className="grid  flex-grow text-center">
                             <p className='mb-0 text-[#696969] text-[12px] font-semibold'>Status</p>
-                            <h3 className='text-[18px] font-medium '>Customer</h3>
+                            <h3 className='text-[18px] font-medium capitalize'>{user?.status}</h3>
                         </div>
 
                     </div>
                 </div>
-                <div>
-                    <p className='text-[15px] font-medium mb-3'>Package</p>
-                    <div className='bg-brandPrimary rounded-[10px] px-[18px] py-[15px] flex items-center justify-between shadow-lg mb-[30px]'>
-                        <div>
-                            <h3 className='text-[22px] font-medium mb-0'>Beta</h3>
-                            <h3 className='text-[29px] font-semibold mb-0 -mt-3'>Basic</h3>
-                            <p className='text-[13px] font-normal mb-0 -mt-2'>Daily Payment Plan</p>
-                        </div>
-                        <div>
-                            <MdOutlineArrowForwardIos size='19' />
-                        </div>
-                    </div>
-                </div>
-                <div className="flex w-full">
-                    <div className="grid  flex-grow text-center">
-                        <p className='mb-0 text-[#696969] text-[15px] font-medium mb-2'>Customer Products Order</p>
-                        <h3 className='text-[30px] font-semibold '>12 Products</h3>
-                        <div classNmw='w-1/3 mx-auto'>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    document.getElementById('product_orders').showModal()
-                                    document.getElementById('vendor_request').close()
-                                }}
-                                class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                            >
-                                View Details
-                            </button>
-                        </div>
 
-                    </div>
-                    <div className="divider divider-horizontal w-[0.3px] bg-[#A5A5A5]" />
-                    <div className="grid  flex-grow text-center">
-                        <p className='mb-0 text-[#696969] text-[15px] font-medium mb-2'>Customer Service Order</p>
-                        <h3 className='text-[30px] font-semibold '>2 Products</h3>
-                        <div classNmw='w-1/3 mx-auto'>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    document.getElementById('vendor_request').close()
-                                    document.getElementById('service_order').showModal()
-                                }
-                                }
-                                class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                            >
-                                View Details
-                            </button>
-                        </div>
-                    </div>
+                {
+                    user?.status !== 'approved' && <div className='flex gap-x-2'>
 
-                </div>
+                        <CustomButton
+                            buttonText={'Accept'}
+                            isLoading={isLoading}
+                            disabled={isLoading}
+                            onClick={() => {
+                                handleUpdateRequest('approved')
+                            }}
+                            className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary !py-[15px]'}
+                        />
+                        <CustomButton
+                            buttonText={'Reject'}
+                            className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandGrey  !py-[15px]'}
+                            isLoading={isLoading}
+                            disabled={isLoading}
+                            onClick={() => {
+                                handleUpdateRequest('rejected')
+                            }}
+                        />
+                    </div>
+                }
 
-                <div className='flex gap-x-2'>
-                    <CustomButton
-                        buttonText={'Accept'}
-                        className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary !py-[15px]'}
-                    />
-                    <CustomButton
-                        buttonText={'Reject'}
-                        className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandGrey  !py-[15px]'}
-                    />
-                </div>
             </ModalManagement>
 
-            <ProductOrders />
-            <ServicesOrder />
+            {/* <ProductOrders /> */}
+            {/* <ServicesOrder /> */}
 
         </>
     )

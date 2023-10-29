@@ -18,6 +18,7 @@ import { FiArrowRight } from 'react-icons/fi'
 import RequestTable from "./components/RequestTable";
 import { filterIcon } from "../../assets/icons";
 import FilterRequest from "./components/FilterRequest";
+import UseGetVendorRequestsQuery from "./controllers/get_requests";
 
 const VendorRequest = () => {
     const formatDate = (dateString) => {
@@ -25,21 +26,23 @@ const VendorRequest = () => {
         return format(date, "MMMM d, yyyy");
     };
 
+    const { requests, pagination } = UseGetVendorRequestsQuery()
+
     return (
         <BaseDashboardNavigation title={"Vendor Request Management"} hideSearch={true}>
             <div className="flex items-center justify-between my-3">
-                <p className="text-[20px] font-normal mb-3">List of users</p>
-                <div>
+                <p className="text-[20px] font-normal mb-3">List of requests</p>
+                {/* <div>
                     <button className="bg-brandPrimary flex gap-x-2 py-3 shadow-lg px-[25px] rounded-full " onClick={() => {
                         document.getElementById('filter_request').showModal()
                     }}>
                         <img src={filterIcon} alt='icon' />
                         <p className="text-[12px] font-medium">Filter</p>
                     </button>
-                </div>
+                </div> */}
 
             </div>
-            <RequestTable />
+            <RequestTable requests={requests} pagination={pagination} />
             <FilterRequest />
         </BaseDashboardNavigation>
     );
