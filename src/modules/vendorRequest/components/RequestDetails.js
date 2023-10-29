@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ModalManagement from '../../../generalComponents/ModalManagement'
 import { close, user } from '../../../assets/icons'
 import { MdOutlineArrowForwardIos } from 'react-icons/md'
@@ -9,7 +9,7 @@ import { UpdateVendorRequestsMutation } from '../controllers/update_requests'
 
 const RequestDetails = ({ user }) => {
 
-    const { updateRequest, isLoading } = UpdateVendorRequestsMutation()
+    const { updateRequest, isLoading, isSuccess } = UpdateVendorRequestsMutation()
 
     const handleUpdateRequest = (status) => {
         const data = {
@@ -18,7 +18,14 @@ const RequestDetails = ({ user }) => {
             "reason": ""
         }
         updateRequest(data)
+        // console.log('---data---', data)
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            document.getElementById('vendor_request').close()
+        }
+    }, [isSuccess])
 
     return (
         <>
@@ -66,7 +73,7 @@ const RequestDetails = ({ user }) => {
                 </div>
 
                 {
-                    user?.status !== 'approved' && <div className='flex gap-x-2'>
+                    user?.status === 'pending' && <div className='flex gap-x-2'>
 
                         <CustomButton
                             buttonText={'Accept'}

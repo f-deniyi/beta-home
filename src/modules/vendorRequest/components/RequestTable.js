@@ -107,7 +107,7 @@ const RequestTable = ({ requests, pagination }) => {
                                                     </td>
 
                                                     <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                                        <div class={`capitalize flex items-center justify-center ${el?.status==='approved'?'bg-[#00A3FF]':"bg-brandOrange"}  py-[5px] px-[10px] text-center text-white rounded-[20px]`}>
+                                                        <div class={`capitalize flex items-center justify-center ${el?.status === 'approved' ? 'bg-[#00A3FF]' : "bg-brandOrange"}  py-[5px] px-[10px] text-center text-white rounded-[20px]`}>
                                                             {el?.status}
                                                         </div>
                                                     </td>
@@ -118,7 +118,7 @@ const RequestTable = ({ requests, pagination }) => {
                                                             <button
                                                                 type="button"
                                                                 onClick={() => {
-                                                                    setSelectedUser({ status: el?.status, ...el?.user })
+                                                                    setSelectedUser({ status: el?.status, serviceId: el?._id, ...el?.user })
                                                                     document.getElementById('vendor_request').showModal()
                                                                 }
                                                                 }
