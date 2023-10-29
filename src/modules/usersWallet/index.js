@@ -8,9 +8,13 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
 import UserWallet from "./components/Table";
-
+import useGetAllUsersManager from '../UsersManagament/controllers/get_all_users_controller'
+import { useLocation } from "react-router-dom";
 
 const UsersWallet = () => {
+    const location = useLocation()
+    const isAdmin = location.pathname.includes("/admin");
+
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return format(date, "MMMM d, yyyy");
@@ -27,6 +31,12 @@ const UsersWallet = () => {
         'Vendors'
     ]
 
+    const { users, pagination } = useGetAllUsersManager({
+        filter: "",
+        enabled: isAdmin
+    })
+
+
     return (
         <BaseDashboardNavigation title={"User Management"} hideSearch={true}>
             <p className="text-[20px] font-normal mb-3">List of users</p>
@@ -42,7 +52,7 @@ const UsersWallet = () => {
                     }
                 </div>
                 <div>
-                    <UserWallet />
+                    <UserWallet users={users} selectedUser={selectedUser} />
                 </div>
             </div>
 

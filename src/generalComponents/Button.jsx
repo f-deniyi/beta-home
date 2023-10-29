@@ -17,7 +17,7 @@ const CustomButton = ({
       type={type}
       onClick={onClick}
       className={`bg-${buttonColor ?? "brandYellow"
-        } py-[6px] md:py-[8px] px-[14px] md:px-[25px] font-medium hover:bg-brandYellow/50 hover:shadow-xl hover:scale-y-105 duration-300 text-${!textColor ? "blackColor" : textColor
+        } py-[6px] md:py-[8px] px-[14px] md:px-[25px] font-medium  hover:shadow-xl hover:scale-y-105 duration-300 text-${!textColor ? "blackColor" : textColor
         } rounded-${radius ?? "full"} ${className}`}
       {...props}
     >

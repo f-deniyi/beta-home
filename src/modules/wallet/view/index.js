@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BaseDashboardNavigation from "../../../generalComponents/BaseDashboardNavigation";
 import Transactions from '../component/Transactions'
 import logo from '../../../assets/images/new_logo.svg'
@@ -8,11 +8,21 @@ import Withdraw from "../component/Withdraw";
 import { walletbg2 } from '../../../assets/icons'
 import useGetWalletBalanceQuery from "../controller/get_wallet_balance";
 import moment from 'moment'
+import useGetTransactionsHistoryQuery from "../controller/get_transactions_history";
 
 
 const WalletManagement = () => {
     const { wallet_balance, lastRefetchTime } = useGetWalletBalanceQuery({ enabled: true })
+    const [activePage, setActivePage] = useState(1)
 
+    const { transactions, pagination } = useGetTransactionsHistoryQuery({
+        enabled: true,
+        page: activePage
+
+    })
+    const handlePage = (page) => {
+        setActivePage(page)
+    }
     return (
         <BaseDashboardNavigation title={"Wallet"} hideSearch={false}>
             <div class="grid grid-cols-7 h-screen gap-2">
@@ -34,7 +44,11 @@ const WalletManagement = () => {
                     <div>
                         <h3 className="text-[15px] font-semibold mt-4">Transactions History</h3>
                         <div className='overflow-scroll' style={{ maxHeight: 'calc(100vh - 400px - 1rem - 1.25rem)' }}>
-                            <Transactions />
+                            <Transactions
+                                transactions={transactions}
+                                pagination={pagination}
+                                handlePage={handlePage}
+                            />
                         </div>
                     </div>
                 </div>

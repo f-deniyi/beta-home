@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import WalletDetails from './WalletDetails'
 import VendorDetails from './VendorDetails'
+import moment from 'moment'
 
-
-const UserTable = () => {
+const UserTable = ({ users, selectedUser }) => {
+    const [userId, setUserId] = useState(null)
     return (
         <div class=" bg-white sm:py-2 lg:py-3">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -21,7 +22,7 @@ const UserTable = () => {
                                         <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">Email</th>
 
                                         <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">Date Created</th>
-                                        <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">No. of O/P/S</th>
+                                        {/* <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">No. of O/P/S</th> */}
 
 
 
@@ -32,533 +33,106 @@ const UserTable = () => {
                                 </thead>
 
                                 <tbody>
-                                    <tr class="bg-">
-                                        <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                1
-                                            </div>
-                                            <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                <div class="flex items-center">
-
-                                                    Faith May
-
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    faithmay@gmail.com
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    23 Apr 2023
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    9
-                                                </div>
-
-                                                <div class="flex items-center pt-3 space-x-4">
-                                                    <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                        Customer
+                                    {
+                                        users?.map((el, i) =>
+                                            <tr class="bg-">
+                                                <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        {i + 1}
                                                     </div>
+                                                    <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
+                                                        <div class="flex items-center">
 
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => document.getElementById('customer_details').showModal()}
-                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                    >
-                                                        View Wallet
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
+                                                            {el?.fullname}
 
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                Faith May
-                                            </div>
-                                        </td>
+                                                        </div>
 
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                faithmay@gmail.com
-                                            </div>
-                                        </td>
+                                                        <div class="flex items-center">
 
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                23 Apr 2023
-                                            </div>
-                                        </td>
+                                                            {el?.email}
+                                                        </div>
 
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                34
-                                            </div>
-                                        </td>
+                                                        <div class="flex items-center">
 
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                            <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                Customer
-                                            </div>
-                                        </td>
+                                                            {moment(el?.createdAt).format('ll')}
+                                                        </div>
 
 
-                                        <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center space-x-4">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => document.getElementById('customer_details').showModal()}
-                                                    class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                >
-                                                    View Wallet
-                                                </button>
 
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                        <div class="flex items-center pt-3 space-x-4">
+                                                            {
+                                                                !el?.isVendor ? <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
+                                                                    Customer
+                                                                </div> : <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
+                                                                    Vendor
+                                                                </div>
+                                                            }
 
-                                    <tr class="bg-white">
-                                        <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                2
-                                            </div>
-                                            <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                <div class="flex items-center">
 
-                                                    Mark Oak
-
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    markoak@gmail.com
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    04 Mar 2023
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    9
-                                                </div>
-
-                                                <div class="flex items-center pt-3 space-x-4">
-                                                    <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                        Vendor
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => {
+                                                                    setUserId(el?._id)
+                                                                    document.getElementById('wallet_details').showModal()
+                                                                }}
+                                                                class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
+                                                            >
+                                                                View Wallet
+                                                            </button>
+                                                        </div>
                                                     </div>
+                                                </td>
 
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => document.getElementById('vendor_details').showModal()}
-                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                    >
-                                                        View Wallet
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                Mark Oak
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                markoak@gmail.com
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                04 Mar 2023
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                9
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                            <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                Vendor
-                                            </div>
-                                        </td>
-
-
-                                        <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center space-x-4">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => document.getElementById('vendor_details').showModal()}
-                                                    class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                >
-                                                    View Wallet
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="bg-white">
-                                        <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                1
-                                            </div>
-                                            <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                <div class="flex items-center">
-
-                                                    Faith May
-
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    faithmay@gmail.com
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    23 Apr 2023
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    9
-                                                </div>
-
-                                                <div class="flex items-center pt-3 space-x-4">
-                                                    <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                        Customer
+                                                <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        {el?.fullname}
                                                     </div>
+                                                </td>
 
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => document.getElementById('customer_details').showModal()}
-                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                    >
-                                                        View Wallet
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                Faith May
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                faithmay@gmail.com
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                23 Apr 2023
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                34
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                            <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                Customer
-                                            </div>
-                                        </td>
-
-
-                                        <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center space-x-4">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => document.getElementById('customer_details').showModal()}
-                                                    class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                >
-                                                    View Wallet
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="bg-white">
-                                        <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                2
-                                            </div>
-                                            <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                <div class="flex items-center">
-
-                                                    Mark Oak
-
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    markoak@gmail.com
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    04 Mar 2023
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    9
-                                                </div>
-
-                                                <div class="flex items-center pt-3 space-x-4">
-                                                    <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                        Vendor
+                                                <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        {el?.email}
                                                     </div>
+                                                </td>
 
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => document.getElementById('vendor_details').showModal()}
-                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                    >
-                                                        View Wallet
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                Mark Oak
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                markoak@gmail.com
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                04 Mar 2023
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                9
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                            <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                Vendor
-                                            </div>
-                                        </td>
-
-
-                                        <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center space-x-4">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => document.getElementById('vendor_details').showModal()}
-                                                    class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                >
-                                                    View Wallet
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="bg-white">
-                                        <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                1
-                                            </div>
-                                            <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                <div class="flex items-center">
-
-                                                    Faith May
-
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    faithmay@gmail.com
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    23 Apr 2023
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    9
-                                                </div>
-
-                                                <div class="flex items-center pt-3 space-x-4">
-                                                    <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                        Customer
+                                                <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        {moment(el?.createdAt).format('ll')}
                                                     </div>
-
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => document.getElementById('customer_details').showModal()}
-                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                    >
-                                                        View Wallet
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                Faith May
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                faithmay@gmail.com
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                23 Apr 2023
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                34
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                            <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                Customer
-                                            </div>
-                                        </td>
+                                                </td>
 
 
-                                        <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center space-x-4">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => document.getElementById('customer_details').showModal()}
-                                                    class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                >
-                                                    View Wallet
-                                                </button>
 
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
+                                                    {
+                                                        !el?.isVendor ? <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
+                                                            Customer
+                                                        </div> : <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
+                                                            Vendor
+                                                        </div>
+                                                    }
+                                                </td>
 
-                                    <tr class="bg-white">
-                                        <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                2
-                                            </div>
-                                            <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                <div class="flex items-center">
 
-                                                    Mark Oak
+                                                <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
+                                                    <div class="flex items-center space-x-4">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                document.getElementById('wallet_details').showModal()
+                                                                setUserId(el?._id)
+                                                            }}
+                                                            class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
+                                                        >
+                                                            View Wallet
+                                                        </button>
 
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    markoak@gmail.com
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    04 Mar 2023
-                                                </div>
-
-                                                <div class="flex items-center">
-
-                                                    9
-                                                </div>
-
-                                                <div class="flex items-center pt-3 space-x-4">
-                                                    <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                        Vendor
                                                     </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
 
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => document.getElementById('vendor_details').showModal()}
-                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                    >
-                                                        View Wallet
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                Mark Oak
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                markoak@gmail.com
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                04 Mar 2023
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                9
-                                            </div>
-                                        </td>
-
-                                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                            <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                                                Vendor
-                                            </div>
-                                        </td>
-
-
-                                        <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
-                                            <div class="flex items-center space-x-4">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => document.getElementById('vendor_details').showModal()}
-                                                    class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                >
-                                                    View Wallet
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                    </tr>
 
 
                                 </tbody>
@@ -567,7 +141,7 @@ const UserTable = () => {
                     </div>
                 </div>
             </div>
-            <WalletDetails />
+            <WalletDetails userId={userId} />
             <VendorDetails />
         </div>
 

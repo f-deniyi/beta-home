@@ -1,7 +1,6 @@
 import React from 'react'
 import ModalManagement from '../../../../generalComponents/ModalManagement'
 import { close, locationIcon, star, edit, deleteIcon } from '../../../../assets/icons'
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import product from '../../../../assets/images/product_details.png'
 import DeleteProduct from '../DeleteProduct';

@@ -24,9 +24,9 @@ const useLoginManager = (email) => {
   const mutation = useMutation(loginController, {
     onSuccess: async (data) => {
       const token = data.data.token;
-      const hasShop = data.data.user.shops.length > 0
+      const hasShop = data.data.user.shops.length > 0;
       if (hasShop) {
-        localStorage.setItem("beta-vendor-shop", data.data.user.shops[0])
+        localStorage.setItem("beta-vendor-shop", data.data.user.shops[0]);
       }
       localStorage.setItem("beta-vendor-token", token);
       toast.success(data.message);
@@ -39,7 +39,9 @@ const useLoginManager = (email) => {
           }
         }, 100);
       });
-      console.log(`this is the token ${localStorage.getItem("beta-vendor-token")} `);
+      console.log(
+        `this is the token ${localStorage.getItem("beta-vendor-token")} `
+      );
       navigate(`/dashboard`);
     },
 
@@ -48,7 +50,7 @@ const useLoginManager = (email) => {
       toast.error(error.message);
       console.log(`this is the status code for error: ${statusCode}`);
       if (statusCode === 402) {
-        navigate(`/registration-confirmation?email=${email}`);
+        navigate(`/account-verification?email=${email}`);
       }
       console.error("Login error:", error.message);
     },

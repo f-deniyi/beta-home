@@ -29,8 +29,10 @@ module.exports = {
         lightGrey: "#F2F2F2",
         deepGrey: "#CEC1B4",
         brandPrimary: '#FFF122',
-        brandGrey:'#f2f2f2'
-        
+        brandGrey: '#f2f2f2',
+        pending: '#FFA800'
+
+
       },
     },
   },
