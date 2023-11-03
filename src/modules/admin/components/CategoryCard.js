@@ -11,7 +11,7 @@ const CategoryCard = ({
   type,
   image
 }) => {
-  // console.log('details', categoryDetails)
+  // console.log('details', categoryDetails,icon)
   return (
     <>
       <div
