@@ -58,7 +58,7 @@ const AddCategory = ({ type }) => {
         },
         details: details,
         parent: parent,
-        type: group,
+        type: null,
       };
       console.log(data)
       type === 'brand' ? addBrandController(data) : addCategoryController(data)
@@ -160,8 +160,8 @@ const AddCategory = ({ type }) => {
 
             <CustomButton
               buttonText={"Proceed"}
-              disabled={addingBrandCategory || addingCategory}
-              isLoading={addingBrandCategory || addingCategory}
+              disabled={addingBrandCategory || addingCategory || fileLoading}
+              isLoading={addingBrandCategory || addingCategory || fileLoading}
               type={'submit'}
               className={
                 "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary  !py-[15px]"

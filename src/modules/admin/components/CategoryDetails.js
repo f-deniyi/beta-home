@@ -96,7 +96,7 @@ const CategoryDetails = ({ type, icon, image = productCategory, name, details, c
             }
             disabled={deletingCategory || deletingBrandCategory}
             onClick={() => {
-              // handleCategoryDelete()
+              handleCategoryDelete()
             }}
           />
         </div>
