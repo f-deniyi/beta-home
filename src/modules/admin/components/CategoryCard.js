@@ -9,7 +9,9 @@ const CategoryCard = ({
   count = "1500",
   onClick,
   type,
+  image
 }) => {
+  // console.log('details', categoryDetails)
   return (
     <>
       <div
@@ -19,15 +21,15 @@ const CategoryCard = ({
           document.getElementById("category_details").showModal();
         }}
       >
+
         <div
-          className={`${
-            type !== "brand"
-              ? "bg-brandPrimary "
-              : "bg-white border border-1 border-[#828282] border-solid "
-          } h-[124px] w-124px] flex justify-center items-center mb-[15px] rounded-lg`}
+          className={`${type !== "brand"
+            ? "bg-brandPrimary"
+            : "bg-white border border-1 border-[#828282] border-solid "
+            } h-[124px] w-124px] flex justify-center items-center mb-[15px] rounded-lg`}
         >
           <img
-            src={type === "brand" ? brand : icon}
+            src={type === "brand" ? image ?? brand : icon}
             alt={name}
             className="object-cover"
           />
@@ -36,10 +38,12 @@ const CategoryCard = ({
         <p className="text-[15px] font-normal mb-2 bg-black rounded-full text-white text-[10px] font-medium py-2 px-3 text-center">{`${count}/products`}</p>
       </div>
       <CategoryDetails
+        category={categoryDetails}
         type={type}
         image={brand}
         name={categoryDetails?.name}
         icon={categoryDetails?.icon}
+        details={categoryDetails?.details}
       />
     </>
   );

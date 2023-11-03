@@ -3,7 +3,7 @@ import usePostManager from "../../../constants/controller_templates/post_control
 export const AddBrandsManager = () => {
   const { postCaller, isLoading, isSuccess, error, data } = usePostManager(
     `/products/manufacturers`,
-    ["brands"]
+    "brands"
   );
   const addBrandController = async (details) => {
     try {

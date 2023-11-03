@@ -1,11 +1,11 @@
 import useUpdateManager from "../../../constants/controller_templates/put_controller_template";
 
 export const UpdateBrandManager = (brandId) => {
-  const isMultiKey = false;
+  // const isMultiKey = false;
   const { updateCaller, isLoading, isSuccess, error, data } = useUpdateManager(
     `/products/manufacturers/${brandId}`,
-    ["brands"],
-    isMultiKey
+    "brands",
+    // isMultiKey
   );
   const editBrandManager = async (details) => {
     try {
