@@ -5,7 +5,7 @@ export const DeleteCategoryManager = () => {
   const isMultiKey = false;
   const { deleteCaller, isLoading, isSuccess, error, data } = useDeleteManager(
     `/categories`,
-    ["product_categories"]
+    "product_categories"
   );
   const deletePackageController = async (details) => {
     try {

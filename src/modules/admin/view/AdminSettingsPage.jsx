@@ -19,6 +19,8 @@ const AdminSettingsPage = () => {
   const { data: brands, isLoading: loadingBrands } = useGetAllBrandsManager({
     enabled: true,
   });
+
+
   const items = [...Array(10).keys()];
   const brandItems = [...Array(3).keys()];
   const [categoryType, setCategoryType] = useState("product");
@@ -47,6 +49,7 @@ const AdminSettingsPage = () => {
             <div className="flex flex-wrap gap-5">
               {productCategories.map((item, index) => (
                 <CategoryCard
+                  details={item?.details}
                   onClick={() => {
                     setSelectedItem(item);
                   }}
@@ -83,6 +86,7 @@ const AdminSettingsPage = () => {
             <div className="flex flex-wrap gap-5">
               {serviceCategories.map((item, index) => (
                 <CategoryCard
+                  details={item?.details}
                   key={index}
                   icon={item.icon}
                   name={item.name}
@@ -120,7 +124,9 @@ const AdminSettingsPage = () => {
             <div className="flex flex-wrap gap-5">
               {brands.map((item, index) => (
                 <CategoryCard
+                  details={item?.details}
                   type={"brand"}
+                  image={item?.image?.original}
                   name={item.name}
                   onClick={() => {
                     setSelectedItem(item);
