@@ -20,18 +20,18 @@ const useAdminVerificationManager = () => {
   const mutation = useMutation(resetPasswordController, {
     onSuccess: async (data) => {
       const token = data.data.token;
-      localStorage.setItem("token", token);
+      localStorage.setItem("beta-vendor-token", token);
 
       await new Promise((resolve) => {
         // Check for token in localStorage every 100 milliseconds
         const intervalId = setInterval(() => {
-          if (localStorage.getItem("token") === token) {
+          if (localStorage.getItem("beta-vendor-token") === token) {
             clearInterval(intervalId);
             resolve();
           }
         }, 100);
       });
-      console.log(`this is the token ${localStorage.getItem("token")} `);
+      console.log(`this is the token ${localStorage.getItem("beta-vendor-token")} `);
       navigate(`/admin/dashboard`);
     },
 

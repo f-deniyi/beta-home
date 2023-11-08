@@ -1,7 +1,7 @@
 import React from "react";
 import { authentication, logo, topPattern } from "../../../assets/images";
 import CustomButton from "../../../generalComponents/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const AuthenticationBase = ({
   title,
@@ -12,6 +12,10 @@ const AuthenticationBase = ({
   afterElements,
   isLoading,
 }) => {
+  let location = useLocation();
+
+  const isAdmin = location.pathname.includes("/admin");
+
   return (
     <div className="h-full lg:h-screen relative text-blackColor  overflow-hidden">
       <div className="flex flex-col lg:flex-row items-center  bg-white h-full w-full">
@@ -23,9 +27,10 @@ const AuthenticationBase = ({
           />
 
           <p className="flex flex-col items-center justify-center text-[50px] lg:text-[100px] font-bold leading-tight z-0 ">
-            <span className="-mb-4 lg:-mb-8">Vendor</span>{" "}
+            <span className="-mb-4 lg:-mb-8">{!isAdmin ? 'Vendor' : 'Super'}</span>{" "}
             <span className="text-[100px] lg:text-[200px] -mt-6 lg:-mt-10 mask-gradient">
-              Store
+
+              {!isAdmin ? 'Store' : 'Admin'}
             </span>
           </p>
 

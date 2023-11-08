@@ -42,13 +42,17 @@ function App() {
             path="/payment/confirmation"
             element={<PaymentVerification />}
           />
+           <Route
+            path="/promotion-management"
+            element={<PromotionManagement />}
+          />
 
           {/* <Route
             path="/dashboard/user-details/:userId"
             element={<UserDetailsPage />}
           /> */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin/login" element={<LoginPage />} />
           <Route path="/admin/users-management" element={<UsersManagement />} />
           <Route path="/admin/vendor-request" element={<VendorRequest />} />
           <Route path="/admin/shop-management" element={<ShopManagement />} />
