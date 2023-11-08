@@ -49,6 +49,12 @@ export const vendorMenu = [
     activeIcon: services_active,
   },
   {
+    title: "Promotion Management",
+    path: "/promotion-management",
+    icon: promotion,
+    activeIcon: promotion_active,
+  },
+  {
     title: "Messages",
     path: "/messages",
     icon: message,
