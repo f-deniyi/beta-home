@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { authentication, topPattern } from "../../../assets/images";
 import InputWithFullBoarder from "../../../generalComponents/InputWithFullBoarder";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import AuthenticationBase from "../components/AuthenticationBase";
 import useLoginManager from "../controllers/login.controller";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import useAdminLoginManager from "../controllers/adminLoginController";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  const isAdmin = location.pathname.includes("/admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [viewPassword, setViewPassword] = useState(false);
@@ -23,6 +26,8 @@ const LoginPage = () => {
   const { postCaller, data, isSuccess, isLoading, error } =
     useLoginManager(email);
 
+  const { postCaller: AdminPostCaller } = useAdminLoginManager()
+
   const handleSubmission = async () => {
     const details = {
       id: email,
@@ -31,8 +36,12 @@ const LoginPage = () => {
 
     console.log(email);
     console.log(password);
+    if (isAdmin) {
+      await AdminPostCaller(details)
+    } else {
+      await postCaller(details);
 
-    await postCaller(details);
+    }
 
     // setEmail("");
     // setPassword("");
@@ -98,12 +107,7 @@ const LoginPage = () => {
             </Link>
           </p> */}
 
-          <button
-            onClick={() => navigate("/forgot-password")}
-            className="text-[14px] mmd:text-[20px] font-semibold text-white text-center mx-auto hover:scale-125 hover:text-blackColor duration-300"
-          >
-            Forgot Password
-          </button>
+         
         </div>
       }
     />

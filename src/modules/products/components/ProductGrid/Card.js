@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import ProductImage from '../../../../assets/images/productImg.png'
 import { star } from '../../../../assets/icons'
 
-const ProductCard = ({ product, setProductId }) => {
+const ProductCard = ({ product, setProductId, onSelect }) => {
     return (
         <>
             <div className="rounded-lg overflow-hidden cursor-pointer" onClick={() => {
-                setProductId(product?.id)
-                document.getElementById('product_details').showModal()
+                if (onSelect) {
+                    onSelect(product?.id)
+                } else {
+                    setProductId(product?.id)
+                    document.getElementById('product_details').showModal()
+                }
             }
             }>
                 <img className="w-full h-[150px] rounded-lg object-cover mb-1" src={product?.image?.original} alt="Product Image" />

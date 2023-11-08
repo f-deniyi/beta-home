@@ -3,7 +3,7 @@ import ProductCard from './Card'
 import PaginationRounded from '../../../../generalComponents/Pagination'
 import ProductDetails from '../Details'
 
-const ProductGrid = ({ products, pagination, paginationChange }) => {
+const ProductGrid = ({ products, pagination, paginationChange, onSelect = null }) => {
     const [productId, setProductId] = useState(null)
     return (
         <div>
@@ -11,7 +11,9 @@ const ProductGrid = ({ products, pagination, paginationChange }) => {
                 {products?.map(product =>
                     <ProductCard
                         product={product}
-                        setProductId={setProductId} />
+                        setProductId={setProductId}
+                        onSelect={onSelect}
+                    />
                 )
                 }
                 {/* <ProductCard />
