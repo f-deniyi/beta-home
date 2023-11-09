@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LeadDetails from './LeadDetails'
+import useGetSalesRep from "../controller/get_sales_rep";
+
 
 const ReferralTable = () => {
+    const [status, setStatus] = useState(true)
+    const { requests } = useGetSalesRep({
+        status
+    })
     return (
         <>
 
@@ -98,7 +104,7 @@ const ReferralTable = () => {
                                             </td>
 
                                             <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                               <p className='text-left text-[12px] font-medium'>2345NG</p>
+                                                <p className='text-left text-[12px] font-medium'>2345NG</p>
                                             </td>
 
 
@@ -184,7 +190,7 @@ const ReferralTable = () => {
                                             </td>
 
                                             <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                               <p className='text-left text-[12px] font-medium'>2345NG</p>
+                                                <p className='text-left text-[12px] font-medium'>2345NG</p>
                                             </td>
 
 
@@ -270,7 +276,7 @@ const ReferralTable = () => {
                                             </td>
 
                                             <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                               <p className='text-left text-[12px] font-medium'>2345NG</p>
+                                                <p className='text-left text-[12px] font-medium'>2345NG</p>
                                             </td>
 
 
@@ -354,93 +360,7 @@ const ReferralTable = () => {
                                             </td>
 
                                             <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                               <p className='text-left text-[12px] font-medium'>2345NG</p>
-                                            </td>
-
-
-                                            <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center space-x-4">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => document.getElementById('lead_details').showModal()}
-                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                    >
-                                                        View Leads
-                                                    </button>
-
-                                                </div>
-                                            </td>
-                                        </tr>
-
-
-
-                                        <tr class="bg-white">
-                                            <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    1
-                                                </div>
-                                                <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                    <div class="flex items-center">
-
-                                                        Faith May
-
-                                                    </div>
-
-                                                    <div class="flex items-center">
-
-                                                        faithmay@gmail.com
-                                                    </div>
-
-                                                    <div class="flex items-center">
-
-                                                        23 Apr 2023
-                                                    </div>
-
-                                                    <div class="flex items-center">
-
-                                                        9
-                                                    </div>
-
-                                                    <div class="flex items-center pt-3 space-x-4">
-                                                        <p className='text-[12px] font-medium'>2345NG</p>
-
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => document.getElementById('lead_details').showModal()}
-                                                            class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
-                                                        >
-                                                            View Leads
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    Faith May
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    faithmay@gmail.com
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    23 Apr 2023
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    34
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                               <p className='text-left text-[12px] font-medium'>2345NG</p>
+                                                <p className='text-left text-[12px] font-medium'>2345NG</p>
                                             </td>
 
 
@@ -526,7 +446,93 @@ const ReferralTable = () => {
                                             </td>
 
                                             <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                                               <p className='text-left text-[12px] font-medium'>2345NG</p>
+                                                <p className='text-left text-[12px] font-medium'>2345NG</p>
+                                            </td>
+
+
+                                            <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center space-x-4">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => document.getElementById('lead_details').showModal()}
+                                                        class="bg-brandPrimary inline-flex items-center px-3 py-2 text-[12px] font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
+                                                    >
+                                                        View Leads
+                                                    </button>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+
+                                        <tr class="bg-white">
+                                            <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    1
+                                                </div>
+                                                <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
+                                                    <div class="flex items-center">
+
+                                                        Faith May
+
+                                                    </div>
+
+                                                    <div class="flex items-center">
+
+                                                        faithmay@gmail.com
+                                                    </div>
+
+                                                    <div class="flex items-center">
+
+                                                        23 Apr 2023
+                                                    </div>
+
+                                                    <div class="flex items-center">
+
+                                                        9
+                                                    </div>
+
+                                                    <div class="flex items-center pt-3 space-x-4">
+                                                        <p className='text-[12px] font-medium'>2345NG</p>
+
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => document.getElementById('lead_details').showModal()}
+                                                            class="bg-brandPrimary inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200  shadow-sm focus:outline-none hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-[#fff122] px-[20px] py-[15px] rounded-full"
+                                                        >
+                                                            View Leads
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    Faith May
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    faithmay@gmail.com
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    23 Apr 2023
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    34
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
+                                                <p className='text-left text-[12px] font-medium'>2345NG</p>
                                             </td>
 
 
