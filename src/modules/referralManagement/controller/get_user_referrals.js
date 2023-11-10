@@ -2,29 +2,29 @@ import { useQuery } from "react-query";
 
 import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithToken";
 
-const useGetSalesRep = ({ status, ...params }) => {
+const useGetUseRefferal = ({ userId, enabled }) => {
 
     const { data, isLoading, isSuccess } = useQuery(
-        ["sales_rep", params.page, status],
+        ["sales_rep", enabled, userId],
         async () => {
             try {
-                const [response] = [await AxiosWithToken.get(`/user/sales-rep/requests?approved=${status}`, { params })];
+                const [response] = [await AxiosWithToken.get(`user/sales-rep/${userId}/referrals`)];
                 return response.data;
             } catch (error) {
                 console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
-        // { enabled: enabled }
+        { enabled: enabled }
     );
-    // console.log("-->>data-enrolments<<---", data)
+    // console.log("-->>data-referrals<<---", data)
 
     return {
-        requests: data?.requests ?? [],
+        referrals: data?.data?.referals ?? {},
         isLoading,
         isSuccess,
-        pagination: data?.pagination ?? {},
+        // pagination: data?.pagination ?? {},
     };
 };
 
-export default useGetSalesRep;
+export default useGetUseRefferal;

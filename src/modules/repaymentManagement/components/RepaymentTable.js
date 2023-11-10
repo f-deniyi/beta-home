@@ -10,7 +10,6 @@ const ReferralTable = () => {
     const [activePage, setActivePage] = useState(1);
     const [selectedEnrollment, setSelectedEnrollment] = useState(null)
     const { enrollments, pagination, isLoading } = useGetAllEnrollments({ page: activePage })
-    console.log('---->>>>enrollments<<<----', enrollments)
 
     const handlePage = (page) => {
         setActivePage(page);
