@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-
 import BaseDashboardNavigation from "../../generalComponents/BaseDashboardNavigation";
-
 import { format } from "date-fns";
-
-
 import ReferralTable from "./components/ReferralTable";
 
 const ReferralManagement = () => {
+   
+
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return format(date, "MMMM d, yyyy");

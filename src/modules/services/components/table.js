@@ -10,8 +10,8 @@ import { useLocation } from "react-router-dom";
 
 
 const ServicesTable = ({ requests, pagination, selectedOrder }) => {
-  const location = useLocation()
-  const isAdmin = location.pathname.includes("/admin");
+    const location = useLocation()
+    const isAdmin = location.pathname.includes("/admin");
 
     const [orderId, setOrderId] = useState(null)
 
@@ -114,9 +114,12 @@ const ServicesTable = ({ requests, pagination, selectedOrder }) => {
 
                     </tbody>
                 </table>
-                <div className='mb-4 mt-3 flex items-center justify-center'>
-                    <PaginationRounded count={pagination?.pageTotal} />
-                </div>
+                {
+                    pagination && <div className='mb-4 mt-3 flex items-center justify-center'>
+                        <PaginationRounded count={pagination?.pageTotal} />
+                    </div>
+                }
+
             </div>
 
             <OrderDetails

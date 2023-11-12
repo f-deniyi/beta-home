@@ -1,14 +1,18 @@
 import React from 'react'
 import { close, warning } from '../../../../assets/icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+
 const Logout = () => {
+    const location = useLocation()
+    const isAdmin = location.pathname.includes("/admin");
     const navigate = useNavigate()
 
     const handleLogout = (e) => {
         e.preventDefault()
         localStorage.removeItem('beta-vendor-token')
         localStorage.removeItem('beta-vendor-shop')
-        navigate('/login')
+        isAdmin ? navigate('/admin/login') : navigate('/login')
+
     }
 
     return (

@@ -107,8 +107,8 @@ const BaseDashboardNavigation = ({
   // const tokenExists = localStorage.getItem("token") !== null;
 
   // console.log('--->>user<<---', data)
-
-  const activeMenu =data?.data?.user?.isVendor ? vendorMenu : adminMenu;
+  const isSalesRep = data?.data?.user?.referral_code?.length > 0
+  const activeMenu = data?.data?.user?.role?.name === 'customer' ? vendorMenu.filter(item => !item.isSalesRep || (item.isSalesRep && isSalesRep)) : adminMenu;
   // const activeMenu = adminMenu;
 
 
@@ -147,7 +147,18 @@ const BaseDashboardNavigation = ({
           src={logo}
           alt="BetaHomeNg logo"
         />
-
+        {activeMenu.map((el) => (
+          <Link className="w-[90%] mx-auto cursor-pointer" to={el?.path}>
+            <IconsWithText
+              icon={el?.icon}
+              activeIcon={el?.activeIcon}
+              path={el?.path}
+              iconSize="28px"
+              text={el?.title}
+            />
+          </Link>
+        ))}
+        {/* 
         <Link
           className="w-[90%] mx-auto"
           to={isAdmin ? "/admin/dashboard" : "/dashboard"}
@@ -268,7 +279,7 @@ const BaseDashboardNavigation = ({
               text="Logout"
             />
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* this is where the top section starts */}

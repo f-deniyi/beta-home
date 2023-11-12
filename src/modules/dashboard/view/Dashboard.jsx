@@ -3,13 +3,20 @@ import BaseDashboardNavigation from "../../../generalComponents/BaseDashboardNav
 import coverImage from '../../../assets/images/vendor_cover.png'
 import background from '../../../assets/images/background.png'
 import { verifiedIcon, locationIcon, accountOutline, walletOutline, rightArrow } from "../../../assets/icons";
-import ServicesTable from "../../../constants/Table/Services";
+// import ServicesTable from "../../../constants/Table/Services";
 import ProductTable from "../../../constants/Table/Products";
 import useGetShopsQuery from "../../shopManagement/controllers/get_shops";
 import useGetUserDetailsManager from "../../../modules/settings/controllers/get_UserDetails_controller";
 import { formatAddress } from "../../../utils/format_address";
 import { formatMonth } from "../../../utils/format_month";
 import Loader from "../../../generalComponents/Loader";
+import useGetProviderServiceRequest from "../../services/controller.js/get_service_request";
+import ServicesOrder from "../../services/components/ServicesOrder";
+import EmptyContent from "../../../generalComponents/EmptyContent";
+import ServicesTable from "../../services/components/table";
+import ProductOrderTable from "../../products/components/OrderTable";
+import useGetProductOrdersManager from "../../products/controllers/get_product_orders_controller";
+import ProductOrders from "../../products/view/orders";
 
 const Dashboard = () => {
   const { data } = useGetUserDetailsManager();
@@ -26,12 +33,13 @@ const Dashboard = () => {
 
 
 
-
+  const { requests, pagination, isLoading: fetchingRequests } = useGetProviderServiceRequest({ enabled: true })
+  const { isLoading: fetchingOrders, data: orders, refetch, } = useGetProductOrdersManager({ filter: "", enable: true });
 
   return (
     <BaseDashboardNavigation title={"Dashboard"} hideSearch={false}>
       {
-        isLoading ? <Loader /> :
+        isLoading || fetchingRequests || fetchingOrders ? <Loader /> :
           <>
             <div class="relative w-full">
               <div class="bg-cover bg-center h-[207px]  rounded-bl-[10px] rounded-br-[10px] w-full" style={{ backgroundImage: `url(${userShop?.shops[0]?.cover_image?.original})` }}></div>
@@ -54,7 +62,10 @@ const Dashboard = () => {
               <div className="mt-3">
                 <div className="flex items-center ">
                   <h3 className="text-[21.457px] text-black font-medium mr-2">{userShop?.shops[0]?.name}</h3>
-                  <img src={verifiedIcon} className="object-cover h-[15px] w-[15px] p-[0.7px] rounded-full " />
+                  {
+                    userShop?.shops[0]?.is_verified && <img src={verifiedIcon} className="object-cover h-[15px] w-[15px] p-[0.7px] rounded-full " />
+                  }
+
                 </div>
                 <div className="flex items-center mb-2">
                   <img src={locationIcon} className="object-cover  p-[0.7px] rounded-full mr-1" />
@@ -69,32 +80,58 @@ const Dashboard = () => {
             <div className="mb-4">
               <div className="flex items-center justify-between mt-3 mb-2">
                 <h3 className="text-[15px] font-medium">Service Orders</h3>
-                <div className="flex items-center">
-                  <p className="pe-2 text-[#4F4F4F] text-[12px]">See all </p>
+                <div className="flex items-center cursor-pointer">
+                  <p className="pe-2 text-[#4F4F4F] text-[12px] " onClick={() => {
+                    document.getElementById("services_request").showModal()
+                  }}>See all </p>
                   <div ><img src={rightArrow} /></div>
                 </div>
 
               </div>
               <div className="bg-white  px-3 rounded-lg">
-                <ServicesTable />
+                {/* <ServicesTable requests={requests}/>
+                 */}
+                {
+                  requests?.length > 0 ?
+                    <ServicesTable pagination={null} requests={requests?.slice(0, 2)} selectedOrder={'All'} />
+                    : <EmptyContent content='No order yet' />
+                }
               </div>
             </div>
             <div>
               <div className="flex items-center justify-between mt-3 mb-2">
                 <h3 className="text-[15px] font-medium">Product Orders</h3>
-                <div className="flex items-center">
-                  <p className="pe-2 text-[#4F4F4F] text-[12px]">See all </p>
-                  <div ><img src={rightArrow} /></div>
-                </div>
+                <div className="flex items-center cursor-pointer" onClick={() => {
+                  document.getElementById("product_orders").showModal()
+                }}>
+                <p className="pe-2 text-[#4F4F4F] text-[12px]">See all </p>
+                <div ><img src={rightArrow} /></div>
+              </div>
 
-              </div>
-              <div className="bg-white  px-3 rounded-lg">
-                <ProductTable />
-              </div>
             </div>
-          </>
+            <div className="bg-white  px-3 rounded-lg">
+              {
+                orders?.orders?.length > 0
+                  ? <ProductOrderTable
+                    orders={orders?.orders?.slice(0, 2)}
+                    isAdmin={false}
+                  /> : <EmptyContent content='No order yet' />
+              }
+
+            </div>
+          </div>
+    </>
       }
-    </BaseDashboardNavigation>
+      <ServicesOrder requests={requests} pagination={pagination} />
+      <ProductOrders
+        orders={orders?.orders}
+        pagination={pagination}
+        // orderStatuses={orderStatuses}
+        refetch={() => {
+          refetch();
+        }}
+      />
+    </BaseDashboardNavigation >
   );
 };
 
