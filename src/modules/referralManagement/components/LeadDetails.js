@@ -5,6 +5,8 @@ import { MdOutlineArrowForwardIos } from 'react-icons/md'
 import ReferredTable from './RefferedTable'
 import useGetUseRefferal from '../controller/get_user_referrals'
 import Loader from '../../../generalComponents/Loader'
+import EmptyContent from '../../../generalComponents/EmptyContent'
+
 
 const LeadDetails = ({ user }) => {
     const { isLoading, referrals } = useGetUseRefferal({
@@ -55,8 +57,8 @@ const LeadDetails = ({ user }) => {
                                     </div>
                                     <div className="divider divider-horizontal w-[0.3px] bg-[#A5A5A5]" />
                                     <div className="grid  flex-grow text-center">
-                                        <p className='mb-0 text-[#696969] text-[12px] font-semibold'>Status</p>
-                                        <h3 className='text-[18px] font-medium '>Customer</h3>
+                                        <p className='mb-0 text-[#696969] text-[12px] font-semibold'>Orders</p>
+                                        <h3 className='text-[18px] font-medium '>{user?.orders ?? 0}</h3>
                                     </div>
 
                                 </div>
@@ -77,7 +79,10 @@ const LeadDetails = ({ user }) => {
                         </div>
                     </div>
                 </div> */}
-                <ReferredTable referrals={referrals} />
+                {
+                    referrals.length > 0 ? <ReferredTable referrals={referrals} /> : <EmptyContent content={'No referral yet'}/>
+                }
+
             </ModalManagement>
         </>
     )
