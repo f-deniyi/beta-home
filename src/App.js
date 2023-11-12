@@ -26,6 +26,7 @@ import PackageManagement from "./modules/packageManagement";
 import PaymentVerification from "./modules/paymentVerification/view";
 import AdminSettingsPage from "./modules/admin/view/AdminSettingsPage";
 import ShopDetails from "./modules/shopManagement/ShopDetails";
+import Referral from "./modules/referral";
 
 function App() {
   return (
@@ -38,11 +39,13 @@ function App() {
           <Route path="/services-management" element={<ServiceManagement />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/referral" element={<Referral />} />
+
           <Route
             path="/payment/confirmation"
             element={<PaymentVerification />}
           />
-           <Route
+          <Route
             path="/promotion-management"
             element={<PromotionManagement />}
           />
