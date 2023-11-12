@@ -20,10 +20,10 @@ const useGetUseRefferal = ({ userId, enabled }) => {
     // console.log("-->>data-referrals<<---", data)
 
     return {
-        referrals: data?.data?.referals ?? {},
+        referrals: data?.data?.referals ?? [],
         isLoading,
         isSuccess,
-        // pagination: data?.pagination ?? {},
+        pagination: data?.pagination ?? {},
     };
 };
 

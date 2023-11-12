@@ -55,6 +55,13 @@ export const vendorMenu = [
     activeIcon: promotion_active,
   },
   {
+    title: "Referral",
+    path: "/referral",
+    icon: product,
+    activeIcon: product_active,
+    isSalesRep: true,
+  },
+  {
     title: "Messages",
     path: "/messages",
     icon: message,
