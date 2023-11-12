@@ -1,12 +1,12 @@
+import moment from 'moment'
 import React from 'react'
 
-const ReferredTable = () => {
+const ReferredTable = ({ referrals }) => {
+    console.log(referrals)
     return (
         <>
-
             <div class=" bg-white sm:py-2 lg:py-3 rounded-lg">
                 <div class=" mx-auto max-w-7xl ">
-
                     <div class="flex flex-col">
                         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -24,7 +24,61 @@ const ReferredTable = () => {
                                     </thead>
 
                                     <tbody>
-                                        <tr class="bg-white">
+                                        {
+                                            referrals?.map((el, i) =>
+
+                                                <tr class="bg-white">
+                                                    <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            {i + 1}
+                                                        </div>
+                                                        <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
+                                                            <div class="flex items-center">
+
+                                                                {el?.user?.fullname}
+
+                                                            </div>
+
+                                                            <div class="flex items-center">
+
+                                                                {el?.user?.email}
+                                                            </div>
+
+                                                            <div class="flex items-center">
+
+                                                                {moment(el?.createdAt).format('ll')}
+                                                            </div>
+
+
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            {el?.user?.fullname}
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            {el?.user?.email}
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            {moment(el?.createdAt).format('ll')}
+                                                        </div>
+                                                    </td>
+
+
+                                                </tr>)
+                                        }
+
+
+
+
+                                        {/* <tr class="bg-white">
                                             <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     1
@@ -46,7 +100,7 @@ const ReferredTable = () => {
                                                         23 Apr 2023
                                                     </div>
 
-                                                    
+
                                                 </div>
                                             </td>
 
@@ -68,7 +122,7 @@ const ReferredTable = () => {
                                                 </div>
                                             </td>
 
-                                           
+
                                         </tr>
 
 
@@ -95,7 +149,7 @@ const ReferredTable = () => {
                                                         23 Apr 2023
                                                     </div>
 
-                                                    
+
                                                 </div>
                                             </td>
 
@@ -117,7 +171,54 @@ const ReferredTable = () => {
                                                 </div>
                                             </td>
 
-                                           
+
+                                        </tr>
+
+                                        <tr class="bg-white">
+                                            <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    1
+                                                </div>
+                                                <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
+                                                    <div class="flex items-center">
+
+                                                        Faith May
+
+                                                    </div>
+
+                                                    <div class="flex items-center">
+
+                                                        faithmay@gmail.com
+                                                    </div>
+
+                                                    <div class="flex items-center">
+
+                                                        23 Apr 2023
+                                                    </div>
+
+
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    Faith May
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    faithmay@gmail.com
+                                                </div>
+                                            </td>
+
+                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    23 Apr 2023
+                                                </div>
+                                            </td>
+
+
                                         </tr>
 
 
@@ -144,7 +245,7 @@ const ReferredTable = () => {
                                                         23 Apr 2023
                                                     </div>
 
-                                                    
+
                                                 </div>
                                             </td>
 
@@ -166,54 +267,7 @@ const ReferredTable = () => {
                                                 </div>
                                             </td>
 
-                                           
-                                        </tr>
 
-                                        <tr class="bg-white">
-                                            <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    1
-                                                </div>
-                                                <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                    <div class="flex items-center">
-
-                                                        Faith May
-
-                                                    </div>
-
-                                                    <div class="flex items-center">
-
-                                                        faithmay@gmail.com
-                                                    </div>
-
-                                                    <div class="flex items-center">
-
-                                                        23 Apr 2023
-                                                    </div>
-
-                                                    
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    Faith May
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    faithmay@gmail.com
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    23 Apr 2023
-                                                </div>
-                                            </td>
-
-                                           
                                         </tr>
 
 
@@ -240,7 +294,7 @@ const ReferredTable = () => {
                                                         23 Apr 2023
                                                     </div>
 
-                                                    
+
                                                 </div>
                                             </td>
 
@@ -262,57 +316,8 @@ const ReferredTable = () => {
                                                 </div>
                                             </td>
 
-                                           
-                                        </tr>
 
-
-
-                                        <tr class="bg-white">
-                                            <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    1
-                                                </div>
-                                                <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
-                                                    <div class="flex items-center">
-
-                                                        Faith May
-
-                                                    </div>
-
-                                                    <div class="flex items-center">
-
-                                                        faithmay@gmail.com
-                                                    </div>
-
-                                                    <div class="flex items-center">
-
-                                                        23 Apr 2023
-                                                    </div>
-
-                                                    
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    Faith May
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    faithmay@gmail.com
-                                                </div>
-                                            </td>
-
-                                            <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    23 Apr 2023
-                                                </div>
-                                            </td>
-
-                                           
-                                        </tr>
+                                        </tr> */}
 
 
 

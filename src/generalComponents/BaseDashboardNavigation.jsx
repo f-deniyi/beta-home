@@ -108,7 +108,7 @@ const BaseDashboardNavigation = ({
 
   // console.log('--->>user<<---', data)
 
-  const activeMenu =data?.data?.user?.isVendor ? vendorMenu : adminMenu;
+  const activeMenu = data?.data?.user?.role?.name === 'customer' ? vendorMenu : adminMenu;
   // const activeMenu = adminMenu;
 
 
