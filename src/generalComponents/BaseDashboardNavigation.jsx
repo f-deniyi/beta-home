@@ -344,8 +344,8 @@ const BaseDashboardNavigation = ({
                   {data?.data?.user?.fullname}
                   {/* <MdOutlineKeyboardArrowDown size={30} /> */}
                 </p>
-                <p className="text-[#8E8E8E] text-[10px]">
-                  {data?.data?.user?.isVendor ? "Vendor" : "Admin"}
+                <p className="text-[#8E8E8E] text-[10px] capitalize">
+                  {data?.data?.user?.role?.name === 'admin' ? 'Admin' : 'Vendor'}
                 </p>
               </div>
             </div>
