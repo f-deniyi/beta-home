@@ -103,7 +103,7 @@ const ResetPasswordPage = () => {
             }}
             value={otp}
             onChange={setOtp}
-            numInputs={4}
+            numInputs={6}
             renderSeparator={<span className="mr-3"></span>}
             renderInput={(props) => <input {...props} />}
           />
