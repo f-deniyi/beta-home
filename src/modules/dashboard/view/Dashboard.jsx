@@ -17,8 +17,10 @@ import ServicesTable from "../../services/components/table";
 import ProductOrderTable from "../../products/components/OrderTable";
 import useGetProductOrdersManager from "../../products/controllers/get_product_orders_controller";
 import ProductOrders from "../../products/view/orders";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate()
   const { data } = useGetUserDetailsManager();
 
   const {
@@ -31,6 +33,7 @@ const Dashboard = () => {
     owner_id: data?.data?.user?.id
   });
 
+  console.log('my-shop', userShop)
 
 
   const { requests, pagination, isLoading: fetchingRequests } = useGetProviderServiceRequest({ enabled: true })
@@ -40,7 +43,8 @@ const Dashboard = () => {
     <BaseDashboardNavigation title={"Dashboard"} hideSearch={false}>
       {
         isLoading || fetchingRequests || fetchingOrders ? <Loader /> :
-          <>
+
+          userShop?.shops.length > 0 ? <>
             <div class="relative w-full">
               <div class="bg-cover bg-center h-[207px]  rounded-bl-[10px] rounded-br-[10px] w-full" style={{ backgroundImage: `url(${userShop?.shops[0]?.cover_image?.original})` }}></div>
               <div class="absolute bottom-[0px] left-[80px] transform -translate-x-1/2 translate-y-1/2 rounded-full overflow-hidden border-4 border-brandPrimary">
@@ -90,7 +94,7 @@ const Dashboard = () => {
               </div>
               <div className="bg-white  px-3 rounded-lg">
                 {/* <ServicesTable requests={requests}/>
-                 */}
+               */}
                 {
                   requests?.length > 0 ?
                     <ServicesTable pagination={null} requests={requests?.slice(0, 2)} selectedOrder={'All'} />
@@ -104,23 +108,37 @@ const Dashboard = () => {
                 <div className="flex items-center cursor-pointer" onClick={() => {
                   document.getElementById("product_orders").showModal()
                 }}>
-                <p className="pe-2 text-[#4F4F4F] text-[12px]">See all </p>
-                <div ><img src={rightArrow} /></div>
+                  <p className="pe-2 text-[#4F4F4F] text-[12px]">See all </p>
+                  <div ><img src={rightArrow} /></div>
+                </div>
+
               </div>
+              <div className="bg-white  px-3 rounded-lg">
+                {
+                  orders?.orders?.length > 0
+                    ? <ProductOrderTable
+                      orders={orders?.orders?.slice(0, 2)}
+                      isAdmin={false}
+                    /> : <EmptyContent content='No order yet' />
+                }
 
+              </div>
             </div>
-            <div className="bg-white  px-3 rounded-lg">
-              {
-                orders?.orders?.length > 0
-                  ? <ProductOrderTable
-                    orders={orders?.orders?.slice(0, 2)}
-                    isAdmin={false}
-                  /> : <EmptyContent content='No order yet' />
-              }
-
+          </> : <div className="h-[80vh] w-full flex items-center justify-center flex-col">
+            <EmptyContent className='h-[300px] w-[300px]' content={'You don\'t have a shop yet'} />
+            <div className='flex items-center justify-center'>
+              <button className='bg-brandPrimary py-3 px-4 mt-4 rounded-md'
+                onClick={() => {
+                  navigate('/vendorshop-settings')
+                }
+                }
+              >
+                Create Shop
+              </button>
             </div>
           </div>
-    </>
+
+
       }
       <ServicesOrder requests={requests} pagination={pagination} />
       <ProductOrders

@@ -54,12 +54,12 @@ export const vendorMenu = [
     icon: services,
     activeIcon: services_active,
   },
-  {
-    title: "Promotion Management",
-    path: "/promotion-management",
-    icon: promotion,
-    activeIcon: promotion_active,
-  },
+  // {
+  //   title: "Promotion Management",
+  //   path: "/promotion-management",
+  //   icon: promotion,
+  //   activeIcon: promotion_active,
+  // },
   {
     title: "Referral",
     path: "/referral",

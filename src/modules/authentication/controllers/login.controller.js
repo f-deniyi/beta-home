@@ -10,27 +10,29 @@ const useLoginManager = (email) => {
   let statusCode = null;
   const loginController = async (details) => {
     try {
-      const [response] = [await Axios.post(`/auth/login`, details)];
-      console.log(`i am checking this ${response.status}`);
+      const response = await Axios.post(`/auth/login`, details);
+      // console.log(`i am checking this ${response.status}`);
 
-      return response.data;
+      return response?.data;
     } catch (error) {
-      console.log(error.response.data);
-      statusCode = error.response.status;
-      throw new Error(`${error.response.data.message}`);
+      console.log(error)
+      console.log(error?.response?.data);
+      statusCode = error?.response?.status;
+      throw new Error(`${error?.response?.data?.message}`);
     }
   };
 
   const mutation = useMutation(loginController, {
     onSuccess: async (data) => {
-      const token = data.data.token;
-      const hasShop = data.data.user.shops.length > 0;
-      const isAdmin = data.data.user.role.name === "admin";
+      console.log(data)
+      const token = data?.data?.token;
+      const hasShop = data?.data?.user?.shops.length > 0;
+      const isAdmin = data?.data?.user?.role?.name === "admin";
       if (hasShop) {
-        localStorage.setItem("beta-vendor-shop", data.data.user.shops[0]);
+        localStorage.setItem("beta-vendor-shop", data?.data?.user?.shops[0]);
       }
       localStorage.setItem("beta-vendor-token", token);
-      toast.success(data.message);
+      // toast.success(data.message);
       await new Promise((resolve) => {
         // Check for token in localStorage every 100 milliseconds
         const intervalId = setInterval(() => {
@@ -52,12 +54,12 @@ const useLoginManager = (email) => {
 
     onError: (error) => {
       // Handle error if necessary
-      toast.error(error.message);
+      toast.error(error?.message);
       console.log(`this is the status code for error: ${statusCode}`);
       if (statusCode === 402) {
         navigate(`/account-verification?email=${email}`);
       }
-      console.error("Login error:", error.message);
+      console.error("Login error:", error);
     },
   });
 
@@ -72,10 +74,10 @@ const useLoginManager = (email) => {
 
   return {
     postCaller,
-    data: mutation.data,
-    isLoading: mutation.isLoading,
-    isSuccess: mutation.isSuccess,
-    error: mutation.error,
+    data: mutation?.data,
+    isLoading: mutation?.isLoading,
+    isSuccess: mutation?.isSuccess,
+    error: mutation?.error,
   };
 };
 

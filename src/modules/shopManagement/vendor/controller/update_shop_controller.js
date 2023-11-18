@@ -1,4 +1,4 @@
-import useUpdateManager from "../../../constants/controller_templates/put_controller_template";
+import useUpdateManager from "../../../../constants/controller_templates/put_controller_template";
 
 export const UpdateShopManager = (shopId) => {
   const isMultiKey = true;
