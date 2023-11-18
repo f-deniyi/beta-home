@@ -12,6 +12,7 @@ import { formatAddress } from "../../utils/format_address";
 import { formatMonth } from "../../utils/format_month";
 import { useNavigate } from "react-router-dom";
 
+
 const ShopManagement = () => {
   const navigate = useNavigate()
   const { isLoading, data } = useGetShopsQuery({ enabled: true });
