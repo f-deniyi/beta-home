@@ -107,10 +107,14 @@ const BaseDashboardNavigation = ({
   // const tokenExists = localStorage.getItem("token") !== null;
 
   // console.log('--->>user<<---', data)
-  const isSalesRep = data?.data?.user?.referral_code?.length > 0
-  const activeMenu = data?.data?.user?.role?.name === 'customer' ? vendorMenu.filter(item => !item.isSalesRep || (item.isSalesRep && isSalesRep)) : adminMenu;
+  const isSalesRep = data?.data?.user?.referral_code?.length > 0;
+  const activeMenu =
+    data?.data?.user?.role?.name === "customer"
+      ? vendorMenu.filter(
+          (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep)
+        )
+      : adminMenu;
   // const activeMenu = adminMenu;
-
 
   return (
     <div className="relative md:fixed flex h-[100vh] w-full text-blackColor p-3">
@@ -139,8 +143,9 @@ const BaseDashboardNavigation = ({
       </div>
       {/* this is where the mobile menu is */}
       <div
-        className={`fixed md:hidden ${showMenu ? "left-0" : "left-[-100%]"
-          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
+        className={`fixed md:hidden ${
+          showMenu ? "left-0" : "left-[-100%]"
+        } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
       >
         <img
           className="object-contain w-[10rem] mx-7"
@@ -158,128 +163,6 @@ const BaseDashboardNavigation = ({
             />
           </Link>
         ))}
-        {/* 
-        <Link
-          className="w-[90%] mx-auto"
-          to={isAdmin ? "/admin/dashboard" : "/dashboard"}
-        >
-          <IconsWithText
-            icon={<AiOutlineHome />}
-            iconSize="28px"
-            path={isAdmin ? "/admin/dashboard" : "/dashboard"}
-            text="Home"
-          />
-        </Link>
-        {isAdmin && (
-          <Link className="w-[90%] mx-auto" to={"/admin/user-management"}>
-            <IconsWithText
-              icon={<AiOutlineSolution />}
-              iconSize="28px"
-              path={"/admin/user-management"}
-              text={"User Management"}
-            />
-          </Link>
-        )}
-        <Link
-          className="w-[90%] mx-auto"
-          to={
-            isAdmin
-              ? "/admin/products-management"
-              : "/dashboard/products-management"
-          }
-        >
-          <IconsWithText
-            icon={<AiOutlineFund />}
-            iconSize="28px"
-            path={
-              isAdmin
-                ? "/admin/products-management"
-                : "/dashboard/products-management"
-            }
-            text="Products Management"
-          />
-        </Link>
-        {!isAdmin && (
-          <Link className="w-[90%] mx-auto" to={"/dashboard/new-profile"}>
-            <IconsWithText
-              icon={<AiOutlineUserAdd />}
-              iconSize="28px"
-              path={"/dashboard/new-profile"}
-              text={"New Profiles"}
-            />
-          </Link>
-        )}
-        <Link
-          className="w-[90%] mx-auto"
-          to={isAdmin ? "/admin/all-profiles" : "/dashboard/all-profiles"}
-        >
-          <IconsWithText
-            icon={<AiOutlineTeam />}
-            iconSize="28px"
-            path={isAdmin ? "/admin/all-profiles" : "/dashboard/all-profiles"}
-            text="Profiles"
-          />
-        </Link>
-        {isAdmin && (
-          <Link className="w-[90%] mx-auto" to={"/admin/pricing"}>
-            <IconsWithText
-              icon={<AiOutlinePercentage />}
-              iconSize="28px"
-              path={"/admin/pricing"}
-              text="Pricing"
-            />
-          </Link>
-        )}
-        {isAdmin && (
-          <Link className="w-[90%] mx-auto" to={"/admin/measurements"}>
-            <IconsWithText
-              icon={<AiOutlineScissor />}
-              iconSize="28px"
-              path={"/admin/measurements"}
-              text="Measurement"
-            />
-          </Link>
-        )}
-        <Link
-          className="w-[90%] mx-auto"
-          to={isAdmin ? "/admin/settings" : "/dashboard/settings"}
-        >
-          <IconsWithText
-            icon={<AiOutlineSetting />}
-            iconSize="28px"
-            path={isAdmin ? "/admin/settings" : "/dashboard/settings"}
-            text="Settings"
-          />
-        </Link>
-        {isAdmin && (
-          <Link className="w-[90%] mx-auto" to={"/admin/tickets"}>
-            <IconsWithText
-              icon={<AiOutlineMail />}
-              iconSize="28px"
-              path={"/admin/tickets"}
-              text="Tickets"
-            />
-          </Link>
-        )}
-        {isAdmin && (
-          <Link className="w-[90%] mx-auto" to={"/admin/broadcast"}>
-            <IconsWithText
-              icon={<AiOutlineNotification />}
-              iconSize="28px"
-              path={"/admin/broadcast"}
-              text="Broadcasts"
-            />
-          </Link>
-        )}
-        <div className="w-[90%] mx-auto">
-          <button onClick={handleLogout} className="w-full">
-            <IconsWithText
-              icon={<AiOutlineLogout />}
-              iconSize="28px"
-              text="Logout"
-            />
-          </button>
-        </div> */}
       </div>
 
       {/* this is where the top section starts */}
@@ -301,8 +184,9 @@ const BaseDashboardNavigation = ({
             </div>
             <div className="hidden md:flex justify-end items-center">
               <div
-                className={` ${hideSearch ? "hidden" : "flex"
-                  }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
+                className={` ${
+                  hideSearch ? "hidden" : "flex"
+                }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
               >
                 <input
                   className="text-[12px] font-normal text-[#8E8E8E] bg-transparent outline-none focus:outline-none w-full"
@@ -345,7 +229,9 @@ const BaseDashboardNavigation = ({
                   {/* <MdOutlineKeyboardArrowDown size={30} /> */}
                 </p>
                 <p className="text-[#8E8E8E] text-[10px] capitalize">
-                  {data?.data?.user?.role?.name === 'admin' ? 'Admin' : 'Vendor'}
+                  {data?.data?.user?.role?.name === "admin"
+                    ? "Admin"
+                    : "Vendor"}
                 </p>
               </div>
             </div>

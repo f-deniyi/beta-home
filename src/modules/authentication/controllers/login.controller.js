@@ -25,6 +25,7 @@ const useLoginManager = (email) => {
     onSuccess: async (data) => {
       const token = data.data.token;
       const hasShop = data.data.user.shops.length > 0;
+      const isAdmin = data.data.user.role.name === "admin";
       if (hasShop) {
         localStorage.setItem("beta-vendor-shop", data.data.user.shops[0]);
       }
@@ -42,7 +43,11 @@ const useLoginManager = (email) => {
       console.log(
         `this is the token ${localStorage.getItem("beta-vendor-token")} `
       );
-      navigate(`/dashboard`);
+      if (isAdmin) {
+        navigate(`/admin/dashboard`);
+      } else {
+        navigate(`/dashboard`);
+      }
     },
 
     onError: (error) => {

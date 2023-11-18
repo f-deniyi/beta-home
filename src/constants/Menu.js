@@ -37,6 +37,12 @@ export const vendorMenu = [
     activeIcon: home_active,
   },
   {
+    title: "Shop Management",
+    path: "/vendorshop-settings",
+    icon: shop,
+    activeIcon: shop_active,
+  },
+  {
     title: "Products Management",
     path: "/products-management",
     icon: product,
@@ -103,6 +109,12 @@ export const adminMenu = [
   {
     title: "Shop Management",
     path: "/admin/shop-management",
+    icon: shop,
+    activeIcon: shop_active,
+  },
+  {
+    title: "Admin Shop Management",
+    path: "/vendorshop-settings",
     icon: shop,
     activeIcon: shop_active,
   },

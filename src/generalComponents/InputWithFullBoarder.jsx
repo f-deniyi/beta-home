@@ -12,7 +12,7 @@ const InputWithFullBoarder = ({
   className,
   hasSuffix,
   placeholder,
-  row = "10",
+  row = "50",
   icon,
   accept,
   isTextArea = false,

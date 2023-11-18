@@ -10,10 +10,15 @@ import useGetOrderStatusManager from "../../products/controllers/get_order_statu
 import Loader from "../../../generalComponents/Loader";
 import useGetProviderServiceRequest from "../../services/controller.js/get_service_request";
 import useGetCustomerServiceRequests from "../../services/controller.js/get_customer_service_requests";
+import { SuspendUnsuspendUserManager } from "../controllers/suspendUnsuspend_user_controller";
+import { DeleteUserManager } from "../controllers/delete_user_controller";
+import { MakeUserVendorManager } from "../controllers/make_user_vendor";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CustomerDetails = ({ userDetails, orderStatuses }) => {
   const [uploadedImages, setUploadedImages] = useState([]);
-
+  const navigate = useNavigate();
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -50,6 +55,14 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
     enabled: Boolean(userDetails._id),
   });
 
+  const { suspendUnsuspendUserController, isLoading: suspending } =
+    SuspendUnsuspendUserManager(userDetails._id);
+  const { deleteUserController, isLoading: deleting } = DeleteUserManager(
+    userDetails._id
+  );
+  const { makeUserVendorController, isLoading: updating } =
+    MakeUserVendorManager(userDetails._id);
+
   if (isLoading || loadingRequests) {
     return <Loader />;
   }
@@ -70,7 +83,7 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
             </div>
           </div>
           <div className="flex itens-center justify-center mb-[26px]">
-            <div>
+            <div className="flex flex-col items-center">
               <div className="border-2 border-brandPrimary h-[135px] w-[135px] rounded-full flex items-center justify-center mb-1">
                 <img
                   className="w-full h-full object-cover relative rounded-full"
@@ -117,26 +130,42 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
             </div>
           </div>
           <div>
-            <p className="text-[15px] font-medium mb-3">Package</p>
-            <div className="bg-brandPrimary rounded-[10px] px-[18px] py-[15px] flex items-center justify-between shadow-lg mb-[30px]">
-              <div>
-                <h3 className="text-[22px] font-medium mb-0">Beta</h3>
-                <h3 className="text-[29px] font-semibold mb-0 -mt-3">Basic</h3>
-                <p className="text-[13px] font-normal mb-0 -mt-2">
-                  Daily Payment Plan
-                </p>
+            <p
+              className={`text-[15px] font-medium mb-3 ${
+                userDetails.enrollments.length > 0
+                  ? ""
+                  : "my-10 text-center mb-12"
+              }`}
+            >
+              {userDetails.enrollments.length > 0
+                ? "Package"
+                : "Not currently Subscribed to any package"}
+            </p>
+            {userDetails.enrollments.length > 0 && (
+              <div className="bg-brandPrimary rounded-[10px] px-[18px] py-[15px] flex items-center justify-between shadow-lg mb-[30px]">
+                <div>
+                  <h3 className="text-[22px] font-medium mb-0">Beta</h3>
+                  <h3 className="text-[29px] font-semibold mb-0 -mt-3">
+                    Basic
+                  </h3>
+                  <p className="text-[13px] font-normal mb-0 -mt-2">
+                    Daily Payment Plan
+                  </p>
+                </div>
+                <div>
+                  <MdOutlineArrowForwardIos size="19" />
+                </div>
               </div>
-              <div>
-                <MdOutlineArrowForwardIos size="19" />
-              </div>
-            </div>
+            )}
           </div>
           <div className="flex w-full">
             <div className="grid  flex-grow text-center">
               <p className="mb-0 text-[#696969] text-[15px] font-medium mb-2">
                 Customer Products Order
               </p>
-              <h3 className="text-[30px] font-semibold ">12 Products</h3>
+              <h3 className="text-[30px] font-semibold ">{`${
+                orders && orders.orders.length
+              } Orders`}</h3>
               <div classNmw="w-1/3 mx-auto">
                 <button
                   type="button"
@@ -157,7 +186,9 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
               <p className="mb-0 text-[#696969] text-[15px] font-medium mb-2">
                 Customer Service Order
               </p>
-              <h3 className="text-[30px] font-semibold ">2 Requests</h3>
+              <h3 className="text-[30px] font-semibold ">
+                {serviceRequests.requests.length} Requests
+              </h3>
               <div classNmw="w-1/3 mx-auto">
                 <button
                   type="button"
@@ -176,7 +207,29 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
 
           <div>
             <CustomButton
-              buttonText={"Make the customer a Vendor"}
+              isLoading={updating}
+              onClick={async () => {
+                if (userDetails.isVendor) {
+                  // navigate to the shop
+                  if (userDetails.shops.length > 0) {
+                    navigate(`/admin/shop-details/${userDetails.shops[0]}`);
+                  } else {
+                    document.getElementById("customer_details").close();
+                    toast.warn(
+                      `${userDetails.fullname} has not created a shop yet`
+                    );
+                  }
+                } else {
+                  // make the user a vendor
+
+                  await makeUserVendorController({ isVendor: true });
+                }
+              }}
+              buttonText={
+                userDetails.isVendor
+                  ? "View Shop"
+                  : "Make the customer a Vendor"
+              }
               className={
                 "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] bg-brandPrimary !py-[15px]"
               }
@@ -185,13 +238,24 @@ const CustomerDetails = ({ userDetails, orderStatuses }) => {
 
           <div className="flex gap-x-2">
             <CustomButton
-              buttonText={"Suspend User"}
+              isLoading={suspending}
+              onClick={async () => {
+                await suspendUnsuspendUserController();
+              }}
+              buttonText={
+                userDetails.isSuspended ? "Activate User" : "Suspend User"
+              }
               className={
                 "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandGrey !py-[15px]"
               }
             />
             <CustomButton
+              isLoading={deleting}
               buttonText={"Delete User"}
+              onClick={async () => {
+                await deleteUserController();
+                document.getElementById("customer_details").close();
+              }}
               className={
                 "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandRed text-white !py-[15px]"
               }
