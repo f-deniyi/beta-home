@@ -10,12 +10,18 @@ const profileMenu = [
   {
     icon: profile,
     name: "Shop Profile",
-    showInAdmin: true,
+    hasShop: true,
   },
   {
     icon: password,
     name: "Promo Banners",
-    showInAdmin: true,
+    hasShop: false,
+  },
+  {
+    icon: password,
+    name: "Attribute",
+    hasShop: false,
   },
 ];
+
 export default profileMenu;

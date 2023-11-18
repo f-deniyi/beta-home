@@ -3,9 +3,10 @@ import menu from "./menu";
 import { arrowRight } from "../../../../assets/icons";
 import { useLocation } from "react-router-dom";
 
-const ShopManagementWrapper = ({ title, setTitle, children }) => {
+
+const ShopManagementWrapper = ({ title, setTitle, children, hasShop }) => {
   let location = useLocation();
-  const isAdmin = location.pathname.includes("/admin");
+  // const isAdmin = location.pathname.includes("/admin");
   return (
     <>
       <div className="relative  flex  w-full text-blackColor">
@@ -13,12 +14,11 @@ const ShopManagementWrapper = ({ title, setTitle, children }) => {
           className={`hidden md:flex ease-in-out duration-500 w-[30%] bg-[#fff] z-50 pt-[20px]  md:overflow-auto scrollbar-hide  flex-col  items-start space-y-4  pb-10 rounded-[10px] h-[calc(100vh-116px)] px-[10px]`}
         >
           {menu
-            .filter((item) => (isAdmin ? item.showInAdmin : true))
+            .filter((item) => (!hasShop ? item.hasShop : true))
             .map((el) => (
               <div
-                className={`flex items-center justify-between ${
-                  el.name === title ? "bg-brandPrimary rounded-full" : ""
-                } w-full pl-[16px] pr-2 py-[10px] text-[12px] font-normal cursor-pointer`}
+                className={`flex items-center justify-between ${el.name === title ? "bg-brandPrimary rounded-full" : ""
+                  } w-full pl-[16px] pr-2 py-[10px] text-[12px] font-normal cursor-pointer`}
                 onClick={() => {
                   setTitle(el.name);
                 }}

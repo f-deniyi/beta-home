@@ -16,7 +16,7 @@ import SelectInput from "../../../../generalComponents/SelectInput";
 import { ca } from "date-fns/locale";
 
 
-const ShopProfileSettings = () => {
+const ShopProfileSettings = ({ hasShop }) => {
   const {
     data,
     isSuccess,
@@ -102,9 +102,10 @@ const ShopProfileSettings = () => {
       },
       categories: categoryIds.length > 0 ? categoryIds : userShop?.shops[0]?.categories,
     };
-    console.log(data)
-    editPackageController(data)
-    // createShopController(data);
+    // console.log(data)
+    hasShop ? editPackageController(data) : createShopController(data)
+
+    // ;
   };
 
 
@@ -277,7 +278,7 @@ const ShopProfileSettings = () => {
                 <CustomButton
                   isLoading={fileLoading || isLoading || updating}
                   disabled={fileLoading || isLoading || updating}
-                  buttonText={"Update Shop"}
+                  buttonText={hasShop ? "Update Shop" : "Create Shop"}
                   className="text-[15px] font-medium w-full !bg-brandPrimary rounded-full !py-4 mt-[30px]"
                   onClick={(e) => {
                     e.preventDefault();
