@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { menu } from "../../../../assets/icons";
+import OrderDetails from '../OrderDetails';
 
+const ProductOrderTable = ({ orders, isAdmin ,statuses}) => {
+    const [orderId, setOrderId] = useState(null)
 
-const ProductOrderTable = ({ orders, isAdmin }) => {
     const formatDate = (isoDate) => {
         const options = { year: "numeric", month: "long", day: "numeric" };
         return new Date(isoDate).toLocaleDateString("en-US", options);
@@ -61,14 +63,19 @@ const ProductOrderTable = ({ orders, isAdmin }) => {
                                                     tabIndex={0}
                                                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
                                                 >
-                                                    <li className="text-[12px] font-normal bg-brandPrimary px-2 py-1 text-center rounded-full mb-2  text-black">
+                                                    <li className="text-[12px] font-normal bg-brandPrimary px-2 py-1 text-center rounded-full m  text-black"
+                                                        onClick={() => {
+                                                            setOrderId(order?.id)
+                                                            document.getElementById('product_order-details').showModal()
+                                                        }}
+                                                    >
                                                         View Order
                                                     </li>
-                                                    {
+                                                    {/* {
                                                         !isAdmin && <li className="text-[12px] font-normal bg-[#F2F2F2] px-2 py-1 text-center rounded-full text-black">
                                                             Report dispute
                                                         </li>
-                                                    }
+                                                    } */}
 
                                                 </ul>
                                             </div>
@@ -79,6 +86,8 @@ const ProductOrderTable = ({ orders, isAdmin }) => {
                         ))}
                 </tbody>
             </table>
+
+            <OrderDetails setOrderId={setOrderId} orderId={orderId} statuses={statuses} />
 
         </div>
     )

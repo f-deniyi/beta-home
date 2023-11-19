@@ -3,13 +3,13 @@ import { useQuery } from "react-query";
 import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithToken";
 
 const useGetProductOrdersManager = ({ filter = "", enable, ...params }) => {
-  const query = filter ? `?customer=${filter}` : "";
-  console.log(query);
+  // const query = filter ? `?customer=${filter}` : "";
+  // console.log(query);
   return useQuery(
-    ["orders"],
+    ["orders", params?.status],
     async () => {
       try {
-        const [response] = [await AxiosWithToken.get(`/order/all${query}`, { params })];
+        const [response] = [await AxiosWithToken.get(`/order/all`, { params })];
         console.log(response.status);
         return response.data;
       } catch (error) {

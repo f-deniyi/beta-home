@@ -33,11 +33,11 @@ const Dashboard = () => {
     owner_id: data?.data?.user?.id
   });
 
-  console.log('my-shop', userShop)
+  // console.log('my-shop', userShop)
 
 
   const { requests, pagination, isLoading: fetchingRequests } = useGetProviderServiceRequest({ enabled: true })
-  const { isLoading: fetchingOrders, data: orders, refetch, } = useGetProductOrdersManager({ filter: "", enable: true });
+  const { isLoading: fetchingOrders, data: orders, refetch, } = useGetProductOrdersManager({ filter: "", enable: true, shop: userShop?.shops[0]?.id });
 
   return (
     <BaseDashboardNavigation title={"Dashboard"} hideSearch={false}>
@@ -92,13 +92,13 @@ const Dashboard = () => {
                 </div>
 
               </div>
-              <div className="bg-white  px-3 rounded-lg">
+              <div className="bg-white  px-3 rounded-lg py-3">
                 {/* <ServicesTable requests={requests}/>
                */}
                 {
                   requests?.length > 0 ?
                     <ServicesTable pagination={null} requests={requests?.slice(0, 2)} selectedOrder={'All'} />
-                    : <EmptyContent content='No order yet' />
+                    : <EmptyContent content='No order yet' className={'h-[150px] w-full '}/>
                 }
               </div>
             </div>
@@ -113,13 +113,13 @@ const Dashboard = () => {
                 </div>
 
               </div>
-              <div className="bg-white  px-3 rounded-lg">
+              <div className="bg-white  px-3 rounded-lg py-3">
                 {
                   orders?.orders?.length > 0
                     ? <ProductOrderTable
                       orders={orders?.orders?.slice(0, 2)}
                       isAdmin={false}
-                    /> : <EmptyContent content='No order yet' />
+                    /> : <EmptyContent content='No order yet' className={'h-[150px] w-full '} />
                 }
 
               </div>

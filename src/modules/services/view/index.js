@@ -7,6 +7,7 @@ import ServicesCard from "../components/ServicesCard";
 import { cart, new_cart } from "../../../assets/icons";
 import useGetProviderServiceRequest from "../controller.js/get_service_request";
 import ServicesOrder from "../components/ServicesOrder";
+import AddService from "../components/AddService";
 
 const ServicesManagement = () => {
 
@@ -50,7 +51,7 @@ const ServicesManagement = () => {
                         </div>
                         <div className="flex items-center">
 
-                            <button className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium " onClick={() => document.getElementById('add_product').showModal()} >
+                            <button className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium " onClick={() => document.getElementById('add_services').showModal()} >
                                 +Add a service
                             </button>
                         </div>
@@ -79,6 +80,7 @@ const ServicesManagement = () => {
                 {/* </div> */}
                 {/* <ServicesTable /> */}
                 <ServicesOrder requests={requests} pagination={pagination} />
+                <AddService />
             </div>
         </BaseDashboardNavigation >
     );
