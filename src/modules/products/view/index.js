@@ -10,6 +10,7 @@ import Loader from "../../../generalComponents/Loader";
 import useGetAllProductsManager from "../controllers/get_all_products_controller";
 import useGetProductOrdersManager from "../controllers/get_product_orders_controller";
 import useGetOrderStatusManager from "../controllers/get_order_statuses";
+import EmptyContent from "../../../generalComponents/EmptyContent";
 
 const ProductsManagement = () => {
   let location = useLocation();
@@ -27,6 +28,9 @@ const ProductsManagement = () => {
     page: activePage,
   });
 
+  const [selectedOrder, setSelectedOrder] = useState("All");
+
+
   const handlePage = (page) => {
     setActivePage(page);
   };
@@ -38,9 +42,12 @@ const ProductsManagement = () => {
   } = useGetProductOrdersManager({
     filter: "",
     enable: true,
+    shop: shopId,
+    // status: selectedOrder === 'All' ? null : selectedOrder
   });
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+
 
   const productCategory = [
     "All",
@@ -63,6 +70,7 @@ const ProductsManagement = () => {
         ? (
           <Loader />
         ) : (
+
           <div>
             <div className="flex items-center justify-between mt-3 mb-4">
               <h3 className="text-[20px]">List of uploaded products</h3>
@@ -89,7 +97,7 @@ const ProductsManagement = () => {
                     >
                       <img src={cart} alt="Notification Icon" />
                       <p className="h-[15px] w-[15px] flex items-center justify-center bg-[#FF0000] text-white text-[10px] font-medium rounded-full  absolute top-0 right-0">
-                        3
+                        {orders.orders?.length ?? 0}
                       </p>
                     </div>
                   </div>
@@ -122,12 +130,16 @@ const ProductsManagement = () => {
                   ))}
                 </div>
               )}
+              {
+                products?.length > 0 || allProducts?.length > 0 ? <ProductGrid
+                  products={isAdmin ? allProducts.products : products}
+                  pagination={isAdmin ? allProducts.pagination : pagination}
+                  paginationChange={handlePage}
+                />
+                  : <EmptyContent content={'No products yet'} className={'h-[300px] w-full'} />
 
-              <ProductGrid
-                products={isAdmin ? allProducts.products : products}
-                pagination={isAdmin ? allProducts.pagination : pagination}
-                paginationChange={handlePage}
-              />
+              }
+
             </div>
           </div>
         )}
@@ -137,6 +149,8 @@ const ProductsManagement = () => {
         <ProductOrders
           orders={orders.orders}
           pagination={pagination}
+          setSelectedOrder={setSelectedOrder}
+          selectedOrder={selectedOrder}
           // orderStatuses={orderStatuses}
           refetch={() => {
             refetch();

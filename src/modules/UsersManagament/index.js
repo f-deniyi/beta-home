@@ -21,6 +21,7 @@ import BarChart from "../../generalComponents/BarChart";
 
 import { FiArrowRight } from "react-icons/fi";
 import UserTable from "./components/Table";
+import useGetUserCountManager from "./controllers/get_user_counts_controller";
 
 const UsersManagement = () => {
   const formatDate = (dateString) => {
@@ -30,6 +31,8 @@ const UsersManagement = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const navigate = useNavigate();
+  const { users: userCount, isLoading: loadingCount } =
+    useGetUserCountManager();
 
   const [selectedUser, setSelectedUser] = useState("");
   const userType = [
@@ -37,6 +40,10 @@ const UsersManagement = () => {
     { title: "Customers", query: "false" },
     { title: "Vendors", query: "true" },
   ];
+
+  if (loadingCount) {
+    return <isLoading />;
+  }
 
   return (
     <BaseDashboardNavigation title={"User Management"} hideSearch={true}>
@@ -55,7 +62,7 @@ const UsersManagement = () => {
                   </div>
                   <p className="text-15px font-medium text-black ">Users</p>
                 </div>
-                <p className="text-30px font-bold ">5503</p>
+                <p className="text-30px font-bold ">{userCount.total}</p>
               </div>
               <div className="hover:shadow-xl duration-150 h-[127px] rounded-[20px] bg-brandPrimary px-[14px] pt-[24px] pb-[22px] w-full  flex flex-col justify-center">
                 <div className="flex gap-x-2 items-center mb-2">
@@ -68,7 +75,7 @@ const UsersManagement = () => {
                   </div>
                   <p className="text-15px font-medium text-black ">Customers</p>
                 </div>
-                <p className="text-30px font-bold ">5503</p>
+                <p className="text-30px font-bold ">{userCount.customers}</p>
               </div>
               <div className="hover:shadow-xl duration-150 h-[127px] rounded-[20px] bg-brandPrimary px-[14px] pt-[24px] pb-[22px] w-full  flex flex-col justify-center">
                 <div className="flex gap-x-2 items-center mb-2">
@@ -81,7 +88,7 @@ const UsersManagement = () => {
                   </div>
                   <p className="text-15px font-medium text-black ">Vendors</p>
                 </div>
-                <p className="text-30px font-bold ">2002</p>
+                <p className="text-30px font-bold ">{userCount.vendors}</p>
               </div>
             </div>
           </div>

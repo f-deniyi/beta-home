@@ -27,6 +27,7 @@ import PaymentVerification from "./modules/paymentVerification/view";
 import AdminSettingsPage from "./modules/admin/view/AdminSettingsPage";
 import ShopDetails from "./modules/shopManagement/ShopDetails";
 import Referral from "./modules/referral";
+import VendorShopManagement from "./modules/shopManagement/vendor";
 
 function App() {
   return (
@@ -93,11 +94,15 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route
+            path="/vendorshop-settings"
+            element={<VendorShopManagement />}
+          />
+          <Route
             path="/account-verification"
             element={<AccountVerification />}
           />
           <Route path="/create-account" element={<CreateAccountPage />} />
-          <Route path='/admin/shop-details/:shopId' element={<ShopDetails />} />
+          <Route path="/admin/shop-details/:shopId" element={<ShopDetails />} />
 
           {/* <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route

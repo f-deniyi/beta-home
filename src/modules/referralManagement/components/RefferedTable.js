@@ -19,6 +19,10 @@ const ReferredTable = ({ referrals }) => {
 
                                             <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">Email</th>
 
+                                            <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">Enrollment</th>
+
+                                            <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">Amount</th>
+
                                             <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">Date Created</th>
                                         </tr>
                                     </thead>
@@ -46,6 +50,15 @@ const ReferredTable = ({ referrals }) => {
 
                                                             <div class="flex items-center">
 
+                                                                {el?.user?.enrollments[0]?.title}
+                                                            </div>
+
+                                                            <div class="flex items-center">
+                                                                {Number(el?.user?.enrollments[0]?.package?.amount)?.toLocaleString()}
+                                                            </div>
+
+                                                            <div class="flex items-center">
+
                                                                 {moment(el?.createdAt).format('ll')}
                                                             </div>
 
@@ -64,6 +77,20 @@ const ReferredTable = ({ referrals }) => {
                                                             {el?.user?.email}
                                                         </div>
                                                     </td>
+
+
+                                                    <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            {el?.user?.enrollments[0]?.package?.title}
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                        <div class="flex items-center">
+                                                            {Number(el?.user?.enrollments[0]?.package?.amount)?.toLocaleString()}
+                                                        </div>
+                                                    </td>
+
 
                                                     <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
                                                         <div class="flex items-center">

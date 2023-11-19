@@ -37,6 +37,12 @@ export const vendorMenu = [
     activeIcon: home_active,
   },
   {
+    title: "Shop Management",
+    path: "/vendorshop-settings",
+    icon: shop,
+    activeIcon: shop_active,
+  },
+  {
     title: "Products Management",
     path: "/products-management",
     icon: product,
@@ -48,12 +54,12 @@ export const vendorMenu = [
     icon: services,
     activeIcon: services_active,
   },
-  {
-    title: "Promotion Management",
-    path: "/promotion-management",
-    icon: promotion,
-    activeIcon: promotion_active,
-  },
+  // {
+  //   title: "Promotion Management",
+  //   path: "/promotion-management",
+  //   icon: promotion,
+  //   activeIcon: promotion_active,
+  // },
   {
     title: "Referral",
     path: "/referral",
@@ -103,6 +109,12 @@ export const adminMenu = [
   {
     title: "Shop Management",
     path: "/admin/shop-management",
+    icon: shop,
+    activeIcon: shop_active,
+  },
+  {
+    title: "Admin Shop Management",
+    path: "/vendorshop-settings",
     icon: shop,
     activeIcon: shop_active,
   },

@@ -12,7 +12,7 @@ const InputWithFullBoarder = ({
   className,
   hasSuffix,
   placeholder,
-  row = "10",
+  row = "50",
   icon,
   accept,
   isTextArea = false,
@@ -27,7 +27,7 @@ const InputWithFullBoarder = ({
         <textarea
           id={id}
           className={`border border-lightGrey bg-lightGrey/30 p-2 rounded-md ${className} outline-none focus:outline-none `}
-          cols="30"
+          cols="50"
           rows={row}
           placeholder={placeholder}
           value={value}
