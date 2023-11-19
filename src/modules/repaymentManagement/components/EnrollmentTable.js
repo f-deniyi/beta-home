@@ -7,7 +7,6 @@ import moment from 'moment';
 
 
 const EnrollmentTable = ({ enrollments }) => {
-    console.log('_-->>enrollment<<---', enrollments)
     const [activePage, setActivePage] = useState(1);
     // const [selectedEnrollment, setSelectedEnrollment] = useState(null)
     // const { enrollments, pagination, isLoading } = useGetAllEnrollments({ page: activePage })

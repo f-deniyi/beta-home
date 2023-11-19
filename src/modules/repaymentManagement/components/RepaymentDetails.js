@@ -5,6 +5,7 @@ import useGetEnrollmentDetails from '../controller/get_enrollment_details'
 import Loader from '../../../generalComponents/Loader'
 import moment from 'moment'
 import EnrollmentTable from './EnrollmentTable'
+
 const LeadDetails = ({ enrollmentId }) => {
 
     const { enrollment, isLoading } = useGetEnrollmentDetails({
