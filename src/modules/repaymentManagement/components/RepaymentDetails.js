@@ -4,6 +4,7 @@ import { close, user } from '../../../assets/icons'
 import useGetEnrollmentDetails from '../controller/get_enrollment_details'
 import Loader from '../../../generalComponents/Loader'
 import moment from 'moment'
+import EnrollmentTable from './EnrollmentTable'
 const LeadDetails = ({ enrollmentId }) => {
 
     const { enrollment, isLoading } = useGetEnrollmentDetails({
@@ -11,6 +12,7 @@ const LeadDetails = ({ enrollmentId }) => {
         enrollmentId
     })
 
+    console.log('--->>enrollment<<---', enrollment)
 
     return (
         <>
@@ -65,7 +67,7 @@ const LeadDetails = ({ enrollmentId }) => {
                     </>
                 }
 
-
+                <EnrollmentTable enrollments={enrollment?.repayments} />
             </ModalManagement>
         </>
     )
