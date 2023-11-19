@@ -34,8 +34,8 @@ const LeadDetails = ({ user }) => {
                 />
               </div>
             </div>
-            <div className="flex itens-center justify-center mb-[26px]">
-              <div>
+            <div className="flex items-center justify-center mb-[26px]">
+              <div className="flex items-center justify-center flex-col">
                 <div className="border-2 border-brandPrimary h-[135px] w-[135px] rounded-full flex items-center justify-center mb-1">
                   <img
                     src={
@@ -75,7 +75,7 @@ const LeadDetails = ({ user }) => {
                     Orders
                   </p>
                   <h3 className="text-[18px] font-medium ">
-                    {user?.total ?? 0}
+                    {user?.referrals?.length ?? 0}
                   </h3>
                 </div>
               </div>

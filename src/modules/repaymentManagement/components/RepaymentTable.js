@@ -16,6 +16,7 @@ const ReferralTable = () => {
     };
 
 
+
     return (
         isLoading ? <Loader /> :
             <>
