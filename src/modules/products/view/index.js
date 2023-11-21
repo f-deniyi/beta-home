@@ -114,7 +114,7 @@ const ProductsManagement = () => {
                       selectedCategory !== el
                         ? "bg-[#F2F2F2]"
                         : "bg-brandPrimary text-black"
-                    } rounded-[20px] `}
+                    } rounded-[20px]`}
                   >
                     {el}
                   </p>
