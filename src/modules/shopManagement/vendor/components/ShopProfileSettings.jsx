@@ -11,10 +11,9 @@ import { UpdateShopManager } from "../controller/update_shop_controller";
 import { formatAddress } from "../../../../utils/format_address";
 import useGetShopsQuery from "../../../shopManagement/controllers/get_shops";
 import { shop as shopIcon } from "../../../../assets/icons";
-import useGetAllCategoriesQuery from '../../../shopManagement/controllers/get_all_categories'
+import useGetAllCategoriesQuery from "../../../shopManagement/controllers/get_all_categories";
 import SelectInput from "../../../../generalComponents/SelectInput";
 import { ca } from "date-fns/locale";
-
 
 const ShopProfileSettings = ({ hasShop }) => {
   const {
@@ -22,7 +21,7 @@ const ShopProfileSettings = ({ hasShop }) => {
     isSuccess,
     isLoading: userLoading,
   } = useGetUserDetailsManager();
-  const { categories } = useGetAllCategoriesQuery({ enabled: true })
+  const { categories } = useGetAllCategoriesQuery({ enabled: true });
 
   const {
     data: userShop,
@@ -31,7 +30,7 @@ const ShopProfileSettings = ({ hasShop }) => {
     isLoading: fetchingShop,
   } = useGetShopsQuery({
     enabled: Boolean(data?.data?.user),
-    owner_id: data?.data?.user?.id
+    owner_id: data?.data?.user?.id,
   });
 
   const [image, setUploadedImage] = useState(null);
@@ -41,13 +40,11 @@ const ShopProfileSettings = ({ hasShop }) => {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [phone, setPhone] = useState("");
-  const [country, setCountry] = useState('')
-  const [state, setState] = useState('')
-  const [city, setCity] = useState('')
-  const [zip, setZip] = useState('')
-  const [categoryIds, setCategoryIds] = useState([])
-
-
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
+  const [categoryIds, setCategoryIds] = useState([]);
 
   const {
     handleFileUpload: uploadFile,
@@ -56,20 +53,21 @@ const ShopProfileSettings = ({ hasShop }) => {
   } = useFileUpload();
 
   const { isLoading, createShopController } = CreateShopManager();
-  const { isLoading: updating, editPackageController } = UpdateShopManager(userShop?.shops[0]?._id)
+  const { isLoading: updating, editPackageController } = UpdateShopManager(
+    userShop?.shops[0]?._id
+  );
 
   const handleFileUpload = (e, type) => {
     const file = e.target.files[0];
-    console.log(file)
+    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         const newImage = { url: reader.result, file };
-        if (type == 'banner') {
-          setBanner(newImage)
+        if (type === "banner") {
+          setBanner(newImage);
         } else {
           setUploadedImage(newImage);
-
         }
       };
       reader.readAsDataURL(file);
@@ -77,11 +75,16 @@ const ShopProfileSettings = ({ hasShop }) => {
   };
 
   const handleProfileUpdate = async () => {
-    const profilePicture = image ? await uploadFile(image?.file) : userShop?.shops[0]?.logo?.original;
-    const banner_ = banner ? await uploadFile(banner?.file) : userShop?.shops[0]?.cover_image?.original;
+    const profilePicture = image
+      ? await uploadFile(image?.file)
+      : userShop?.shops[0]?.logo?.original;
+    const banner_ = banner
+      ? await uploadFile(banner?.file)
+      : userShop?.shops[0]?.cover_image?.original;
     const data = {
       name: shopName.length > 0 ? shopName : userShop?.shops[0]?.name,
-      description: description.length > 0 ? description : userShop?.shops[0].description,
+      description:
+        description.length > 0 ? description : userShop?.shops[0].description,
       cover_image: {
         original: banner_,
         thumbnail: banner_,
@@ -95,29 +98,40 @@ const ShopProfileSettings = ({ hasShop }) => {
         zip: zip.length > 0 ? zip : userShop?.shops[0]?.address?.zip,
         city: city.length > 0 ? city : userShop?.shops[0]?.address?.city,
         state: state.length > 0 ? state : userShop?.shops[0]?.address?.state,
-        country: country.length > 0 ? country : userShop?.shops[0]?.address?.country,
-        street_address: address.length > 0 ? address : userShop?.shops[0]?.address?.street_address,
+        country:
+          country.length > 0 ? country : userShop?.shops[0]?.address?.country,
+        street_address:
+          address.length > 0
+            ? address
+            : userShop?.shops[0]?.address?.street_address,
         lng: 0,
         lat: 0,
       },
-      categories: categoryIds.length > 0 ? categoryIds : userShop?.shops[0]?.categories,
+      categories:
+        categoryIds.length > 0 ? categoryIds : userShop?.shops[0]?.categories,
     };
     // console.log(data)
-    hasShop ? editPackageController(data) : createShopController(data)
+    hasShop ? editPackageController(data) : createShopController(data);
 
     // ;
   };
 
-
-
   return !userLoading ? (
     <>
-      {
-        !fetchingShop ? <>
+      {!fetchingShop ? (
+        <>
           <div className="">
             <div className="relative w-full">
-
-              <div className="bg-cover bg-center h-[179px]  rounded-bl-[10px] rounded-br-[10px] w-full bg-white flex items-center justify-center" style={{ backgroundImage: `url(${banner ? banner?.url : userShop?.shops[0]?.cover_image?.original})` }}>
+              <div
+                className="bg-cover bg-center h-[179px]  rounded-bl-[10px] rounded-br-[10px] w-full bg-white flex items-center justify-center"
+                style={{
+                  backgroundImage: `url(${
+                    banner
+                      ? banner?.url
+                      : userShop?.shops[0]?.cover_image?.original
+                  })`,
+                }}
+              >
                 <div className="bg-brandPrimary h-[50px] w-[50px] rounded-[50%] flex items-center justify-center">
                   {/* <img src={camera} alt="icon" /> */}
                   <label className="cursor-pointer block">
@@ -126,7 +140,7 @@ const ShopProfileSettings = ({ hasShop }) => {
                       type="file"
                       className="hidden"
                       accept="image/*"
-                      onChange={(e) => handleFileUpload(e, 'banner')}
+                      onChange={(e) => handleFileUpload(e, "banner")}
                     />
                   </label>
                 </div>
@@ -135,8 +149,12 @@ const ShopProfileSettings = ({ hasShop }) => {
                 <div className="relative transform -translate-x-1/2 translate-y-1/2">
                   <div className=" h-[135px] w-[135px]  rounded-full overflow-hidden border-4 border-brandPrimary bg-white flex justify-center items-center">
                     <img
-                      className="object-cover"
-                      src={image ? image?.url : userShop?.shops[0]?.logo?.original ?? shopIcon}
+                      className="object-cover h-full w-full"
+                      src={
+                        image
+                          ? image?.url
+                          : userShop?.shops[0]?.logo?.original ?? shopIcon
+                      }
                       // src={image ? image?.url : user}
                       alt="Profile avatar"
                     />
@@ -151,7 +169,7 @@ const ShopProfileSettings = ({ hasShop }) => {
                         type="file"
                         className="hidden"
                         accept="image/*"
-                        onChange={(e) => handleFileUpload(e, 'cover_image')}
+                        onChange={(e) => handleFileUpload(e, "cover_image")}
                       />
                     </label>
                   </div>
@@ -182,16 +200,15 @@ const ShopProfileSettings = ({ hasShop }) => {
               <div className="mb-[17px]">
                 <SelectInput
                   isMulti={true}
-                  label={'Categories'}
+                  label={"Categories"}
                   options={categories}
-                  backgroundColor={'#fff'}
+                  backgroundColor={"#fff"}
                   // de
                   onChange={(e, opt) => {
-                    console.log(e, opt.value)
-                    const categoryIds = e.map(el => el?._id)
-                    console.log('idss', categoryIds)
-                    setCategoryIds(categoryIds)
-
+                    console.log(e, opt.value);
+                    const categoryIds = e.map((el) => el?._id);
+                    console.log("idss", categoryIds);
+                    setCategoryIds(categoryIds);
                   }}
                   defaultValue={userShop?.shops[0]?.categories}
                 />
@@ -259,12 +276,11 @@ const ShopProfileSettings = ({ hasShop }) => {
                 />
               </div>
 
-
               <div className="mb-[17px]">
                 <InputWithFullBoarder
                   label={"Description"}
-                  cols={'5'}
-                  rows={'20'}
+                  cols={"5"}
+                  rows={"20"}
                   isTextArea={true}
                   className="input !bg-white  !h-[200px] w-full  placeholder:text-[12px] text-[#121212] placeholder:font-light"
                   placeholder="Describe your shop"
@@ -288,9 +304,8 @@ const ShopProfileSettings = ({ hasShop }) => {
               </div>
             </form>
           </div>
-        </> : null
-      }
-
+        </>
+      ) : null}
     </>
   ) : (
     <Loader />

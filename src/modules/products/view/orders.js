@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import ProductOrderTable from "../components/OrderTable";
 
 const ProductOrders = ({ refetch, orders, pagination }) => {
-  const location = useLocation()
+  const location = useLocation();
   const isAdmin = location.pathname.includes("/admin");
 
   const [selectedOrder, setSelectedOrder] = useState("All");
@@ -39,11 +39,12 @@ const ProductOrders = ({ refetch, orders, pagination }) => {
     }
   }, [statuses, fetchedStatuses]);
 
-
   return (
     <ModalManagement id="product_orders" type="large">
-      {
-        loadingStatuses ? <Loader /> : <div
+      {loadingStatuses ? (
+        <Loader />
+      ) : (
+        <div
           style={{
             width: "100%",
           }}
@@ -52,10 +53,9 @@ const ProductOrders = ({ refetch, orders, pagination }) => {
             <div>
               <p className="text-[18px] font-medium ">Product Order</p>
               <p className="text-[12px] font-normal ">
-                {
-                  isAdmin ? 'List of products orders' : 'List of product orders you have.'
-                }
-
+                {isAdmin
+                  ? "List of products orders"
+                  : "List of product orders you have."}
               </p>
             </div>
             <div
@@ -72,10 +72,11 @@ const ProductOrders = ({ refetch, orders, pagination }) => {
                   onClick={() => {
                     setSelectedOrder(el.name);
                   }}
-                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${selectedOrder !== el.name
-                    ? "bg-[#F2F2F2]"
-                    : "bg-brandPrimary text-black"
-                    } rounded-[20px] `}
+                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
+                    selectedOrder !== el.name
+                      ? "bg-[#F2F2F2]"
+                      : "bg-brandPrimary text-black"
+                  } rounded-[20px] `}
                 >
                   {el.name}
                 </p>
@@ -83,12 +84,12 @@ const ProductOrders = ({ refetch, orders, pagination }) => {
             </div>
           }
           <ProductOrderTable
+            statuses={orderStatuses}
             orders={orders}
             isAdmin={isAdmin}
           />
         </div>
-      }
-
+      )}
     </ModalManagement>
   );
 };
