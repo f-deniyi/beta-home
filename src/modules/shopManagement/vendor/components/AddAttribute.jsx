@@ -7,17 +7,37 @@ import { AiOutlinePlus } from "react-icons/ai";
 // import {  } from '../../../../../assets/icons'
 import { IoIosClose } from "react-icons/io";
 import { AddAttributeManager } from "../../controllers/add_attributes";
+import { SketchPicker } from "react-color";
+import { toast } from "react-toastify";
 
 const AddAttribute = ({ shopId }) => {
   const [sizeArray, setSizeArray] = useState([]);
   const [count, setCount] = useState(1);
+  const [isColor, setIsColor] = useState(false);
+  const [sizeValue, setSizeValue] = useState("");
   const { addAttributeController, isLoading, isSuccess } =
     AddAttributeManager();
-  const initialItem = {
-    name: "",
-    quantity: 1,
-  };
+
   const [title, setTitle] = useState("");
+  const handleTitleChange = (newTitle) => {
+    const containsColor = /color|colour/i.test(newTitle);
+
+    if (containsColor) {
+      setIsColor(true);
+      setTitle(newTitle);
+    } else {
+      // Continue with updating the title state
+      setTitle(newTitle);
+      setIsColor(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isColor) {
+      handleChangeComplete();
+    }
+  }, [sizeValue, isColor]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,19 +53,15 @@ const AddAttribute = ({ shopId }) => {
 
     console.log(details);
     addAttributeController(details);
-    // // await addPackageController(details);
-    // setTitle("");
-    // setAmount("");
-    // // setPackageItems([initialItem]);
   };
 
   useEffect(() => {
     if (isSuccess) {
+      setSizeArray([]);
+      setTitle("");
       document.getElementById("add_attribute").close();
     }
   }, [isSuccess]);
-
-  const [sizeValue, setSizeValue] = useState("");
 
   const handleChangeComplete = () => {
     if (sizeValue.length > 0) {
@@ -75,7 +91,7 @@ const AddAttribute = ({ shopId }) => {
             <div>
               <InputWithFullBoarder
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => handleTitleChange(e.target.value)}
                 label={"Title"}
                 placeholder={"Enter attribute title"}
                 className={"!bg-[#EDEDED] !py-4 !px-[24px]"}
@@ -85,43 +101,76 @@ const AddAttribute = ({ shopId }) => {
             <div className="flex items-centr gap-2 w-full">
               <p className="font-semibold">Value: </p>
               <div className="flex-grow">
-                <div className="flex items-center bg-[#EDEDED] rounded-md w-full ml-3">
-                  <input
-                    placeholder="value"
-                    id="value_field"
-                    className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[60px] flex-1 px-4 py-2 bg-transparent focus:border-none hover:border-none focus:outline-none focus:shadow-none appearance-none"
-                    onChange={(e) => {
-                      setSizeValue(e.target.value);
-                    }}
-                  />
-                  <button
-                    className="px-5 py-2 bg-brandPrimary text-white rounded-r-md text-[#000] h-[60px]"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const inputElement =
-                        document.getElementById("value_field");
-                      inputElement.value = "";
-                      handleChangeComplete();
-                      // setTitle('')
-                    }}
-                  >
-                    <img src={plusIcon} alt="icon" />
-                  </button>
+                <div
+                  className={`flex items-center bg-[#EDEDED] rounded-md ${
+                    isColor ? "max-w-max " : "w-full"
+                  } ml-3`}
+                >
+                  {isColor ? (
+                    <SketchPicker
+                      color={sizeValue ?? "#FFFFFF"}
+                      onChangeComplete={(color) => {
+                        setSizeValue(`${color.hex}`);
+                      }}
+                    />
+                  ) : (
+                    <input
+                      placeholder="value"
+                      id="value_field"
+                      className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[60px] flex-1 px-4 py-2 bg-transparent focus:border-none hover:border-none focus:outline-none focus:shadow-none appearance-none"
+                      onChange={(e) => {
+                        setSizeValue(e.target.value);
+                      }}
+                    />
+                  )}
+                  {!isColor && (
+                    <button
+                      className="px-5 py-2 bg-brandPrimary text-white rounded-r-md text-[#000] h-[60px]"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const inputElement =
+                          document.getElementById("value_field");
+                        inputElement.value = "";
+                        handleChangeComplete();
+                        // setTitle('')
+                      }}
+                    >
+                      <img src={plusIcon} alt="icon" />
+                    </button>
+                  )}
                 </div>
-                <div className="mt-[17px] ml-3 flex gap-2">
-                  {sizeArray?.map((el) => (
-                    <div className="flex items-center bg-black rounded-full  justify-between">
-                      <p className="text-[#f2f2f2] py-[5px] px-[10px]  font-medium">{`${el}`}</p>
+                <div className="mt-[17px] ml-3 flex gap-2 w-full lg:w-[400px] overflow-x-scroll scrollbar-hide">
+                  {sizeArray?.map((el) =>
+                    isColor ? (
                       <div
-                        className="cursor-pointer ml-auto pr-2"
+                        key={el}
+                        style={{
+                          backgroundColor: sizeArray.length > 0 ? el : "black",
+                        }}
+                        className={`flex items-center justify-center p-1 rounded-full `}
                         onClick={() => {
                           deleteSize(el);
                         }}
                       >
-                        <IoIosClose color="#fff" size={22} />
+                        <IoIosClose
+                          color={el === "#ffffff" ? "#000" : "#fff"}
+                          size={22}
+                        />
                       </div>
-                    </div>
-                  ))}
+                    ) : (
+                      <div className="flex items-center bg-black rounded-full  justify-between">
+                        <p className="text-[#f2f2f2] py-[5px] px-[10px]  font-medium">{`${el}`}</p>
+                        <div
+                          className="cursor-pointer ml-auto pr-2"
+                          onClick={() => {
+                            deleteSize(el);
+                          }}
+                        >
+                          <IoIosClose color="#fff" size={22} />
+                        </div>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </div>

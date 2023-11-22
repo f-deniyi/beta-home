@@ -14,6 +14,7 @@ import { shop as shopIcon } from "../../../../assets/icons";
 import useGetAllCategoriesQuery from "../../../shopManagement/controllers/get_all_categories";
 import SelectInput from "../../../../generalComponents/SelectInput";
 import { ca } from "date-fns/locale";
+import useGetAllServiceCategoriesQuery from "../../controllers/get_all_service_categories";
 
 const ShopProfileSettings = ({ hasShop }) => {
   const {
@@ -21,7 +22,7 @@ const ShopProfileSettings = ({ hasShop }) => {
     isSuccess,
     isLoading: userLoading,
   } = useGetUserDetailsManager();
-  const { categories } = useGetAllCategoriesQuery({ enabled: true });
+  const { categories } = useGetAllServiceCategoriesQuery({ enabled: true });
 
   const {
     data: userShop,

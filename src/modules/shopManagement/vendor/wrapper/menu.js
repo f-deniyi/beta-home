@@ -19,7 +19,7 @@ const profileMenu = [
   },
   {
     icon: password,
-    name: "Attribute",
+    name: "Attributes",
     hasShop: false,
   },
 ];
