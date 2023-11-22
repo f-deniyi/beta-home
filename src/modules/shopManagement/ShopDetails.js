@@ -238,14 +238,7 @@ const ShopDetails = () => {
             )}
           </div>
 
-          <ProductOrders
-            orders={orders?.orders}
-            pagination={pagination}
-            orderStatuses={statuses?.data}
-            refetch={() => {
-              refetch();
-            }}
-          />
+          <ProductOrders shopId={shopId} />
 
           <ServicesOrder requests={requests} pagination={servicesPagination} />
         </>

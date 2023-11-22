@@ -8,26 +8,30 @@ import useGetOrderStatusManager from "../controllers/get_order_statuses";
 import { useLocation } from "react-router-dom";
 import ProductOrderTable from "../components/OrderTable";
 
-const ProductOrders = ({
-  refetch,
-  orders,
-  pagination,
-  setSelectedOrder,
-  selectedOrder,
-}) => {
+const ProductOrders = ({ isShop, shopId = "" }) => {
   const location = useLocation();
   const isAdmin = location.pathname.includes("/admin");
-
-  useEffect(() => {
-    refetch();
-  }, [selectedOrder]);
+  const [orderStatuses, setOrderStatuses] = useState([{ name: "All", id: "" }]);
+  const [choosenOrderStatus, setChoosenOrderStatus] = useState({
+    name: "All",
+    id: "",
+  });
+  const {
+    isLoading: fetchingOrders,
+    data: orders,
+    refetch,
+  } = useGetProductOrdersManager({
+    filter: "",
+    enable: true,
+    shop: shopId,
+    status: choosenOrderStatus.id,
+  });
 
   const {
     isLoading: loadingStatuses,
     data: statuses,
     isSuccess: fetchedStatuses,
   } = useGetOrderStatusManager();
-  const [orderStatuses, setOrderStatuses] = useState([{ name: "All", id: "" }]);
 
   useEffect(() => {
     console.log("statuses:", statuses);
@@ -45,7 +49,7 @@ const ProductOrders = ({
 
   return (
     <ModalManagement id="product_orders" type="large">
-      {loadingStatuses ? (
+      {loadingStatuses || fetchingOrders ? (
         <Loader />
       ) : (
         <div
@@ -74,10 +78,10 @@ const ProductOrders = ({
               {orderStatuses?.map((el) => (
                 <p
                   onClick={() => {
-                    setSelectedOrder(el.name);
+                    setChoosenOrderStatus(el);
                   }}
                   className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
-                    selectedOrder !== el.name
+                    choosenOrderStatus.name !== el.name
                       ? "bg-[#F2F2F2]"
                       : "bg-brandPrimary text-black"
                   } rounded-[20px] `}
@@ -89,10 +93,8 @@ const ProductOrders = ({
           }
           <ProductOrderTable
             statuses={orderStatuses}
-            orders={orders}
+            orders={orders.orders}
             isAdmin={isAdmin}
-            selectedOrder={selectedOrder}
-            // statuses={statuses}
           />
         </div>
       )}

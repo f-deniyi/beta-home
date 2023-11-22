@@ -89,9 +89,8 @@ const ProductOrderDetails = ({ orderDetails, statuses }) => {
           value={statusId}
           onChange={(e) => setStatusId(e.target.value)}
         >
-          {statuses.map((el, i) => (
-            <option value={el.id}>{el.name}</option>
-          ))}
+          {statuses &&
+            statuses.map((el, i) => <option value={el.id}>{el.name}</option>)}
         </select>
         {
           <div className="flex gap-x-2">

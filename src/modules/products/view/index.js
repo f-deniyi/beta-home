@@ -31,15 +31,7 @@ const ProductsManagement = () => {
     setActivePage(page);
   };
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const {
-    isLoading: fetchingOrders,
-    data: orders,
-    refetch,
-  } = useGetProductOrdersManager({
-    filter: "",
-    enable: true,
-    status: selectedCategory.id,
-  });
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState("");
 
   const productCategory = [
     "All",
@@ -57,7 +49,7 @@ const ProductsManagement = () => {
 
   return (
     <BaseDashboardNavigation title={"Product Managment"} hideSearch={false}>
-      {isLoading || loadingAllProducts || fetchingOrders ? (
+      {isLoading || loadingAllProducts ? (
         // || loadingStatuses
         <Loader />
       ) : (
@@ -132,16 +124,7 @@ const ProductsManagement = () => {
       )}
 
       <AddProduct />
-      {orders && (
-        <ProductOrders
-          orders={orders.orders}
-          pagination={pagination}
-          // orderStatuses={orderStatuses}
-          refetch={() => {
-            refetch();
-          }}
-        />
-      )}
+      <ProductOrders shopId={shopId} />
     </BaseDashboardNavigation>
   );
 };
