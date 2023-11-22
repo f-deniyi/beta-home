@@ -10,6 +10,7 @@ import Loader from "../../../generalComponents/Loader";
 import useGetAllProductsManager from "../controllers/get_all_products_controller";
 import useGetProductOrdersManager from "../controllers/get_product_orders_controller";
 import useGetOrderStatusManager from "../controllers/get_order_statuses";
+import useGetSCategoriesQuery from "../../shopManagement/controllers/get_shop_categories";
 
 const ProductsManagement = () => {
   let location = useLocation();
@@ -17,35 +18,50 @@ const ProductsManagement = () => {
 
   const shopId = localStorage.getItem("beta-vendor-shop");
   const [activePage, setActivePage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState({
+    name: "All",
+    id: "",
+  });
 
   const { data: allProducts, isLoading: loadingAllProducts } =
-    useGetAllProductsManager({ enabled: isAdmin, page: activePage });
+    useGetAllProductsManager({
+      enabled: isAdmin,
+      page: activePage,
+      categories: selectedCategory.id,
+    });
+
+  const { categories, categoryLoading } = useGetSCategoriesQuery({
+    enabled: true,
+  });
 
   const { products, pagination, isLoading } = useGetShopsProductsQuery({
     enabled: Boolean(shopId),
     shopId,
     page: activePage,
+    categories: selectedCategory.id,
   });
 
   const handlePage = (page) => {
     setActivePage(page);
   };
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedOrderStatus, setSelectedOrderStatus] = useState("");
 
-  const productCategory = [
-    "All",
-    "Funiture",
-    "Home Decor",
-    "Kitchen & Dining",
-    "Bed & Bath",
-    "Home Improvement",
-    "Home Electronics",
-    "Home Cleaning",
-    "Home Texlies",
-    "Garden & Outdoor",
-    "Pet Supplies",
-  ];
+  const [modifiedCategories, setModifiedCategories] = useState([
+    { name: "All", id: "" },
+  ]);
+
+  useEffect(() => {
+    console.log("categories:", categories);
+
+    if (categories) {
+      let formattedStatuses = categories;
+      const newOrderStatus = [{ name: "All", id: "" }];
+
+      newOrderStatus.push(...formattedStatuses);
+      console.log("newOrderStatus:", newOrderStatus);
+
+      setModifiedCategories(newOrderStatus);
+    }
+  }, [categories]);
 
   return (
     <BaseDashboardNavigation title={"Product Managment"} hideSearch={false}>
@@ -95,24 +111,24 @@ const ProductsManagement = () => {
             )}
           </div>
           <div className="bg-white rounded-lg p-3">
-            {isAdmin && (
+            {
               <div className="flex flex-wrap gap-2 mb-5 mt-2">
-                {productCategory.map((el) => (
+                {modifiedCategories.map((el) => (
                   <p
                     onClick={() => {
                       setSelectedCategory(el);
                     }}
                     className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
-                      selectedCategory !== el
+                      selectedCategory.name !== el.name
                         ? "bg-[#F2F2F2]"
                         : "bg-brandPrimary text-black"
                     } rounded-[20px]`}
                   >
-                    {el}
+                    {el.name}
                   </p>
                 ))}
               </div>
-            )}
+            }
 
             <ProductGrid
               products={isAdmin ? allProducts.products : products}
