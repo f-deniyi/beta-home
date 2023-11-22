@@ -8,10 +8,17 @@ import useFileUpload from "../../fileupload/fileUploadController";
 import { AddBrandsManager } from "../controllers/add_brands_controller";
 import { AddCategoryManager } from "../controllers/add_category_controller";
 
-
 const AddCategory = ({ type }) => {
-  const { isLoading: addingBrandCategory, isSuccess: brandUploaded, addBrandController } = AddBrandsManager()
-  const { isLoading: addingCategory, isSuccess: categoryUploaded, addCategoryController } = AddCategoryManager()
+  const {
+    isLoading: addingBrandCategory,
+    isSuccess: brandUploaded,
+    addBrandController,
+  } = AddBrandsManager();
+  const {
+    isLoading: addingCategory,
+    isSuccess: categoryUploaded,
+    addCategoryController,
+  } = AddCategoryManager();
 
   const [uploadedImages, setUploadedImages] = useState(null);
   const handleFileUpload = (e) => {
@@ -37,44 +44,56 @@ const AddCategory = ({ type }) => {
   const [parent, setParent] = useState(null);
   const [details, setDetails] = useState("");
   const [group, setGroup] = useState("");
-  const [imageError, setImageError] = useState(false)
+  const [imageError, setImageError] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (uploadedImages) {
       if (imageError) {
-        setImageError(false)
+        setImageError(false);
       }
       const gallery = await uploadFile(uploadedImages.file);
       // const gallery = uploadUrl
       // const galleries = await Promise.all(galleryPromises);
       // console.log(gallery);
-      const data = {
-        name: name,
-        icon: type !== 'brand' ? gallery : '',
-        image: {
-          original: type === 'brand' ? gallery : '',
-          thumbnail: type === 'brand' ? gallery : '',
-        },
-        details: details,
-        parent: parent,
-        type: null,
-      };
-      console.log(data)
-      type === 'brand' ? addBrandController(data) : addCategoryController(data)
-
+      let data;
+      if (type === "brand") {
+        data = {
+          list: [
+            {
+              name: name,
+              image: {
+                original: type === "brand" ? gallery : "",
+                thumbnail: type === "brand" ? gallery : "",
+              },
+            },
+          ],
+        };
+      } else {
+        data = {
+          name: name,
+          icon: type !== "brand" ? gallery : "",
+          image: {
+            original: type === "brand" ? gallery : "",
+            thumbnail: type === "brand" ? gallery : "",
+          },
+          details: details,
+          parent: parent,
+          type: null,
+        };
+      }
+      console.log(data);
+      type === "brand" ? addBrandController(data) : addCategoryController(data);
     } else {
-      setImageError(true)
+      setImageError(true);
     }
   };
 
   useEffect(() => {
     if (categoryUploaded || brandUploaded) {
-      document.getElementById("add_category").close()
+      document.getElementById("add_category").close();
     }
-  }, [categoryUploaded, brandUploaded])
-
-
+  }, [categoryUploaded, brandUploaded]);
 
   return (
     <>
@@ -95,27 +114,38 @@ const AddCategory = ({ type }) => {
                 {uploadedImages ? (
                   <img src={uploadedImages?.url} alt="img" />
                 ) : (
-                  <p className="text-[#A5A5A5] font-medium text-[30px]">{type !== 'brand' ? 'SVG' : 'PNG'}</p>
+                  <p className="text-[#A5A5A5] font-medium text-[30px]">
+                    {type !== "brand" ? "SVG" : "PNG"}
+                  </p>
                 )}
               </div>
               <div>
                 <div className="relative text-center ">
                   <label className="cursor-pointer block bg-brandPrimary flex justify-center py-4 shadow-lg px-[25px] rounded-full mb-2">
                     <AiOutlinePlus />
-                    <p className="text-[12px] font-normal">{type !== 'brand' ? 'Add an icon' : 'Add brand Image'}</p>
+                    <p className="text-[12px] font-normal">
+                      {type !== "brand" ? "Add an icon" : "Add brand Image"}
+                    </p>
                     <input
                       type="file"
                       className="hidden"
-                      accept={type !== 'brand' ? '.svg' : '.jpeg, .jpg, .png, .gif'}
+                      accept={
+                        type !== "brand" ? ".svg" : ".jpeg, .jpg, .png, .gif"
+                      }
                       onChange={(e) => handleFileUpload(e)}
-                    // required
+                      // required
                     />
                   </label>
                   <p className="text-[12px] font-medium">
-                    {type !== 'brand' ? 'Icon must be in SVG format' : 'Image must be in supported format'}
-
+                    {type !== "brand"
+                      ? "Icon must be in SVG format"
+                      : "Image must be in supported format"}
                   </p>
-                  {imageError && <p className="text-[12px] font-medium text-red-500">Please upload category image</p>}
+                  {imageError && (
+                    <p className="text-[12px] font-medium text-red-500">
+                      Please upload category image
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -125,7 +155,7 @@ const AddCategory = ({ type }) => {
                 placeholder={"Enter category name"}
                 className={"!bg-[#EDEDED] !py-4 !px-[24px]"}
                 onChange={(e) => {
-                  setName(e.target.value)
+                  setName(e.target.value);
                 }}
                 required
               />
@@ -135,9 +165,11 @@ const AddCategory = ({ type }) => {
                 label={"Details"}
                 isTextArea
                 placeholder={"Enter category details"}
-                className={"!bg-[#EDEDED] !py-4 !px-[24px] !h-[120px] w-full !resize-none"}
+                className={
+                  "!bg-[#EDEDED] !py-4 !px-[24px] !h-[120px] w-full !resize-none"
+                }
                 onChange={(e) => {
-                  setDetails(e.target.value)
+                  setDetails(e.target.value);
                 }}
                 required
               />
@@ -162,14 +194,13 @@ const AddCategory = ({ type }) => {
               buttonText={"Proceed"}
               disabled={addingBrandCategory || addingCategory || fileLoading}
               isLoading={addingBrandCategory || addingCategory || fileLoading}
-              type={'submit'}
+              type={"submit"}
               className={
                 "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary  !py-[15px]"
               }
             />
           </div>
         </form>
-
       </ModalManagement>
     </>
   );

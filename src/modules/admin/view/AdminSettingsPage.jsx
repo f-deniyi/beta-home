@@ -20,7 +20,6 @@ const AdminSettingsPage = () => {
     enabled: true,
   });
 
-
   const items = [...Array(10).keys()];
   const brandItems = [...Array(3).keys()];
   const [categoryType, setCategoryType] = useState("product");
@@ -113,7 +112,9 @@ const AdminSettingsPage = () => {
               }}
             >
               <AiOutlinePlus />
-              <p className="text-[12px] font-medium">Add a Category</p>
+              <p className="text-[12px] font-medium">
+                Add a Brand/Manufacturer
+              </p>
             </button>
           </div>
         </div>
