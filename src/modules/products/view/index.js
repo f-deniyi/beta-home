@@ -10,7 +10,6 @@ import Loader from "../../../generalComponents/Loader";
 import useGetAllProductsManager from "../controllers/get_all_products_controller";
 import useGetProductOrdersManager from "../controllers/get_product_orders_controller";
 import useGetOrderStatusManager from "../controllers/get_order_statuses";
-import EmptyContent from "../../../generalComponents/EmptyContent";
 
 const ProductsManagement = () => {
   let location = useLocation();
@@ -28,9 +27,6 @@ const ProductsManagement = () => {
     page: activePage,
   });
 
-  const [selectedOrder, setSelectedOrder] = useState("All");
-
-
   const handlePage = (page) => {
     setActivePage(page);
   };
@@ -42,19 +38,9 @@ const ProductsManagement = () => {
   } = useGetProductOrdersManager({
     filter: "",
     enable: true,
-<<<<<<< HEAD
     status: selectedCategory.id,
   });
 
-=======
-    shop: shopId,
-    // status: selectedOrder === 'All' ? null : selectedOrder
-  });
-
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-
->>>>>>> 206cd84ec74adbf31577b9e6e3846df3ab3a0932
   const productCategory = [
     "All",
     "Funiture",
@@ -73,7 +59,6 @@ const ProductsManagement = () => {
     <BaseDashboardNavigation title={"Product Managment"} hideSearch={false}>
       {isLoading || loadingAllProducts || fetchingOrders ? (
         // || loadingStatuses
-<<<<<<< HEAD
         <Loader />
       ) : (
         <div>
@@ -96,48 +81,14 @@ const ProductsManagement = () => {
                 <div className="relative  me-2">
                   <div
                     className="relative top-0 right-0 flex items-center justify-center cursor-pointer"
-=======
-        ? (
-          <Loader />
-        ) : (
-
-          <div>
-            <div className="flex items-center justify-between mt-3 mb-4">
-              <h3 className="text-[20px]">List of uploaded products</h3>
-              {isAdmin ? (
-                <div className="flex items-center">
-                  <button
-                    className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium flex items-center gap-x-2"
->>>>>>> 206cd84ec74adbf31577b9e6e3846df3ab3a0932
                     onClick={() =>
                       document.getElementById("product_orders").showModal()
                     }
                   >
-<<<<<<< HEAD
                     <img src={cart} alt="Notification Icon" />
                     <p className="h-[15px] w-[15px] flex items-center justify-center bg-[#FF0000] text-white text-[10px] font-medium rounded-full  absolute top-0 right-0">
                       3
                     </p>
-=======
-                    <img src={new_cart} alt="Notification Icon" />
-                    <p>View all orders</p>
-                  </button>
-                </div>
-              ) : (
-                <div className="flex items-center">
-                  <div className="relative  me-2">
-                    <div
-                      className="relative top-0 right-0 flex items-center justify-center cursor-pointer"
-                      onClick={() =>
-                        document.getElementById("product_orders").showModal()
-                      }
-                    >
-                      <img src={cart} alt="Notification Icon" />
-                      <p className="h-[15px] w-[15px] flex items-center justify-center bg-[#FF0000] text-white text-[10px] font-medium rounded-full  absolute top-0 right-0">
-                        {orders.orders?.length ?? 0}
-                      </p>
-                    </div>
->>>>>>> 206cd84ec74adbf31577b9e6e3846df3ab3a0932
                   </div>
                 </div>
                 <button
@@ -163,7 +114,6 @@ const ProductsManagement = () => {
                       selectedCategory !== el
                         ? "bg-[#F2F2F2]"
                         : "bg-brandPrimary text-black"
-<<<<<<< HEAD
                     } rounded-[20px]`}
                   >
                     {el}
@@ -177,26 +127,6 @@ const ProductsManagement = () => {
               pagination={isAdmin ? allProducts.pagination : pagination}
               paginationChange={handlePage}
             />
-=======
-                        } rounded-[20px] `}
-                    >
-                      {el}
-                    </p>
-                  ))}
-                </div>
-              )}
-              {
-                products?.length > 0 || allProducts?.length > 0 ? <ProductGrid
-                  products={isAdmin ? allProducts.products : products}
-                  pagination={isAdmin ? allProducts.pagination : pagination}
-                  paginationChange={handlePage}
-                />
-                  : <EmptyContent content={'No products yet'} className={'h-[300px] w-full'} />
-
-              }
-
-            </div>
->>>>>>> 206cd84ec74adbf31577b9e6e3846df3ab3a0932
           </div>
         </div>
       )}
@@ -206,8 +136,6 @@ const ProductsManagement = () => {
         <ProductOrders
           orders={orders.orders}
           pagination={pagination}
-          setSelectedOrder={setSelectedOrder}
-          selectedOrder={selectedOrder}
           // orderStatuses={orderStatuses}
           refetch={() => {
             refetch();

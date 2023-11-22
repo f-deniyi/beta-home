@@ -8,15 +8,15 @@ import useGetOrderStatusManager from "../controllers/get_order_statuses";
 import { useLocation } from "react-router-dom";
 import ProductOrderTable from "../components/OrderTable";
 
-<<<<<<< HEAD
-const ProductOrders = ({ refetch, orders, pagination }) => {
+const ProductOrders = ({
+  refetch,
+  orders,
+  pagination,
+  setSelectedOrder,
+  selectedOrder,
+}) => {
   const location = useLocation();
-=======
-const ProductOrders = ({ refetch, orders, pagination, setSelectedOrder, selectedOrder }) => {
-  const location = useLocation()
->>>>>>> 206cd84ec74adbf31577b9e6e3846df3ab3a0932
   const isAdmin = location.pathname.includes("/admin");
-
 
   useEffect(() => {
     refetch();
@@ -92,7 +92,7 @@ const ProductOrders = ({ refetch, orders, pagination, setSelectedOrder, selected
             orders={orders}
             isAdmin={isAdmin}
             selectedOrder={selectedOrder}
-            statuses={statuses}
+            // statuses={statuses}
           />
         </div>
       )}

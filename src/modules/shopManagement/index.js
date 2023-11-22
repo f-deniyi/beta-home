@@ -48,7 +48,7 @@ const ShopManagement = () => {
                   </div>
                   <div className="mt-0">
                     <div className="flex items-center justify-center w-full">
-                      <h3 className="text-[15px] text-black font-medium mr-2">
+                      <h3 className="text-[15px] text-black font-medium mr-2 truncate text-ellipsis">
                         {shop.name}
                       </h3>
                       <img
