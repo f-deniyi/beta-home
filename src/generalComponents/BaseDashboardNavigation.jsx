@@ -111,8 +111,8 @@ const BaseDashboardNavigation = ({
   const activeMenu =
     data?.data?.user?.role?.name === "customer"
       ? vendorMenu.filter(
-          (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep)
-        )
+        (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep)
+      )
       : adminMenu;
   // const activeMenu = adminMenu;
 
@@ -143,9 +143,8 @@ const BaseDashboardNavigation = ({
       </div>
       {/* this is where the mobile menu is */}
       <div
-        className={`fixed md:hidden ${
-          showMenu ? "left-0" : "left-[-100%]"
-        } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
+        className={`fixed md:hidden ${showMenu ? "left-0" : "left-[-100%]"
+          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
       >
         <img
           className="object-contain w-[10rem] mx-7"
@@ -184,9 +183,8 @@ const BaseDashboardNavigation = ({
             </div>
             <div className="hidden md:flex justify-end items-center">
               <div
-                className={` ${
-                  hideSearch ? "hidden" : "flex"
-                }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
+                className={` ${hideSearch ? "hidden" : "flex"
+                  }  items-center justify-start pl-5 pr-4 py-3 h-[50px] mr-[10px] bg-[#F2F2F2] rounded-[60px] md:min-w-[280px] max-w-xs`}
               >
                 <input
                   className="text-[12px] font-normal text-[#8E8E8E] bg-transparent outline-none focus:outline-none w-full"
@@ -203,14 +201,19 @@ const BaseDashboardNavigation = ({
               >
                 <img src={notificationIcon} alt="notification_icon" />
               </button>
-              <button className="mr-[10px]">
+              <button className="mr-[10px]"
+              onClick={() => {
+                navigate('/messages')
+              }}>
                 <img src={messageIcon} alt="message_icon" />
               </button>
               {/* notification display */}
               {showNotification && (
                 <NotificationList showNotification={showNotification} />
               )}
-              <div className="rounded-full border-brandPrimary border-solid border-2 mr-[13px]">
+              <div className="rounded-full border-brandPrimary border-solid border-2 mr-[13px] cursor-pointer"
+                
+              >
                 {" "}
                 <img
                   className=" object-cover h-[44px] w-[44px] p-[0.7px] rounded-full "
