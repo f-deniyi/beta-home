@@ -27,6 +27,7 @@ import {
   promotion_active,
   repayment_active,
   package_active,
+  activeSupport
 } from "../assets/icons";
 
 export const vendorMenu = [
@@ -130,12 +131,12 @@ export const adminMenu = [
     icon: referal,
     activeIcon: referral_active,
   },
-  {
-    title: "Promotion Management",
-    path: "/admin/promotion-management",
-    icon: promotion,
-    activeIcon: promotion_active,
-  },
+  // {
+  //   title: "Promotion Management",
+  //   path: "/admin/promotion-management",
+  //   icon: promotion,
+  //   activeIcon: promotion_active,
+  // },
   {
     title: "Repayment Management",
     path: "/admin/repayment-management",
@@ -148,6 +149,12 @@ export const adminMenu = [
     path: "/admin/package-management",
     icon: packageIcon,
     activeIcon: package_active,
+  },
+  {
+    title: "Support Management",
+    path: "/admin/support-management",
+    icon: activeSupport,
+    activeIcon: activeSupport,
   },
   {
     title: "Wallet",

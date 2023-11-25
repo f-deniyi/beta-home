@@ -29,6 +29,8 @@ import ShopDetails from "./modules/shopManagement/ShopDetails";
 import Referral from "./modules/referral";
 import VendorShopManagement from "./modules/shopManagement/vendor";
 import Messages from './modules/messages'
+import SupportManagement from "./modules/supportManagement";
+import SupportDetails from "./modules/supportManagement/Details";
 
 function App() {
   return (
@@ -42,7 +44,7 @@ function App() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/referral" element={<Referral />} />
-          <Route path='/messages' element={<Messages/>} />
+          <Route path='/messages' element={<Messages />} />
 
           <Route
             path="/payment/confirmation"
@@ -65,6 +67,14 @@ function App() {
           <Route
             path="/admin/products-management"
             element={<ProductsManagement />}
+          />
+          <Route
+            path="/admin/support-management"
+            element={<SupportManagement />}
+          />
+          <Route
+            path="/admin/support-management/:ticketId"
+            element={<SupportDetails/>}
           />
           <Route
             path="/admin/referral-management"
