@@ -2,8 +2,8 @@ import React from "react";
 
 const NotificationTiles = ({ details }) => {
   return (
-    <div className="bg-white rounded-[15px] shadow-md flex justify-start w-full items-center p-2 mb-2">
-      <p className="h-[57px] w-[57px] aspect-square rounded-[13px] flex items-center justify-center text-[32px] font-extrabold justify-items-center text-white mr-4 bg-offCoffee">
+    <div className="bg-white rounded-[15px] flex justify-start w-full items-center p-2 mb-2">
+      <p className="h-[57px] w-[57px] aspect-square rounded-full border border-black flex items-center justify-center text-[32px] font-extrabold justify-items-center text-black mr-4 bg-brandYellow">
         {details.title.charAt(0)}
       </p>
       <div>

@@ -9,16 +9,17 @@ const PackageCard = ({ packageDetails, onClick }) => {
         className="cursor-pointer "
         onClick={() => {
           onClick();
-          document.getElementById("package_details").showModal();
         }}
       >
         <div
-          className={` bg-white  h-[168.59px] w-[168.59px] flex justify-center items-center  rounded-lg`}
+          className={` bg-white  h-[168.59px] w-[168.59px] flex justify-start items-end  rounded-lg `}
+          style={{ backgroundImage: `url(${beta})`, backgroundSize: "cover" }}
         >
-          <img src={beta} alt={"beta_package"} className="object-cover" />
+          <p className="text-[25px] font-semibold mb-4 ml-2">
+            {packageDetails.title}
+          </p>
         </div>
       </div>
-      {packageDetails && <PackageDetails packageDetails={packageDetails} />}
     </>
   );
 };

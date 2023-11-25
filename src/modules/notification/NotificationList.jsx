@@ -8,62 +8,62 @@ import { isToday, isYesterday, format } from "date-fns";
 const NotificationList = ({ showNotification }) => {
   const notificationList = [1, 2, 3, 4];
   const { data, isLoading, isError, error, isSuccess } = useGetNotifications();
-  let groupedNotifications;
-  const groupNotificationsByDate = (notifications) => {
-    const groupedNotifications = [];
+  // let groupedNotifications;
+  // const groupNotificationsByDate = (notifications) => {
+  //   const groupedNotifications = [];
 
-    notifications.forEach((notification) => {
-      const createdAt = new Date(notification.createdAt);
+  //   notifications.forEach((notification) => {
+  //     const createdAt = new Date(notification.createdAt);
 
-      if (isToday(createdAt)) {
-        const todayGroup = groupedNotifications.find(
-          (group) => group.date === "Today"
-        );
-        if (todayGroup) {
-          todayGroup.notifications.push(notification);
-        } else {
-          groupedNotifications.push({
-            date: "Today",
-            notifications: [notification],
-          });
-        }
-      } else if (isYesterday(createdAt)) {
-        const yesterdayGroup = groupedNotifications.find(
-          (group) => group.date === "Yesterday"
-        );
-        if (yesterdayGroup) {
-          yesterdayGroup.notifications.push(notification);
-        } else {
-          groupedNotifications.push({
-            date: "Yesterday",
-            notifications: [notification],
-          });
-        }
-      } else {
-        const formattedDate = format(createdAt, "MMM d");
-        const existingGroup = groupedNotifications.find(
-          (group) => group.date === formattedDate
-        );
-        if (existingGroup) {
-          existingGroup.notifications.push(notification);
-        } else {
-          groupedNotifications.push({
-            date: formattedDate,
-            notifications: [notification],
-          });
-        }
-      }
-    });
+  //     if (isToday(createdAt)) {
+  //       const todayGroup = groupedNotifications.find(
+  //         (group) => group.date === "Today"
+  //       );
+  //       if (todayGroup) {
+  //         todayGroup.notifications.push(notification);
+  //       } else {
+  //         groupedNotifications.push({
+  //           date: "Today",
+  //           notifications: [notification],
+  //         });
+  //       }
+  //     } else if (isYesterday(createdAt)) {
+  //       const yesterdayGroup = groupedNotifications.find(
+  //         (group) => group.date === "Yesterday"
+  //       );
+  //       if (yesterdayGroup) {
+  //         yesterdayGroup.notifications.push(notification);
+  //       } else {
+  //         groupedNotifications.push({
+  //           date: "Yesterday",
+  //           notifications: [notification],
+  //         });
+  //       }
+  //     } else {
+  //       const formattedDate = format(createdAt, "MMM d");
+  //       const existingGroup = groupedNotifications.find(
+  //         (group) => group.date === formattedDate
+  //       );
+  //       if (existingGroup) {
+  //         existingGroup.notifications.push(notification);
+  //       } else {
+  //         groupedNotifications.push({
+  //           date: formattedDate,
+  //           notifications: [notification],
+  //         });
+  //       }
+  //     }
+  //   });
 
-    return groupedNotifications;
-  };
+  //   return groupedNotifications;
+  // };
 
   if (isLoading) {
     return <div></div>;
   }
-  if (isSuccess) {
-    groupedNotifications = groupNotificationsByDate(data.data);
-  }
+  // if (isSuccess) {
+  //   groupedNotifications = groupNotificationsByDate(data.data);
+  // }
 
   if (isError) {
     return (
@@ -82,17 +82,9 @@ const NotificationList = ({ showNotification }) => {
         Notifications
       </p>
       <div className="md:max-h-[55vh]  overflow-y-auto scrollbar-hide">
-        {groupedNotifications.map((group) => (
-          <div key={group.date}>
-            <p className="font-bold text-[20px] mt-8 mb-5">{group.date}</p>
-
-            <div className="bg-lightGrey/30 rounded-[30px] w-full  p-5">
-              {group.notifications.map((notification, index) => {
-                return <NotificationTiles key={index} details={notification} />;
-              })}
-            </div>
-          </div>
-        ))}
+        {data.data.map((notification, index) => {
+          return <NotificationTiles key={index} details={notification} />;
+        })}
       </div>
     </div>
   );

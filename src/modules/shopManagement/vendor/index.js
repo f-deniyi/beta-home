@@ -10,12 +10,10 @@ import Attributes from "./components/Attributes";
 import useGetUserDetailsManager from "../../settings/controllers/get_UserDetails_controller";
 import useGetShopsQuery from "../../shopManagement/controllers/get_shops";
 
-
 const VendorShopManagement = () => {
   const navigate = useNavigate();
   const { isLoading, createShopController } = CreateShopManager();
   const [title, setTitle] = useState("Shop Profile");
-
 
   const {
     data,
@@ -30,18 +28,22 @@ const VendorShopManagement = () => {
     isLoading: fetchingShop,
   } = useGetShopsQuery({
     enabled: Boolean(data?.data?.user),
-    owner_id: data?.data?.user?.id
+    owner_id: data?.data?.user?.id,
   });
 
-  const has_shop = userShop?.shops.length > 0
-  console.log('has---shop', has_shop)
+  const has_shop = userShop?.shops.length > 0;
+  console.log("has---shop", has_shop);
 
   return (
     <BaseDashboardNavigation title={"Shop Settings"} hideSearch={true}>
-      <ShopManagementWrapper title={title} setTitle={setTitle} hasShop={has_shop}>
+      <ShopManagementWrapper
+        title={title}
+        setTitle={setTitle}
+        hasShop={has_shop}
+      >
         {title === "Shop Profile" && <ShopProfileSettings hasShop={has_shop} />}
         {title === "Promo Banners" && <PromotionManagement isAdmin={false} />}
-        {title === "Attribute" && <Attributes />}
+        {title === "Attributes" && <Attributes />}
       </ShopManagementWrapper>
     </BaseDashboardNavigation>
   );

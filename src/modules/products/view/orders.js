@@ -8,21 +8,31 @@ import useGetOrderStatusManager from "../controllers/get_order_statuses";
 import { useLocation } from "react-router-dom";
 import ProductOrderTable from "../components/OrderTable";
 
-const ProductOrders = ({ refetch, orders, pagination, setSelectedOrder, selectedOrder }) => {
-  const location = useLocation()
+const ProductOrders = ({ isShop, shopId = "" }) => {
+  const location = useLocation();
   const isAdmin = location.pathname.includes("/admin");
+  const [orderStatuses, setOrderStatuses] = useState([{ name: "All", id: "" }]);
 
-
-  useEffect(() => {
-    refetch();
-  }, [selectedOrder]);
+  const [choosenOrderStatus, setChoosenOrderStatus] = useState({
+    name: "All",
+    id: "",
+  });
+  const {
+    isLoading: fetchingOrders,
+    data: orders,
+    refetch,
+  } = useGetProductOrdersManager({
+    filter: "",
+    enable: true,
+    shop: shopId,
+    status: choosenOrderStatus.id,
+  });
 
   const {
     isLoading: loadingStatuses,
     data: statuses,
     isSuccess: fetchedStatuses,
   } = useGetOrderStatusManager();
-  const [orderStatuses, setOrderStatuses] = useState([{ name: "All", id: "" }]);
 
   useEffect(() => {
     console.log("statuses:", statuses);
@@ -38,11 +48,12 @@ const ProductOrders = ({ refetch, orders, pagination, setSelectedOrder, selected
     }
   }, [statuses, fetchedStatuses]);
 
-
   return (
     <ModalManagement id="product_orders" type="large">
-      {
-        loadingStatuses ? <Loader /> : <div
+      {loadingStatuses || fetchingOrders ? (
+        <Loader />
+      ) : (
+        <div
           style={{
             width: "100%",
           }}
@@ -51,10 +62,9 @@ const ProductOrders = ({ refetch, orders, pagination, setSelectedOrder, selected
             <div>
               <p className="text-[18px] font-medium ">Product Order</p>
               <p className="text-[12px] font-normal ">
-                {
-                  isAdmin ? 'List of products orders' : 'List of product orders you have.'
-                }
-
+                {isAdmin
+                  ? "List of products orders"
+                  : "List of product orders you have."}
               </p>
             </div>
             <div
@@ -69,12 +79,13 @@ const ProductOrders = ({ refetch, orders, pagination, setSelectedOrder, selected
               {orderStatuses?.map((el) => (
                 <p
                   onClick={() => {
-                    setSelectedOrder(el.name);
+                    setChoosenOrderStatus(el);
                   }}
-                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${selectedOrder !== el.name
-                    ? "bg-[#F2F2F2]"
-                    : "bg-brandPrimary text-black"
-                    } rounded-[20px] `}
+                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
+                    choosenOrderStatus.name !== el.name
+                      ? "bg-[#F2F2F2]"
+                      : "bg-brandPrimary text-black"
+                  } rounded-[20px] `}
                 >
                   {el.name}
                 </p>
@@ -82,14 +93,12 @@ const ProductOrders = ({ refetch, orders, pagination, setSelectedOrder, selected
             </div>
           }
           <ProductOrderTable
-            orders={orders}
+            statuses={orderStatuses}
+            orders={orders.orders}
             isAdmin={isAdmin}
-            selectedOrder={selectedOrder}
-            statuses={statuses}
           />
         </div>
-      }
-
+      )}
     </ModalManagement>
   );
 };

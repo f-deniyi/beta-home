@@ -7,6 +7,7 @@ import PackageCard from "./components/PackageCard";
 import AddCategory from "./components/AddPackage";
 import useGetPackagesManager from "./controller/get_packages_controller";
 import Loader from "../../generalComponents/Loader";
+import PackageDetails from "./components/PackageDetails";
 
 const ShopManagement = () => {
   const items = [...Array(10).keys()];
@@ -48,14 +49,16 @@ const ShopManagement = () => {
                 <PackageCard
                   onClick={() => {
                     setSelectedPackage(item);
+                    document.getElementById("package_details").showModal();
                   }}
                   key={index}
-                  packageDetails={selectedPackage}
+                  packageDetails={item}
                 />
               ))}
             </div>
           )}
         </div>
+        {selectedPackage && <PackageDetails packageDetails={selectedPackage} />}
       </div>
 
       <AddCategory type={categoryType} />

@@ -28,6 +28,7 @@ import AdminSettingsPage from "./modules/admin/view/AdminSettingsPage";
 import ShopDetails from "./modules/shopManagement/ShopDetails";
 import Referral from "./modules/referral";
 import VendorShopManagement from "./modules/shopManagement/vendor";
+import Messages from './modules/messages'
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/referral" element={<Referral />} />
+          <Route path='/messages' element={<Messages/>} />
 
           <Route
             path="/payment/confirmation"

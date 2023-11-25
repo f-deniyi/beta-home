@@ -61,7 +61,7 @@ export const vendorMenu = [
   //   activeIcon: promotion_active,
   // },
   {
-    title: "Referral",
+    title: "Referrals",
     path: "/referral",
     icon: product,
     activeIcon: product_active,
@@ -125,7 +125,7 @@ export const adminMenu = [
     activeIcon: product_active,
   },
   {
-    title: "Refferal Management",
+    title: "Referral Management",
     path: "/admin/referral-management",
     icon: referal,
     activeIcon: referral_active,
