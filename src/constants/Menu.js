@@ -81,6 +81,12 @@ export const vendorMenu = [
     activeIcon: wallet_active,
   },
   {
+    title: "Support Management",
+    path: "/support-management",
+    icon: activeSupport,
+    activeIcon: activeSupport,
+  },
+  {
     title: "Account",
     path: "/profile",
     icon: account,

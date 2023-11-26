@@ -72,8 +72,12 @@ function App() {
             path="/admin/support-management"
             element={<SupportManagement />}
           />
+           <Route
+            path="/support-management"
+            element={<SupportManagement />}
+          />
           <Route
-            path="/admin/support-management/:ticketId"
+            path="/support-management/:ticketId"
             element={<SupportDetails/>}
           />
           <Route

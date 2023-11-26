@@ -16,7 +16,6 @@ const useGetSupportMessageQuery = ({ enabled, ticketId }) => {
         },
         { enabled: enabled }
     );
-    console.log('ticket_messages', data)
     return {
         messages: data?.data ?? [],
         isLoading: isLoading,

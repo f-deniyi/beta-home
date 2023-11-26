@@ -102,9 +102,9 @@ const SupportTable = ({ supports }) => {
                                                                     <li
                                                                         role="button"
                                                                         onClick={() => {
-                                                                            navigate(`/admin/support-management/${item?._id}`)
+                                                                            navigate(`/support-management/${item?._id}`)
                                                                         }}
-                                                                        className="text-[12px] font-normal bg-brandPrimary px-2 py-1 text-center rounded-full mb-2  text-black"
+                                                                        className="text-[12px] font-normal bg-brandPrimary px-2 py-1 text-center rounded-full   text-black"
                                                                     >
                                                                         View Details
                                                                     </li>
