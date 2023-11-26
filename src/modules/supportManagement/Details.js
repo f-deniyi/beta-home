@@ -59,7 +59,7 @@ const SupportDetails = () => {
 
 
             </div>
-            <ReplyTicket />
+            <ReplyTicket ticketId={ticketId}/>
         </BaseDashboardNavigation>
     )
 }
