@@ -8,6 +8,7 @@ import useGetSCategoriesQuery from '../../../shopManagement/controllers/get_shop
 import CustomButton from '../../../../generalComponents/Button'
 import useFileUpload from '../../../fileupload/fileUploadController'
 import useCreateProduct from '../../controllers/create_product'
+import useGetShopsAttributesQuery from '../../../shopManagement/vendor/controller/get_shop_attribute'
 
 const AddProduct = () => {
     const [name, setName] = useState("");
@@ -19,7 +20,14 @@ const AddProduct = () => {
     const [sizeArray, setSizeArray] = useState([])
     const [selectedCategories, setCategories] = useState([])
     const shopId = localStorage.getItem('beta-vendor-shop')
-    // const [attributes, setAttributes] = useState([])
+    const [colorValues, setColorValues] = useState([])
+    const [selectedAttribute, setSelectedAttribute] = useState([])
+    const [attributesValues, setAttributesValues] = useState([])
+
+    const { attributes, isLoading: gettingShop } = useGetShopsAttributesQuery({
+        enabled: Boolean(shopId),
+        shopId: shopId,
+    });
 
 
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -56,51 +64,84 @@ const AddProduct = () => {
     } = useFileUpload();
 
     const handleCategoryChange = (e) => {
-        console.log(e)
+        // console.log(e)
         setCategories(e)
     }
+
+
+
+
+
+    useEffect(() => {
+        document.getElementById('add_product').close()
+    }, [isSuccess])
+
+
+    const handleInputChange = (id, event) => {
+        const newAttributes = [...selectedAttribute];
+        const index = newAttributes.findIndex(attr => attr.id === id);
+        
+        if (index !== -1) {
+          newAttributes[index].value = event.target.value;
+          setAttributesValues(newAttributes);
+        }
+      };
+      
 
 
     const handleProduct = async () => {
         const galleryPromises = uploadedImages.map(el => uploadFile(el.file))
         const galleries = await Promise.all(galleryPromises)
-        console.log(galleries)
+        const attributes = attributesValues
+            .reduce((result, { name, id, attribute_name, value }) => {
+                const existingAttr = result.find(item => item.name === attribute_name);
+                if (existingAttr) {
+                    existingAttr.values.push({ value: id, price: value });
+                } else {
+                    result.push({
+                        name: attribute_name,
+                        values: [{ value: id, price: value }],
+                    });
+                }
+                return result;
+            }, []);
         const data = {
             name,
             description,
             price: Number(price),
             "shop_id": shopId,
             "quantity": Number(quantity),
-            "attributes": [
-                {
-                    "name": "colour",
-                    "values":
-                        colorArray.map(el => ({
-                            "value": el,
-                            "price": Number(price)
-                        }))
+            attributes,
+            // "attributes": [
+            //     {
+            //         "name": "colour",
+            //         "values":
+            //             colorArray.map(el => ({
+            //                 "value": el,
+            //                 "price": Number(price)
+            //             }))
 
-                },
-                {
-                    "name": "size",
-                    "values":
-                        sizeArray.map(el => ({
-                            "value": el,
-                            "price": Number(price)
-                        }))
+            //     },
+            //     {
+            //         "name": "size",
+            //         "values":
+            //             sizeArray.map(el => ({
+            //                 "value": el,
+            //                 "price": Number(price)
+            //             }))
 
-                },
-                {
-                    "name": "weight",
-                    "values":
-                        weightArray.map(el => ({
-                            "value": el,
-                            "price": Number(price)
-                        }))
+            //     },
+            //     {
+            //         "name": "weight",
+            //         "values":
+            //             weightArray.map(el => ({
+            //                 "value": el,
+            //                 "price": Number(price)
+            //             }))
 
-                },
+            //     },
 
-            ],
+            // ],
             "image": {
                 "original": galleries[0],
                 "thumbnail": galleries[0]
@@ -119,14 +160,11 @@ const AddProduct = () => {
                 selectedCategories.map(el => el?.id)
             ]
         }
-        // console.log(data)
         createProduct(data)
     }
 
-
     useEffect(() => {
-        document.getElementById('add_product').close()
-    }, [isSuccess])
+    }, [attributesValues])
 
     return (
 
@@ -173,7 +211,7 @@ const AddProduct = () => {
                                 <img
                                     src={image.url}
                                     alt={`Uploaded Image ${index + 1}`}
-                                    className="mx-auto w-16 h-16 object-contain"
+                                    className="mx-auto w-16 h-16 object-cover"
                                 />
                                 <button
                                     className="absolute -top-2 -right-2 bg-brandPrimary rounded-full hover:text-red-700"
@@ -258,17 +296,97 @@ const AddProduct = () => {
                         setAddAttribute(e.target.checked)
                     }} />
                 </div>
-                <div className=''>
+                <div className='mt-[12px]'>
                     {addAttribute &&
-                        <AddProductAttribute
-                            weightArray={weightArray}
-                            setWeightArray={setWeightArray}
-                            sizeArray={sizeArray}
-                            setSizeArray={setSizeArray}
-                            colorArray={colorArray}
-                            setColorArray={setColorArray}
+                        <div>
+                            {attributes?.map(el => {
+                                const containsColor = /color|colour/i.test(el.name);
 
-                        />}
+                                return (
+                                    <div>
+
+                                        <SelectInput
+                                            isMulti
+                                            label={el?.name}
+                                            options={el?.values.map(ele => {
+                                                return { name: ele, id: ele, attribute_name: el?.name }
+                                            })}
+                                            onChange={(e, opt) => {
+
+                                                // setSelectedAttribute(e)
+                                                if (opt.action === 'select-option') {
+                                                    const updatedAttributes = [...selectedAttribute, opt.option]
+                                                    setSelectedAttribute(updatedAttributes);
+
+                                                } else if (opt.action === 'remove-value') {
+                                                    const updatedAttribute = selectedAttribute.filter(e => e.id !== opt.removedValue.id)
+                                                    setSelectedAttribute(updatedAttribute)
+                                                } else {
+                                                    const updatedAttribute = selectedAttribute.filter(e => e.attribute_name !== opt.removedValues[0].attribute_name)
+                                                    setSelectedAttribute(updatedAttribute)
+                                                }
+
+                                            }}
+                                        />
+                                        {
+                                            containsColor &&
+                                            < div className="my-[17px] ml-3 flex gap-2 flex-wrap">
+                                                {
+                                                    selectedAttribute.filter(ele => /color|colour/i.test(ele.attribute_name)).map(el =>
+                                                        <div className='flex gap-x-2'>
+                                                            <p className='text-[14px] font-medium'>{el?.id}</p>
+                                                            <div
+                                                                key={el}
+                                                                style={{
+                                                                    backgroundColor:
+                                                                        el?.id
+                                                                }}
+                                                                className={`flex items-center justify-center p-1 rounded-full h-[15px] w-[15px] `}
+
+                                                            >
+
+                                                            </div>
+                                                        </div>
+
+                                                    )
+                                                }
+
+                                            </div>
+                                        }
+                                        <div className='ml-[25px]'>
+                                            {
+                                                selectedAttribute?.filter(ele => el?.name === ele?.attribute_name)?.map((el, index) =>
+                                                    // console.log('Outer map:', el);
+
+                                                    <InputWithFullBoarder
+                                                        type={'number'}
+                                                        key={el?.id}
+                                                        label={el?.id}
+                                                        placeholder={`Enter ${el?.id} price`}
+                                                        onChange={(event) => handleInputChange(el?.id, event)}
+                                                    />
+
+
+                                                )
+                                            }
+                                        </div>
+
+
+                                    </div>
+
+                                )
+                            })}
+                        </div>
+                        // <AddProductAttribute
+                        //     weightArray={weightArray}
+                        //     setWeightArray={setWeightArray}
+                        //     sizeArray={sizeArray}
+                        //     setSizeArray={setSizeArray}
+                        //     colorArray={colorArray}
+                        //     setColorArray={setColorArray}
+
+                        // />
+                    }
                 </div>
                 <div>
                     <CustomButton
@@ -284,7 +402,7 @@ const AddProduct = () => {
                 </div>
             </form>
 
-        </ModalManagement>
+        </ModalManagement >
     )
 }
 

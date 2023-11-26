@@ -17,7 +17,7 @@ const useGetSupportDetailsQuery = ({ enabled, ticketId }) => {
         { enabled: enabled }
     );
     return {
-        support_details: data.data ?? {},
+        support_details: data?.data ?? {},
         isLoading: isLoading,
         // pagination: data?.pagination ?? {}
     }
