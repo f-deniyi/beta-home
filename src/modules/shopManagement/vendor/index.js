@@ -9,6 +9,7 @@ import PromotionManagement from "../../promotionManagement";
 import Attributes from "./components/Attributes";
 import useGetUserDetailsManager from "../../settings/controllers/get_UserDetails_controller";
 import useGetShopsQuery from "../../shopManagement/controllers/get_shops";
+import ProductsManagement from "../../products/view/management";
 
 const VendorShopManagement = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const VendorShopManagement = () => {
   });
 
   const has_shop = userShop?.shops.length > 0;
+  const isAdmin= data?.data?.user?.role?.name==='admin'
   console.log("has---shop", has_shop);
 
   return (
@@ -40,10 +42,13 @@ const VendorShopManagement = () => {
         title={title}
         setTitle={setTitle}
         hasShop={has_shop}
+        isAdmin={isAdmin}
       >
         {title === "Shop Profile" && <ShopProfileSettings hasShop={has_shop} />}
         {title === "Promo Banners" && <PromotionManagement isAdmin={false} />}
         {title === "Attributes" && <Attributes />}
+        {title === "Products" && <ProductsManagement />}
+
       </ShopManagementWrapper>
     </BaseDashboardNavigation>
   );

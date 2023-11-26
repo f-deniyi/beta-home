@@ -2,51 +2,22 @@ import React, { useEffect, useState } from "react";
 import ModalManagement from "../../../generalComponents/ModalManagement";
 import product from "../../../assets/images/product.png";
 import { close } from "../../../assets/icons";
-import useGetProductOrdersManager from "../controllers/get_product_orders_controller";
 import Loader from "../../../generalComponents/Loader";
-import useGetOrderStatusManager from "../controllers/get_order_statuses";
 import { useLocation } from "react-router-dom";
 import ProductOrderTable from "../components/OrderTable";
 
-const ProductOrders = ({ isShop, shopId = "" }) => {
+const ProductOrders = ({
+  loadingStatuses,
+  fetchingOrders,
+  orderStatuses,
+  setChoosenOrderStatus,
+  choosenOrderStatus,
+  orders
+}) => {
   const location = useLocation();
   const isAdmin = location.pathname.includes("/admin");
-  const [orderStatuses, setOrderStatuses] = useState([{ name: "All", id: "" }]);
 
-  const [choosenOrderStatus, setChoosenOrderStatus] = useState({
-    name: "All",
-    id: "",
-  });
-  const {
-    isLoading: fetchingOrders,
-    data: orders,
-    refetch,
-  } = useGetProductOrdersManager({
-    filter: "",
-    enable: true,
-    shop: shopId,
-    status: choosenOrderStatus.id,
-  });
 
-  const {
-    isLoading: loadingStatuses,
-    data: statuses,
-    isSuccess: fetchedStatuses,
-  } = useGetOrderStatusManager();
-
-  useEffect(() => {
-    console.log("statuses:", statuses);
-
-    if (fetchedStatuses && statuses) {
-      let formattedStatuses = statuses.data;
-      const newOrderStatus = [{ name: "All", id: "" }];
-
-      newOrderStatus.push(...formattedStatuses);
-      console.log("newOrderStatus:", newOrderStatus);
-
-      setOrderStatuses(newOrderStatus);
-    }
-  }, [statuses, fetchedStatuses]);
 
   return (
     <ModalManagement id="product_orders" type="large">
@@ -81,11 +52,10 @@ const ProductOrders = ({ isShop, shopId = "" }) => {
                   onClick={() => {
                     setChoosenOrderStatus(el);
                   }}
-                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
-                    choosenOrderStatus.name !== el.name
-                      ? "bg-[#F2F2F2]"
-                      : "bg-brandPrimary text-black"
-                  } rounded-[20px] `}
+                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${choosenOrderStatus.name !== el.name
+                    ? "bg-[#F2F2F2]"
+                    : "bg-brandPrimary text-black"
+                    } rounded-[20px] `}
                 >
                   {el.name}
                 </p>
@@ -94,7 +64,7 @@ const ProductOrders = ({ isShop, shopId = "" }) => {
           }
           <ProductOrderTable
             statuses={orderStatuses}
-            orders={orders.orders}
+            orders={orders?.orders}
             isAdmin={isAdmin}
           />
         </div>

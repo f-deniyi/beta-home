@@ -4,7 +4,7 @@ import { arrowRight } from "../../../../assets/icons";
 import { useLocation } from "react-router-dom";
 
 
-const ShopManagementWrapper = ({ title, setTitle, children, hasShop }) => {
+const ShopManagementWrapper = ({ title, setTitle, children, hasShop,isAdmin }) => {
   let location = useLocation();
   // const isAdmin = location.pathname.includes("/admin");
   return (
@@ -15,6 +15,8 @@ const ShopManagementWrapper = ({ title, setTitle, children, hasShop }) => {
         >
           {menu
             .filter((item) => (!hasShop ? item.hasShop : true))
+            .filter((item) => (!isAdmin ? !item.belongsToAdmin : true))
+
             .map((el) => (
               <div
                 className={`flex items-center justify-between ${el.name === title ? "bg-brandPrimary rounded-full" : ""
