@@ -52,12 +52,12 @@ const ProductOrders = ({
                   onClick={() => {
                     setChoosenOrderStatus(el);
                   }}
-                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${choosenOrderStatus.name !== el.name
+                  className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${choosenOrderStatus?.name !== el.name
                     ? "bg-[#F2F2F2]"
                     : "bg-brandPrimary text-black"
                     } rounded-[20px] `}
                 >
-                  {el.name}
+                  {el?.name}
                 </p>
               ))}
             </div>
