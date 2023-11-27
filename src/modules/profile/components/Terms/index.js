@@ -1,10 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
+import useGetTermsAndConditions from '../../controller/get_terms_conditions'
+import { useLocation } from "react-router-dom";
+import InputWithFullBoarder from '../../../../generalComponents/InputWithFullBoarder';
+import CustomButton from '../../../../generalComponents/Button';
+import CreateTermsAndCondtionsManager from '../../controller/create_terms_conditions';
+import { UpdateTermsAndConditions } from '../../controller/update_terms_conditions';
 
 const Terms = () => {
+    const [termsAndConditions, setTermsAndConditions] = useState('')
+    const location = useLocation();
+    const isAdmin = location.pathname.includes("/admin");
+    const { terms, isLoading } = useGetTermsAndConditions()
+    // console.log('--->>.terms', terms)
+    const { createTermsAndCondtionsController, isLoading: creating } = CreateTermsAndCondtionsManager()
+    const { updateTermsAndConditionsCaller, isLoading: updating } = UpdateTermsAndConditions()
+
+    const handleTerms = (e) => {
+        e.preventDefault()
+        const data = {
+            "content": termsAndConditions
+        }
+        const payload = {
+            "content": termsAndConditions,
+            id: terms?._id
+        }
+        terms ? updateTermsAndConditionsCaller(payload) : createTermsAndCondtionsController(data)
+    }
+
     return (
-        <p className='text-[12px] font-light mt-[10px]'>
-            Lorem ipsum dolor sit amet consectetur. Nullam risus quam sed fringilla dolor ut condimentum at. Ultrices egestas libero adipiscing integer cras molestie ullamcorper ultrices. Nunc platea morbi commodo habitant nunc quis aliquet tincidunt. Laoreet nibh erat et gravida. Quam elementum vitae quis commodo placerat. Nibh sit a ipsum odio mollis. Fusce eget proin nulla diam aliquet lectus lorem ut justo. Nam ultrices arcu eu in sed odio id. Fringilla amet scelerisque metus sed auctor et aenean. Et ac volutpat nisl tincidunt morbi nibh pellentesque ut. Pellentesque neque erat non ornare nullam gravida vel pellentesque neque. Massa elit tellus gravida enim in elementum. Leo sit potenti ut adipiscing ullamcorper quam elementum dictum non. Pellentesque commodo commodo lacus massa viverra elementum convallis eget. Feugiat nibh feugiat sodales volutpat. Montes quam sollicitudin odio gravida. Leo purus nisl consectetur sodales euismod. Tempor aliquet mauris tortor phasellus nec scelerisque integer. Tellus mi vel sit sed enim. Integer tristique tortor nunc varius. Velit senectus in augue risus id dictumst eros consequat. Ut blandit dolor massa mattis massa dictum et condimentum euismod. Ullamcorper cursus varius vitae aliquam suspendisse magna dolor nisl tellus. Habitant id tristique blandit vehicula. Odio lacinia nullam posuere nunc. Aliquet facilisi hendrerit vulputate imperdiet ac elementum dui orci commodo. In praesent in sagittis convallis mattis sit lectus. Lobortis tortor in eget euismod neque congue scelerisque mollis maecenas. Odio proin ut et ut ante volutpat lectus sed malesuada. Habitasse gravida elementum cursus arcu ipsum vitae. Et aliquet vitae magna sed bibendum aenean arcu. Vestibulum cras consectetur vulputate tellus. Gravida id enim id non nulla at purus enim imperdiet. Amet enim phasellus curabitur sed facilisi sed sed dolor. Quis tempor amet faucibus velit nam sed sed. Eget suspendisse ultrices a amet sit. Nisi elit tellus sollicitudin elementum in metus non. Quis eu sit molestie egestas et. Ultrices massa libero augue lectus ut purus sapien mauris. Blandit vel sit facilisis faucibus neque. Tellus et non vel auctor. Senectus lobortis placerat ac vivamus elementum lacus aliquet dui fermentum. Faucibus parturient eu pretium amet vitae adipiscing massa aenean. Turpis cursus nec quis ultrices placerat neque. Suspendisse consequat accumsan egestas neque arcu. Erat blandit pulvinar est eu viverra. Quisque vestibulum commodo tellus suspendisse gravida risus justo quis. Consequat luctus id integer egestas purus amet sed porta. Arcu quam mattis lacinia mollis. Semper massa vitae et blandit suscipit risus mauris mattis cursus. Orci nisi commodo eu in. Est leo consectetur ut scelerisque porta sodales. Etiam habitant cursus dictumst mauris a. Laoreet nulla eget sit cras mi viverra risus dignissim. Et turpis aenean at odio enim nibh morbi tempus nunc. Egestas urna scelerisque a risus velit elit rhoncus in sed. At nisi cursus elementum elementum elementum morbi sodales. Vestibulum gravida lacus faucibus enim mauris cras vel ac a. Diam eu rhoncus rhoncus neque. Nisl posuere ante in diam mollis. Id urna aenean arcu est id ligula ultrices. Diam risus a lobortis amet blandit viverra iaculis tellus. Nibh sem magna odio iaculis morbi nisl. Massa mi fringilla orci neque vel mattis tincidunt. Aliquam dui morbi urna ligula auctor et leo. Nunc pulvinar ut ultricies vel etiam volutpat. Velit commodo non ornare enim etiam. Volutpat blandit facilisi metus volutpat. Lacus id quam maecenas massa velit habitant faucibus. In risus tincidunt justo eu tempor ut morbi lacinia. Praesent facilisi in facilisi quis cras sagittis. Tellus bibendum penatibus proin nunc egestas ut mollis netus elementum. Dignissim molestie urna nulla commodo nisi vitae fames fringilla id. Tincidunt sed adipiscing lectus eros vitae ultrices est. Eget facilisis a non sit egestas quis. Justo non interdum et metus posuere consectetur rhoncus euismod magna. Amet duis massa mauris commodo viverra ut. Tempus at viverra id interdum lacus velit ipsum adipiscing nisl. Platea integer est at aliquam duis ultrices. Mauris ut orci egestas nisl. Sapien ut pulvinar sed pretium enim. Fermentum adipiscing nunc ornare malesuada. Adipiscing tristique elementum elit tincidunt a montes. Ultrices fringilla consectetur dictumst fames. Donec sagittis pellentesque volutpat mauris. Sit placerat montes rutrum tincidunt nunc dolor. Sed viverra eu amet faucibus ultrices faucibus vitae urna. Vestibulum turpis pharetra interdum egestas. Amet et amet dictum egestas. Massa et viverra at pharetra suscipit. Dignissim pretium interdum rutrum elementum vitae. Nunc ornare dui ullamcorper lorem. Gravida ultricies nisi nec lectus. Vitae mollis id amet sit amet turpis id. Lectus facilisi enim diam suscipit maecenas et euismod. Et duis sed tellus placerat sed elementum sit suspendisse urna. Nibh semper nec amet tellus ullamcorper nisi vitae. Rhoncus dignissim vel sit mi feugiat sit. Mattis rhoncus lacus natoque arcu dui rhoncus mauris porttitor. At leo euismod massa aliquet. Nunc pulvinar facilisis cursus sed diam malesuada. Dictum sed aliquet aenean proin ligula tortor in. Facilisi quis integer metus turpis iaculis potenti tortor pellentesque pharetra. Purus diam elit aliquam volutpat integer porttitor ac. Tellus sit hendrerit vitae massa dui amet mattis cursus. Fermentum dolor sed risus fermentum imperdiet nisl. Ipsum enim cras sit porta sed duis sit ac.
-        </p>
+
+        isAdmin ? <div className='bg-white p-3 rounded-[5px]'>
+            <form onSubmit={handleTerms}>
+                <InputWithFullBoarder
+                    isTextArea={true}
+                    className={'h-[350px] border border-black p-2'}
+                    defaultValue={terms?.content}
+                    onChange={(e) => {
+                        setTermsAndConditions(e.target.value)
+                    }}
+                />
+                <div className='flex flex-end items-end'>
+                    <CustomButton
+                        buttonText={terms ? 'Update' : 'Save'}
+                        className={'py-3 !px-6 bg-brandPrimary ml-auto'}
+                        isLoading={creating || updating}
+                    />
+                </div>
+            </form>
+
+        </div> :
+            <p className='text-[12px] font-light mt-[10px]'>
+                {terms?.content}
+            </p>
+
+
     )
 }
 
