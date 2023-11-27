@@ -2,11 +2,11 @@ import { useQuery } from "react-query";
 import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithToken";
 
 
-const useGetSupportMessageQuery = ({ enabled, ticketId }) => {
-    const { data, isLoading, isSuccess } = useQuery(["ticket_messages"],
+const useGetTermsAndConditions = () => {
+    const { data, isLoading, isSuccess } = useQuery(["terms_and_conditions"],
         async () => {
             try {
-                const [response] = [await AxiosWithToken.get(`/support/tickets/${ticketId}/messages`)];
+                const [response] = [await AxiosWithToken.get(`/terms`)];
                 // console.log(`this is the current subscription status ${response}`);
                 return response.data;
             } catch (error) {
@@ -14,13 +14,14 @@ const useGetSupportMessageQuery = ({ enabled, ticketId }) => {
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
-        { enabled: enabled }
+        // { enabled: enabled }
     );
+    console.log('data---->>>', data)
     return {
-        messages: data?.data ?? [],
+        terms: data?.data ?? null,
         isLoading: isLoading,
-        pagination: data?.pagination ?? {}
+        // pagination: data?.pagination ?? {}
     }
 };
 
-export default useGetSupportMessageQuery;
+export default useGetTermsAndConditions;

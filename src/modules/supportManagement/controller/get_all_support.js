@@ -2,11 +2,11 @@ import { useQuery } from "react-query";
 import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithToken";
 
 
-const useGetSupportQuery = ({ ...params }) => {
+const useGetSupportQuery = ({ isAdmin, ...params }) => {
     const { data, isLoading, isSuccess } = useQuery(["all_supports", params.page],
         async () => {
             try {
-                const [response] = [await AxiosWithToken.get(`/support/tickets`, { params })];
+                const [response] = [await AxiosWithToken.get(isAdmin ? `/support/tickets` : `/support/user/tickets`, { params })];
                 // console.log(`this is the current subscription status ${response}`);
                 return response.data;
             } catch (error) {
