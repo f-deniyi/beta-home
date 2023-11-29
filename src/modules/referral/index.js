@@ -35,7 +35,7 @@ const Referral = () => {
       ) : (
         <>
           <div className="w-full bg-white rounded-lg mb-5 flex items-center justify-start px-5 md:px-10 py-10">
-            <div className="h-[135px] w-[135px] border-2 border-brandYellow rounded-full">
+            <div className="h-[135px] md:h-[135px] w-[135px] md:w-[135px] border-2 border-brandYellow rounded-full">
               <img
                 src={
                   userDetails?.profile_picture
@@ -55,16 +55,16 @@ const Referral = () => {
                   {userDetails?.email}
                 </p>
               </div>
-              <div className="flex items-center ml-5 mt-5">
-                <div className="font-medium flex flex-col items-start">
+              <div className="flex flex-col md:flex-row items-start md:items-center ml-5 mt-5">
+                <div className="font-medium flex flex-row md:flex-col items-start">
                   <p className="text-[#696969] text-[12px] mb-3">
                     No. of referrals
                   </p>
-                  <p className="text-blackColor text-[15px]">
+                  <p className="text-blackColor text-[15px] ml-5 md:ml-0">
                     {referrals.length}
                   </p>
                 </div>
-                <div className="border-r h-10 mx-20 border-[#a5a5a5]"></div>
+                <div className=" border-b md:border-r w-full md:w-0 md:h-10 my-5 md:my-0 md:mx-20 border-[#a5a5a5]"></div>
                 <div className="font-medium flex flex-col items-start">
                   <p className="text-[#696969] text-[12px] mb-3">
                     Your referral code
