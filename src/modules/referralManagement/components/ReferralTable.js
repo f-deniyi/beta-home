@@ -8,7 +8,9 @@ import CustomButton from "../../../generalComponents/Button";
 import { UpdateSalesRepRequestsMutation } from "../controller/update_sales_rep_request";
 import EmptyContent from "../../../generalComponents/EmptyContent";
 
-const ReferralTable = () => {
+
+const ReferralTable = ({debouncedSearchValue}) => {
+  
   const [activePage, setActivePage] = useState(1);
   const salesType = ["Active", "Pending Requests"];
 
@@ -17,6 +19,7 @@ const ReferralTable = () => {
   const { requests, pagination, isLoading } = useGetSalesRep({
     status: status === "Active" ? "true" : "false",
     page: activePage,
+    user:debouncedSearchValue
   });
 
   const handlePage = (page) => {
@@ -25,6 +28,7 @@ const ReferralTable = () => {
 
   const { updateSalesRepRequests, isLoading: updating } =
     UpdateSalesRepRequestsMutation();
+
   const [selectedUser, setSelectedUser] = useState(null);
 
   return isLoading ? (

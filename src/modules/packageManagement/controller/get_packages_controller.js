@@ -4,7 +4,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 
 const useGetPackagesManager = ({ enabled, ...params }) => {
   return useQuery(
-    ["all_packages", enabled],
+    ["all_packages", enabled, params.title],
     async () => {
       try {
         const [response] = [await AxiosWithToken.get(`/packages`, { params })];

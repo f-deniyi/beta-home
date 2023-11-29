@@ -3,11 +3,11 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 import { toast } from "react-toastify";
 
 
-const UseGetVendorRequestsQuery = () => {
-    const { data, isLoading, isSuccess, isError, refetch } = useQuery(["vendor-requests"],
+const UseGetVendorRequestsQuery = ({ ...params }) => {
+    const { data, isLoading, isSuccess, isError, refetch } = useQuery(["vendor-requests", params.fullname],
         async () => {
             try {
-                const [response] = [await AxiosWithToken.get(`/user/vendor/requests`)];
+                const [response] = [await AxiosWithToken.get(`/user/vendor/requests`, { params })];
                 toast.success(response?.data?.message)
                 return response.data;
 

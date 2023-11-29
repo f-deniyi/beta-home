@@ -5,7 +5,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 const useGetSalesRep = ({ status, ...params }) => {
 
     const { data, isLoading, isSuccess } = useQuery(
-        ["sales_rep", params.page, status],
+        ["sales_rep", params.page, status, params.name],
         async () => {
             try {
                 const [response] = [await AxiosWithToken.get(`/user/sales-rep/requests?approved=${status}`, { params })];
