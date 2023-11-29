@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import BaseDashboardNavigation from "../../generalComponents/BaseDashboardNavigation";
 
@@ -22,8 +22,12 @@ import BarChart from "../../generalComponents/BarChart";
 import { FiArrowRight } from "react-icons/fi";
 import UserTable from "./components/Table";
 import useGetUserCountManager from "./controllers/get_user_counts_controller";
+import useDebounce from "../../utils/UseDebounce";
+import InputWithFullBoarder from "../../generalComponents/InputWithFullBoarder";
 
 const UsersManagement = () => {
+  const [searchValue, setSearchValue] = useState('')
+  const debouncedSearchValue = useDebounce(searchValue, 1000)
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return format(date, "MMMM d, yyyy");
@@ -36,14 +40,23 @@ const UsersManagement = () => {
 
   const [selectedUser, setSelectedUser] = useState("");
   const userType = [
-    { title: "All Users", query: "" },
-    { title: "Customers", query: "false" },
-    { title: "Vendors", query: "true" },
+    { title: "All Users", query: null },
+    { title: "Customers", query: false },
+    { title: "Vendors", query: true },
   ];
 
+  useEffect(()=>{
+    setSelectedUser(userType[0])
+
+  },[])
+  
   if (loadingCount) {
     return <isLoading />;
   }
+
+ 
+
+
 
   return (
     <BaseDashboardNavigation title={"User Management"} hideSearch={true}>
@@ -97,25 +110,37 @@ const UsersManagement = () => {
 
       <p className="text-[20px] font-normal mb-3">List of users</p>
 
-      <div className="bg-white p-3 rounded-[10px]">
-        <div className="flex gap-2 mb-3">
-          {userType.map((el) => (
-            <p
-              onClick={() => {
-                setSelectedUser(el.query);
-              }}
-              className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${
-                selectedUser !== el.query
+      <div className="bg-white p-3 rounded-[10px] ">
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2 mb-3">
+            {userType.map((el) => (
+              <p
+                onClick={() => {
+                  setSelectedUser(el);
+                }}
+                className={`py-[10px] px-[20px] text-[#696969] font-medium text-[12px] cursor-pointer ${selectedUser?.title !== el.title
                   ? "bg-[#F2F2F2]"
                   : "bg-brandPrimary text-black"
-              } rounded-[20px] `}
-            >
-              {el.title}
-            </p>
-          ))}
+                  } rounded-[20px] `}
+              >
+                {el.title}
+              </p>
+            ))}
+          </div>
+          <div className="">
+            <InputWithFullBoarder
+              placeholder={'Search User...'}
+              className={'!border-black border sm:w-full md:w-[230px]'}
+              onChange={(e) => {
+                setSearchValue(e.target.value.toLowerCase())
+              }}
+            />
+          </div>
+
         </div>
+
         <div>
-          <UserTable filter={selectedUser} />
+          <UserTable filter={selectedUser?.query} debouncedSearchValue={debouncedSearchValue} />
         </div>
       </div>
     </BaseDashboardNavigation>

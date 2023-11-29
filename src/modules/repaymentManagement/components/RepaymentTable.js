@@ -6,10 +6,10 @@ import Loader from '../../../generalComponents/Loader';
 import moment from 'moment';
 
 
-const ReferralTable = () => {
+const ReferralTable = ({ debouncedSearchValue }) => {
     const [activePage, setActivePage] = useState(1);
     const [selectedEnrollment, setSelectedEnrollment] = useState(null)
-    const { enrollments, pagination, isLoading } = useGetAllEnrollments({ page: activePage })
+    const { enrollments, pagination, isLoading } = useGetAllEnrollments({ page: activePage, name: debouncedSearchValue })
 
     const handlePage = (page) => {
         setActivePage(page);

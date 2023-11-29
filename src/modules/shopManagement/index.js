@@ -11,17 +11,34 @@ import { locationIcon, verifiedIcon } from "../../assets/icons";
 import { formatAddress } from "../../utils/format_address";
 import { formatMonth } from "../../utils/format_month";
 import { useNavigate } from "react-router-dom";
-
+import useDebounce from "../../utils/UseDebounce";
+import InputWithFullBoarder from "../../generalComponents/InputWithFullBoarder";
 const ShopManagement = () => {
+  const [searchValue, setSearchValue] = useState('')
+  const debouncedSearchValue = useDebounce(searchValue, 1000)
   const navigate = useNavigate();
-  const { isLoading, data } = useGetShopsQuery({ enabled: true });
+  const { isLoading, data } = useGetShopsQuery({ enabled: true, name: debouncedSearchValue });
 
   return (
     <BaseDashboardNavigation title={"Shop Management"} hideSearch={true}>
+       <div className="flex items-center justify-between my-3">
+            <p className="text-[20px] font-normal mb-3">List of shops</p>
+            <div className="">
+              <InputWithFullBoarder
+                placeholder={'Search shop...'}
+                className={'!border-black border sm:w-full md:w-[230px]'}
+                onChange={(e) => {
+                  setSearchValue(e.target.value.toLowerCase())
+                }}
+              />
+            </div>
+          </div>
       {isLoading ? (
         <Loader />
       ) : (
         <>
+         
+
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 ">
             {data.shops.map((shop, index) => (
               <div

@@ -5,9 +5,10 @@ import useGetAllUsersManager from "../controllers/get_all_users_controller";
 import Loader from "../../../generalComponents/Loader";
 import useGetOrderStatusManager from "../../products/controllers/get_order_statuses";
 
-const UserTable = ({ filter }) => {
+const UserTable = ({ filter,debouncedSearchValue }) => {
   const { users, pagination, isLoading, refetch } = useGetAllUsersManager({
     filter: filter,
+    fullname: debouncedSearchValue
   });
 
   const [selectedUserDetails, setSelectedUserDetails] = useState(null);
@@ -81,7 +82,7 @@ const UserTable = ({ filter }) => {
                     </th>
 
                     <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">
-                      Status
+                      Role
                     </th>
                     <th class="py-3.5 px-4 text-left  uppercase tracking-widest font-medium text-black text-[12px]">
                       Actions
@@ -147,10 +148,13 @@ const UserTable = ({ filter }) => {
                         </td>
 
                         <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 xl:table-cell whitespace-nowrap text-center">
-                          <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
-                            {/* burby is not returning role name. */}
-                            {user.isVendor ? "Vendor" : "Customer"}
-                          </div>
+                        {
+                                                                !user?.isVendor ? <div class="flex items-center justify-center bg-[#00A3FF] py-[5px] px-[10px] text-center text-white rounded-[20px]">
+                                                                    Customer
+                                                                </div> : <div class="flex items-center justify-center bg-[#04A701] py-[5px] px-[10px] text-center text-white rounded-[20px]">
+                                                                    Vendor
+                                                                </div>
+                                                            }
                         </td>
 
                         <td class="hidden px-4 py-4 lg:table-cell whitespace-nowrap">

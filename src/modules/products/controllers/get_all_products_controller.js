@@ -6,7 +6,7 @@ const useGetAllProductsManager = ({ enabled, ...params }) => {
   // const query = filter ? `?customer=${filter}` : "";
   // console.log(query);
   return useQuery(
-    ["all_products", enabled, params.page, params.categories],
+    ["all_products", enabled, params.page, params.categories, params.name],
     async () => {
       try {
         const [response] = [await AxiosWithToken.get(`/products`, { params })];
