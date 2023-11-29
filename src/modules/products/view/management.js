@@ -13,9 +13,13 @@ import useGetSCategoriesQuery from "../../shopManagement/controllers/get_shop_ca
 import EmptyContent from "../../../generalComponents/EmptyContent";
 // import useGetProductOrdersManager from "../controllers/get_product_orders_controller";
 // import useGetOrderStatusManager from "../controllers/get_order_statuses";
+import useDebounce from "../../../utils/UseDebounce";
+import InputWithFullBoarder from "../../../generalComponents/InputWithFullBoarder";
 
 
 const ProductsManagement = () => {
+    const [searchValue, setSearchValue] = useState('')
+    const debouncedSearchValue = useDebounce(searchValue, 1000)
     let location = useLocation();
     const isAdmin = location.pathname.includes("/admin");
 
@@ -31,6 +35,7 @@ const ProductsManagement = () => {
             enabled: isAdmin,
             page: activePage,
             categories: selectedCategory.id,
+            name: debouncedSearchValue
         });
 
     const { categories, categoryLoading } = useGetSCategoriesQuery({
@@ -105,54 +110,73 @@ const ProductsManagement = () => {
 
     return (
         <>
+            <div className="flex items-center justify-between my-3">
+                {/* <p className="text-[20px] font-normal mb-3">List of uploaded products</p> */}
+                <div className="flex items-center justify-between mt-3 mb-4  w-full">
+                    <h3 className="text-[20px] flex-shrink-0">List of uploaded products</h3>
+                    <div className="flex gap-x-3  ">
+                        <div className="">
+                            <InputWithFullBoarder
+                                placeholder={'Search product...'}
+                                className={'!border-black border sm:w-full md:w-[230px] mt2 py-3'}
+                                onChange={(e) => {
+                                    setSearchValue(e.target.value.toLowerCase())
+                                }}
+                            />
+                        </div>
+                        <div>
+                            {isAdmin ? (
+                                <div className="flex items-center">
+                                    <button
+                                        className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium flex items-center gap-x-2"
+                                        onClick={() =>
+                                            document.getElementById("product_orders").showModal()
+                                        }
+                                    >
+                                        <img src={new_cart} alt="Notification Icon" />
+                                        <p>View all orders</p>
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="flex items-center">
+                                    {
+                                        orders?.orders?.length > 0 && <div className="relative  me-2">
+                                            <div
+                                                className="relative top-0 right-0 flex items-center justify-center cursor-pointer"
+                                                onClick={() =>
+                                                    document.getElementById("product_orders").showModal()
+                                                }
+                                            >
+                                                <img src={cart} alt="Notification Icon" />
+                                                <p className="h-[15px] w-[15px] flex items-center justify-center bg-[#FF0000] text-white text-[10px] font-medium rounded-full  absolute top-0 right-0">
+                                                    {orders?.orders?.length}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <button
+                                        className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium "
+                                        onClick={() =>
+                                            document.getElementById("add_product").showModal()
+                                        }
+                                    >
+                                        +Add a product
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
             {isLoading || loadingAllProducts ? (
                 // || loadingStatuses
                 <Loader />
             ) : (
                 <div>
-                    <div className="flex items-center justify-between mt-3 mb-4">
-                        <h3 className="text-[20px]">List of uploaded products</h3>
-                        {isAdmin ? (
-                            <div className="flex items-center">
-                                <button
-                                    className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium flex items-center gap-x-2"
-                                    onClick={() =>
-                                        document.getElementById("product_orders").showModal()
-                                    }
-                                >
-                                    <img src={new_cart} alt="Notification Icon" />
-                                    <p>View all orders</p>
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="flex items-center">
-                                {
-                                    orders?.orders?.length > 0 && <div className="relative  me-2">
-                                        <div
-                                            className="relative top-0 right-0 flex items-center justify-center cursor-pointer"
-                                            onClick={() =>
-                                                document.getElementById("product_orders").showModal()
-                                            }
-                                        >
-                                            <img src={cart} alt="Notification Icon" />
-                                            <p className="h-[15px] w-[15px] flex items-center justify-center bg-[#FF0000] text-white text-[10px] font-medium rounded-full  absolute top-0 right-0">
-                                                {orders?.orders?.length}
-                                            </p>
-                                        </div>
-                                    </div>
-                                }
 
-                                <button
-                                    className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium "
-                                    onClick={() =>
-                                        document.getElementById("add_product").showModal()
-                                    }
-                                >
-                                    +Add a product
-                                </button>
-                            </div>
-                        )}
-                    </div>
                     <div className="bg-white rounded-lg p-3">
                         {
                             <div className="flex flex-wrap gap-2 mb-5 mt-2">

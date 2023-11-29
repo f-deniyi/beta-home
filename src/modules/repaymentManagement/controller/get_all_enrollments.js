@@ -5,7 +5,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 const useGetAllEnrollments = ({ ...params }) => {
 
     const { data, isLoading, isSuccess } = useQuery(
-        ["enrollments", params.page],
+        ["enrollments", params.page, params?.name],
         async () => {
             try {
                 const [response] = [await AxiosWithToken.get(`/packages/enrollments/list`, { params })];

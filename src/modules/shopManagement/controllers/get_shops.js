@@ -4,7 +4,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 
 
 const useGetShopsQuery = ({ enabled, ...params }) => {
-    return useQuery(["all_shop", enabled],
+    return useQuery(["all_shop", enabled, params.name],
         async () => {
             try {
                 const [response] = [await AxiosWithToken.get(`/shops`, { params })];
