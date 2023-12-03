@@ -11,7 +11,8 @@ const Logout = () => {
         e.preventDefault()
         localStorage.removeItem('beta-vendor-token')
         localStorage.removeItem('beta-vendor-shop')
-        isAdmin ? navigate('/admin/login') : navigate('/login')
+        // isAdmin ? navigate('/admin/login') : navigate('/login')
+        navigate('/login')
 
     }
 

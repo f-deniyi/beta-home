@@ -6,6 +6,7 @@ import product from '../../../../assets/images/product_details.png'
 import DeleteProduct from '../DeleteProduct';
 import useGetSingleProductQuery from '../../controllers/get_single_product';
 import { useLocation } from 'react-router-dom'
+import EditProduct from '../EditProduct'
 
 const customIndicator = (onClickHandler, isSelected, index, label) => {
 
@@ -103,7 +104,14 @@ const ProductDetails = ({ productId, setProductId }) => {
                         </div>
                         {
                             !isAdmin && <div className='flex gap-2'>
-                                <div className='cursor-pointer flex items-center justify-center bg-brandPrimary border-2 border-black h-[60px] w-[60px] rounded-full'>
+                                <div
+                                    className='cursor-pointer flex items-center justify-center bg-brandPrimary border-2 border-black h-[60px] w-[60px] rounded-full'
+                                    onClick={
+                                        () => document.getElementById('edit_product').showModal()
+
+                                    }
+
+                                >
                                     <img src={edit} alt='icon' />
                                 </div>
                                 <div className='cursor-pointer'
@@ -187,6 +195,7 @@ const ProductDetails = ({ productId, setProductId }) => {
 
             </ModalManagement>
             <DeleteProduct productId={productId} />
+            <EditProduct productId={productId} />
         </>
 
 
