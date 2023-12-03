@@ -12,6 +12,7 @@ import InputWithFullBoarder from "../../../../generalComponents/InputWithFullBoa
 import { AddAttributeManager } from "../../controllers/add_attributes.js";
 import { toast } from "react-toastify";
 import { SketchPicker } from "react-color";
+import UpdateAttributeManager from "../../controllers/update_attributes.js";
 
 const Attributes = () => {
   const [title, setTitle] = useState("");
@@ -34,10 +35,19 @@ const Attributes = () => {
     isLoading: userLoading,
   } = useGetUserDetailsManager();
 
-  const handleChangeComplete = () => {
-    if (sizeValue.length > 0) {
-      setSizeArray((arr) => [...arr, sizeValue]);
+  const { editAttributeManager, isLoading: updatingAttribute, isSuccess: attributeUpdated } = UpdateAttributeManager(selectedAttId)
+
+  const handleChangeComplete = (attribute, value, action = 'add') => {
+    // if (sizeValue.length > 0) {
+    //   setSizeArray((arr) => [...arr, sizeValue]);
+    // }
+    const data = {
+      name: attribute.name,
+      values: action === 'add' ? [...attribute.values, value] : attribute.values.filter(el => el !== value)
     }
+    console.log(data, attribute)
+    editAttributeManager(attribute?._id, data)
+
   };
 
   const deleteSize = (size) => {
@@ -45,20 +55,20 @@ const Attributes = () => {
     setSizeArray(filteredArray);
   };
 
-  useEffect(() => {
-    if (selectedAttId && sizeArray.length > 0) {
-      toast.success([...sizeArray]);
-      addAttributeController({
-        shop: userShop?.shops[0]?.id,
-        list: [
-          {
-            name: title,
-            values: sizeArray,
-          },
-        ],
-      });
-    }
-  }, [sizeArray]);
+  // useEffect(() => {
+  //   if (selectedAttId && sizeArray.length > 0) {
+  //     toast.success([...sizeArray]);
+  //     addAttributeController({
+  //       shop: userShop?.shops[0]?.id,
+  //       list: [
+  //         {
+  //           name: title,
+  //           values: sizeArray,
+  //         },
+  //       ],
+  //     });
+  //   }
+  // }, [sizeArray]);
 
   const {
     data: userShop,
@@ -124,7 +134,7 @@ const Attributes = () => {
                     <div>
                       <p className="text-[15px] font-semibold mb-4">
                         Name:
-                        <span className="font-normal ml-5">{el?.name}</span>
+                        <span className="font-normal ml-5 capitalize">{el?.name}</span>
                       </p>
                     </div>
 
@@ -132,15 +142,15 @@ const Attributes = () => {
                       <p className="font-semibold mt-5">Value: </p>
                       <div className="flex-grow">
                         <div
-                          className={`flex items-center bg-[#EDEDED] rounded-md ${
-                            containsColor ? "max-w-max" : "w-full"
-                          } ml-3`}
+                          className={`flex items-center bg-[#EDEDED] rounded-md ${containsColor ? "max-w-max" : "w-full"
+                            } ml-3`}
                         >
                           {containsColor ? (
                             <SketchPicker
                               color={sizeValue ?? "#FFFFFF"}
                               onChangeComplete={(color) => {
                                 setSizeValue(`${color.hex}`);
+                                handleChangeComplete(el, color.hex)
                               }}
                             />
                           ) : (
@@ -150,10 +160,12 @@ const Attributes = () => {
                               className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[60px] flex-1 px-4 py-2 bg-transparent focus:border-none hover:border-none focus:outline-none focus:shadow-none appearance-none"
                               onChange={(e) => {
                                 setSizeValue(e.target.value);
-                                setSelectedAttId(el._id);
-                                setTitle(el.name);
-                                handleChangeComplete();
-                                setSizeArray(el.values);
+                                // setSelectedAttId(el._id);
+                                // setTitle(el.name);
+                                // setSizeArray(el.values);
+
+                                // handleChangeComplete();
+
                               }}
                             />
                           )}
@@ -166,12 +178,13 @@ const Attributes = () => {
                                   document.getElementById("value_field");
                                 inputElement.value = "";
                                 setSelectedAttId(el._id);
-                                setTitle(el.name);
+                                // setTitle(el.name);
 
-                                setSizeArray(el.values);
-                                handleChangeComplete();
+                                // setSizeArray(el.values);
+                                handleChangeComplete(el, sizeValue);
                                 // setTitle('')
                               }}
+                              disabled={sizeValue.length === 0 || updatingAttribute}
                             >
                               <img src={plusIcon} alt="icon" />
                             </button>
@@ -188,10 +201,12 @@ const Attributes = () => {
                                 }}
                                 className={`flex items-center justify-center p-1 rounded-full `}
                                 onClick={() => {
-                                  deleteSize(value);
-                                  setTitle(el.name);
-                                  setSelectedAttId(el._id);
-                                  setSizeArray(el.values);
+                                  // deleteSize(value);
+                                  // setTitle(el.name);
+                                  // setSelectedAttId(el._id);
+                                  // setSizeArray(el.values);
+                                  handleChangeComplete(el, value, 'remove')
+
                                 }}
                               >
                                 <IoIosClose
@@ -205,10 +220,11 @@ const Attributes = () => {
                                 <div
                                   className="cursor-pointer ml-auto pr-2"
                                   onClick={() => {
-                                    deleteSize(value);
-                                    setTitle(el.name);
-                                    setSelectedAttId(el._id);
-                                    setSizeArray(el.values);
+                                    // deleteSize(value);
+                                    // setTitle(el.name);
+                                    // setSelectedAttId(el._id);
+                                    // setSizeArray(el.values);
+                                    handleChangeComplete(el, value, 'remove')
                                   }}
                                 >
                                   <IoIosClose color="#fff" size={22} />
