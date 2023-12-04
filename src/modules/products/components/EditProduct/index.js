@@ -175,8 +175,21 @@ const EditProduct = ({ productId }) => {
 
 
     useEffect(() => {
+        if (product) {
+            setUploadedImages(product?.gallery)
+            if (product?.attributes?.length > 0) {
+                const productsAttributes = product?.attributes?.map(ele => ele.values.map(value => {
 
-    }, [])
+                    return { name: value.value, id: value.value, attribute_name: ele?.name, price: value.price }
+                }
+                )).flat()
+                // console.log('<<product--attributes>>', productsAttributes, productsAttributes?.flat())
+                setSelectedAttribute(productsAttributes)
+            }
+
+
+        }
+    }, [product])
 
     const [delayed, setDelayed] = useState(true)
 
@@ -190,6 +203,8 @@ const EditProduct = ({ productId }) => {
         return () => clearTimeout(timeoutId);
 
     }, []);
+
+
 
 
 
@@ -234,7 +249,7 @@ const EditProduct = ({ productId }) => {
 
                                     <div className="flex mt-5">
                                         {/* Uploaded Images */}
-                                        {[...product?.gallery ?? [], ...uploadedImages]?.map((image, index) => (
+                                        {uploadedImages?.map((image, index) => (
                                             <div
                                                 key={index}
                                                 className="relative border-dashed border-2 border-black rounded-md mx-2 text-center bg-[#f2f2f2]"
@@ -246,7 +261,10 @@ const EditProduct = ({ productId }) => {
                                                 />
                                                 <button
                                                     className="absolute -top-2 -right-2 bg-brandPrimary rounded-full hover:text-red-700"
-                                                    onClick={() => handleDeleteImage(index)}
+                                                    onClick={(e) => {
+                                                        e.preventDefault()
+                                                        handleDeleteImage(index)
+                                                    }}
                                                 >
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -347,11 +365,15 @@ const EditProduct = ({ productId }) => {
                                                         <SelectInput
                                                             isMulti
                                                             label={el?.name}
-                                                            options={attributes?.filter(elem => elem?.name === el?.name).map(ele => {
-                                                                return { name: ele?.value, id: ele?.price, attribute_name: el?.name }
-                                                            })}
+                                                            options={attributes?.filter(elem => elem?.name === el?.name).map(
+                                                                ele => ele.values.map(value => {
+
+                                                                    return { name: value, id: value, attribute_name: el?.name }
+                                                                })
+                                                            )[0]}
+
                                                             defaultValue={el?.values.map(ele => {
-                                                                return { name: ele?.value, id: ele?.price, attribute_name: el?.name }
+                                                                return { name: ele?.value, id: ele?.value, attribute_name: el?.name }
                                                             })}
                                                             // defaultValue={el?.values}
                                                             onChange={(e, opt) => {
@@ -405,6 +427,7 @@ const EditProduct = ({ productId }) => {
                                                                         type={'number'}
                                                                         key={el?.id}
                                                                         label={el?.id}
+                                                                        defaultValue={el?.price}
                                                                         placeholder={`Enter ${el?.id} price`}
                                                                         onChange={(event) => handleInputChange(el?.id, event)}
                                                                     />
