@@ -27,7 +27,8 @@ import {
   promotion_active,
   repayment_active,
   package_active,
-  activeSupport
+  activeSupport,
+  support
 } from "../assets/icons";
 
 export const vendorMenu = [
@@ -83,7 +84,7 @@ export const vendorMenu = [
   {
     title: "Support Management",
     path: "/support-management",
-    icon: activeSupport,
+    icon: support,
     activeIcon: activeSupport,
   },
   {
