@@ -5,7 +5,7 @@ export const DeleteServiceCategoryManager = () => {
   const isMultiKey = false;
   const { deleteCaller, isLoading, isSuccess, error, data } = useDeleteManager(
     `/service-categories`,
-    ["product_categories"]
+    ["service-categories"]
   );
   const deletePackageController = async (details) => {
     try {

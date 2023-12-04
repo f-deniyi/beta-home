@@ -4,7 +4,7 @@ export const UpdateServiceCategoryManager = (categoryId) => {
   const isMultiKey = false;
   const { updateCaller, isLoading, isSuccess, error, data } = useUpdateManager(
     `/service-categories/${categoryId}`,
-    ["product_categories"],
+    ["service-categories"],
     isMultiKey
   );
   const editCategoryController = async (details) => {
