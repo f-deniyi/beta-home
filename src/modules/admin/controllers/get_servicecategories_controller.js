@@ -4,7 +4,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 
 const useGetServiceCategoriesManager = ({ enabled, ...params }) => {
   return useQuery(
-    ["product_categories", enabled],
+    ["service-categories", enabled],
     async () => {
       try {
         const [response] = [

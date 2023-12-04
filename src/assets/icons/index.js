@@ -69,6 +69,8 @@ import walletbg2 from './wallet_bg2.svg'
 import package_active from './package_icon.svg'
 import beta from './beta.svg'
 import activeSupport from './support_active.svg'
+import support from './support.svg'
+
 
 
 
@@ -143,6 +145,7 @@ export {
     walletbg2,
     package_active,
     beta,
-    activeSupport
+    activeSupport,
+    support
 
 };
