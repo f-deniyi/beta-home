@@ -10,6 +10,7 @@ import useCreateProduct from '../../controllers/create_product'
 import useGetShopsAttributesQuery from '../../../shopManagement/vendor/controller/get_shop_attribute'
 import useGetSingleProductQuery from '../../controllers/get_single_product';
 import Loader from '../../../../generalComponents/Loader'
+import { UpdateProductDetailsMutation } from '../../controllers/update_product'
 
 
 const EditProduct = ({ productId }) => {
@@ -18,10 +19,12 @@ const EditProduct = ({ productId }) => {
         enabled: Boolean(productId)
     })
 
+    const { updateProductDetails, isLoading: updatingProduct, isSuccess: productUpdated } = UpdateProductDetailsMutation(productId)
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState('');
     const [weightArray, setWeightArray] = useState([])
     const [colorArray, setColorArray] = useState([])
     const [sizeArray, setSizeArray] = useState([])
@@ -97,8 +100,15 @@ const EditProduct = ({ productId }) => {
 
 
     const handleProduct = async () => {
-        const galleryPromises = uploadedImages.map(el => uploadFile(el.file))
-        const galleries = await Promise.all(galleryPromises)
+
+        const imageUrlArray = uploadedImages.filter(item => 'original' in item);
+        const fileArray = uploadedImages.filter(item => !('original' in item));
+        let galleries = []
+        if (fileArray.length > 0) {
+            const galleryPromises = fileArray.map(el => uploadFile(el.file))
+            galleries = await Promise.all(galleryPromises)
+        }
+
         const attributes = attributesValues
             .reduce((result, { name, id, attribute_name, value }) => {
                 const existingAttr = result.find(item => item.name === attribute_name);
@@ -112,66 +122,64 @@ const EditProduct = ({ productId }) => {
                 }
                 return result;
             }, []);
+
+        const updatedAttributes = attributes.map(newObj => {
+            const correspondingOriginalObj = product.attributes.find(originalObj => originalObj.name === newObj.name);
+
+            if (correspondingOriginalObj) {
+                return {
+                    ...newObj,
+                    values: newObj.values.map(newValue => ({
+                        ...newValue,
+                        price: newValue.price === undefined ? (correspondingOriginalObj.values.find(originalValue => originalValue.value === newValue.value) || {}).price : Number(newValue.price)
+                    }))
+                };
+            }
+
+            return newObj;
+        });
+
+
         const data = {
-            name,
-            description,
-            price: Number(price),
+            name: name.length > 0 ? name : product?.name,
+            description: description.length > 0 ? description : product?.description,
+            price: price.length > 0 ? Number(price) : product?.price,
             "shop_id": shopId,
-            "quantity": Number(quantity),
-            attributes,
-            // "attributes": [
-            //     {
-            //         "name": "colour",
-            //         "values":
-            //             colorArray.map(el => ({
-            //                 "value": el,
-            //                 "price": Number(price)
-            //             }))
+            "quantity": quantity.length > 0 ? Number(quantity) : product?.quantity,
+            attributes: updatedAttributes,
 
-            //     },
-            //     {
-            //         "name": "size",
-            //         "values":
-            //             sizeArray.map(el => ({
-            //                 "value": el,
-            //                 "price": Number(price)
-            //             }))
-
-            //     },
-            //     {
-            //         "name": "weight",
-            //         "values":
-            //             weightArray.map(el => ({
-            //                 "value": el,
-            //                 "price": Number(price)
-            //             }))
-
-            //     },
-
-            // ],
             "image": {
-                "original": galleries[0],
-                "thumbnail": galleries[0]
+                "original": galleries.concat(imageUrlArray)[0]?.original ?? galleries.concat(imageUrlArray)[0],
+                "thumbnail": galleries.concat(imageUrlArray)[0]?.thumbnail ?? galleries.concat(imageUrlArray)[0]
             },
             "gallery":
-                galleries.map(el => (
+                galleries.concat(imageUrlArray).map(el => (
                     {
-                        "original": el,
-                        "thumbnail": el
+                        "original": el?.original ?? el,
+                        "thumbnail": el?.thumbnail ?? el
                     }
                 )
                 )
 
             ,
-            "categories": [
+            "categories": selectedCategories.length > 0 ? [
+
                 selectedCategories.map(el => el?.id)
-            ]
+            ] : product?.categories
         }
-        createProduct(data)
+        console.log(data)
+        updateProductDetails(data)
     }
 
     useEffect(() => {
     }, [attributesValues])
+
+
+    useEffect(() => {
+        if(productUpdated){
+            document.getElementById('edit_product').close()
+        }
+     }, [productUpdated])
 
 
     useEffect(() => {
@@ -460,8 +468,8 @@ const EditProduct = ({ productId }) => {
                                             e.preventDefault()
                                             handleProduct()
                                         }}
-                                        disabled={true}
-                                        isLoading={isLoading || fileLoading}
+                                        disabled={isLoading || fileLoading || updatingProduct}
+                                        isLoading={isLoading || fileLoading || updatingProduct}
                                         buttonText={'Save'}
                                         className={'!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary text-black !py-[15px]'}
                                     />
