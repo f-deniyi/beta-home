@@ -82,9 +82,9 @@ const EditProduct = ({ productId }) => {
 
 
 
-    useEffect(() => {
-        document.getElementById('add_product').close()
-    }, [isSuccess])
+    // useEffect(() => {
+    //     document.getElementById('add_product').close()
+    // }, [isSuccess])
 
 
     const handleInputChange = (id, event) => {
