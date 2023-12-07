@@ -160,7 +160,7 @@ export const adminMenu = [
   {
     title: "Support Management",
     path: "/admin/support-management",
-    icon: activeSupport,
+    icon: support,
     activeIcon: activeSupport,
   },
   {
