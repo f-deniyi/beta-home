@@ -83,7 +83,7 @@ const ProductsManagement = () => {
         refetch,
     } = useGetProductOrdersManager({
         filter: "",
-        enable: true,
+        enable: Boolean(shopId),
         shop: shopId,
         status: choosenOrderStatus.id,
     });
@@ -112,9 +112,9 @@ const ProductsManagement = () => {
         <>
             <div className="flex items-center justify-between my-3">
                 {/* <p className="text-[20px] font-normal mb-3">List of uploaded products</p> */}
-                <div className="flex items-center justify-between mt-3 mb-4  w-full">
+                <div className="flex  flex-wrap items-center justify-between mt-3 mb-4 w-full ">
                     <h3 className="text-[20px] flex-shrink-0">List of uploaded products</h3>
-                    <div className="flex gap-x-3  ">
+                    <div className="flex gap-x-3 items-center justify-between md:justify-end w-full">
                         <div className="">
                             <InputWithFullBoarder
                                 placeholder={'Search product...'}
@@ -156,7 +156,7 @@ const ProductsManagement = () => {
                                     }
 
                                     <button
-                                        className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium "
+                                        className="hidden md:block bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium "
                                         onClick={() =>
                                             document.getElementById("add_product").showModal()
                                         }
@@ -166,8 +166,29 @@ const ProductsManagement = () => {
                                 </div>
                             )}
                         </div>
-                    </div>
 
+                    </div>
+                    <div className="  w-full block md:hidden">
+                        {
+                            isAdmin ? <button
+                                className="w-full bg-brandPrimary px-6 py-5 rounded-3 px-3 text-[15px] font-medium flex items-center gap-x-2"
+                                onClick={() =>
+                                    document.getElementById("product_orders").showModal()
+                                }
+                            >
+                                <img src={new_cart} alt="Notification Icon" />
+                                <p>View all orders</p>
+                            </button> : <button
+                                className=" w-full bg-brandPrimary px-6 py-5 rounded-3 px-3 text-[15px] font-medium "
+                                onClick={() =>
+                                    document.getElementById("add_product").showModal()
+                                }
+                            >
+                                +Add a product
+                            </button>
+                        }
+
+                    </div>
                 </div>
 
             </div>

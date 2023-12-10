@@ -98,16 +98,16 @@ const LoginPage = () => {
       onClick={handleSubmission}
       afterElements={
         <div className="flex flex-col items-center ">
-          {/* <p className="text-[12px] md:text-[15px]  py-5 text-blackColor text-center">
+          <p className="text-[12px] md:text-[15px]  py-5 text-blackColor text-center">
             Don’t have an account?
             <Link to={"/create-account"}>
               <span className="hover:text-blackColor/60 hover:scale-110 duration-300 underline md:ml-3 text-blackColor">
                 {"Register"}
               </span>
             </Link>
-          </p> */}
+          </p>
 
-         
+
         </div>
       }
     />

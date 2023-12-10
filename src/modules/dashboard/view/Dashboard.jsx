@@ -69,15 +69,15 @@ const Dashboard = () => {
                 backgroundImage: `url(${userShop?.shops[0]?.cover_image?.original})`,
               }}
             ></div>
-            <div class="absolute bottom-[0px] left-[80px] transform -translate-x-1/2 translate-y-1/2 rounded-full overflow-hidden border-4 border-brandPrimary">
+            <div class="absolute bottom-[0px] left-[40px] md:left-[80px] transform -translate-x-1/2 translate-y-1/2 rounded-full overflow-hidden border-4 border-brandPrimary">
               <img
-                class="object-cover h-[120px] w-[120px] "
+                class="object-cover md:h-[120px] md:w-[120px] h-[60px] w-[60px] "
                 src={userShop?.shops[0]?.logo?.original}
                 alt="Profile Picture"
               />
             </div>
 
-            <div class="absolute bottom-[0px] right-[0px] transform -translate-x-1/2 translate-y-1/2  overflow-hidden ">
+            <div class="absolute bottom-[0px] right-[0px] transform -translate-x-1/2 translate-y-1/2  overflow-hidden hidden md:block ">
               <div className="flex">
                 <div className="rounded-full bg-brandPrimary h-[50px] w-[50px] mr-[10px] flex items-center justify-center">
                   <img src={walletOutline} className="object-cover " />
@@ -88,7 +88,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div class="ml-40">
+          <div class=" ml-0 md:ml-40  mt-[35px] md:mt-0">
             <div className="mt-3">
               <div className="flex items-center ">
                 <h3 className="text-[21.457px] text-black font-medium mr-2">
@@ -101,11 +101,14 @@ const Dashboard = () => {
                   />
                 )}
               </div>
-              <div className="flex items-center mb-2">
-                <img
-                  src={locationIcon}
-                  className="object-cover  p-[0.7px] rounded-full mr-1"
-                />
+              <div className="flex items-centr mb-2">
+                <div>
+                  <img
+                    src={locationIcon}
+                    className="object-cover mt-1   rounded-full mr-1"
+                  />
+                </div>
+
                 <p className="text-[15.735px] text-[#696969] font-normal mr-2">
                   {formatAddress(userShop?.shops[0]?.address)}
                 </p>
@@ -120,6 +123,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+
           <div className="mb-4">
             <div className="flex items-center justify-between mt-3 mb-2">
               <h3 className="text-[15px] font-medium">Service Orders</h3>
@@ -137,7 +141,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white  px-3 rounded-lg py-3">
+            <div className="bg-[#EEE] md:bg-white  px-3 rounded-lg py-3">
               {/* <ServicesTable requests={requests}/>
                */}
               {requests?.length > 0 ? (
@@ -169,7 +173,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white  px-3 rounded-lg py-3">
+            <div className="bg-[#EEE] md:bg-white  px-3 rounded-lg py-3">
               {orders?.orders?.length > 0 ? (
                 <ProductOrderTable
                   orders={orders?.orders?.slice(0, 2)}

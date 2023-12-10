@@ -146,9 +146,9 @@ const ShopProfileSettings = ({ hasShop }) => {
                   </label>
                 </div>
               </div>
-              <div className="absolute bottom-[0px] left-[80px]">
+              <div className="absolute bottom-[0px] left-[50px] md:left-[80px]">
                 <div className="relative transform -translate-x-1/2 translate-y-1/2">
-                  <div className=" h-[135px] w-[135px]  rounded-full overflow-hidden border-4 border-brandPrimary bg-white flex justify-center items-center">
+                  <div className=" md:h-[135px] md:w-[135px] h-[90px] w-[90px]  rounded-full overflow-hidden border-4 border-brandPrimary bg-white flex justify-center items-center">
                     <img
                       className="object-cover h-full w-full"
                       src={
@@ -179,12 +179,12 @@ const ShopProfileSettings = ({ hasShop }) => {
             </div>
           </div>
 
-          <div className="p-3 mt-[100px]  h-[calc(100vh-400px)] overflow-auto">
+          <div className="p-0 md:p-3 mt-[60px] md:mt-[100px]  h-[calc(100vh-400px)] overflow-auto">
             <div className="flex items-end mb-10">
               <p className="w-full max-w-max mr-1">Shop Information</p>
               <div className="border border-transparent w-full border-b-black mb-1 "></div>
             </div>
-            <form className="ml-[160px]">
+            <form className="ml-[0px] md:ml-[160px]">
               <div className="mb-[17px]">
                 {/* <p>{userShop?.shops[0]?.name}</p> */}
                 {/* <label className='w-full text-[15px] font-medium mb-3'>Name</label> */}

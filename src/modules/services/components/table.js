@@ -20,7 +20,7 @@ const ServicesTable = ({ requests, pagination, selectedOrder }) => {
         <>
 
             <div className="overflow-x-auto">
-                <table className="min-w-full  rounded-lg overflow-hidden border-separate border-spacing-y-3">
+                <table className="hidden md:block min-w-full  rounded-lg overflow-hidden border-separate border-spacing-y-3">
                     <tbody>
                         {
                             requests?.filter(request => selectedOrder === 'All' || request.status === selectedOrder.toLowerCase())?.map((request, index) =>
@@ -114,6 +114,29 @@ const ServicesTable = ({ requests, pagination, selectedOrder }) => {
 
                     </tbody>
                 </table>
+                <div className='"block md:hidden'>
+                    {
+                        requests?.filter(request => selectedOrder === 'All' || request.status === selectedOrder.toLowerCase())?.map((request, index) =>
+                            <div className="flex gap-x-1 bg-white p-2 rounded-lg mb-2" key={index}>
+                                <img
+                                    className="w-[80px] h-[80px] rounded-lg mr-[10px]"
+                                    src={
+                                        request?.customer?.profile_picture !== '' ?
+                                            request?.customer?.profile_picture : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`
+                                    }
+                                    alt="Item Image"
+                                />
+                                <div>
+                                    <p className="text-[18px] font-medium">{request?.customer?.fullname}</p>
+                                    <p className="text-[16px] font-medium"> {`N${request?.amount ?? '0.00'}`}</p>
+                                    <p>{moment(request?.createdAt).format('MMM Do YYYY')}</p>
+
+                                </div>
+                            </div>)
+                    }
+                </div>
+
+
                 {
                     pagination && <div className='mb-4 mt-3 flex items-center justify-center'>
                         <PaginationRounded count={pagination?.pageTotal} />

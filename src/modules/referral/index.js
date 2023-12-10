@@ -34,8 +34,8 @@ const Referral = () => {
         <Loader />
       ) : (
         <>
-          <div className="w-full bg-white rounded-lg mb-5 flex items-center justify-start px-5 md:px-10 py-10">
-            <div className="h-[135px] md:h-[135px] w-[135px] md:w-[135px] border-2 border-brandYellow rounded-full">
+          <div className="w-full bg-white rounded-lg mb-5 flex md:items-center justify-start px-5 md:px-10 py-10">
+            <div className="h-[100px] md:h-[135px] flex-shrink-0 w-[100px] md:w-[135px] border-2 border-brandYellow rounded-full">
               <img
                 src={
                   userDetails?.profile_picture

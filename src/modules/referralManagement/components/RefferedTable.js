@@ -43,9 +43,9 @@ const ReferredTable = ({ referrals }) => {
                     {referrals?.map((el, i) => (
                       <tr class="bg-white">
                         <td class="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap sm:block lg:hidden">
-                          {/* <div class="flex items-center">
+                          <div class="flex items-center">
                                                             {i + 1}
-                                                        </div> */}
+                                                        </div>
                           <div class="mt-1 space-y-2 font-medium pl-11 lg:hidden">
                             <div class="flex items-center">
                               {el?.user?.fullname}
@@ -116,7 +116,7 @@ const ReferredTable = ({ referrals }) => {
                                                             {moment(el?.createdAt).format('ll')}
                                                         </div>
                                                     </td> */}
-                        <td>
+                        <td class="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
                           <button
                             type="button"
                             onClick={() => {

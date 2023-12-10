@@ -142,12 +142,13 @@ const BaseDashboardNavigation = ({
         ))}
       </div>
       {/* this is where the mobile menu is */}
+      
       <div
         className={`fixed md:hidden ${showMenu ? "left-0" : "left-[-100%]"
-          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-11 flex flex-col  items-start space-y-10 mr-7`}
+          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-4  flex flex-col  items-start space-y-10 mr-7`}
       >
         <img
-          className="object-contain w-[10rem] mx-7"
+          className="object-contain w-[64px] h-[67.98px] mx-7"
           src={logo}
           alt="BetaHomeNg logo"
         />
