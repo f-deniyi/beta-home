@@ -18,7 +18,7 @@ const ProductOrderTable = ({ orders, isAdmin, statuses }) => {
 
   return (
     <div>
-      <table className="min-w-full  rounded-lg overflow-hidden border-separate border-spacing-y-3">
+      <table className=" hidden md:block min-w-full  rounded-lg overflow-hidden border-separate border-spacing-y-3">
         <tbody>
           {orders?.length > 0 &&
             orders?.map((order, index) => (
@@ -95,6 +95,26 @@ const ProductOrderTable = ({ orders, isAdmin, statuses }) => {
             ))}
         </tbody>
       </table>
+      <div className="block md:hidden">
+        {orders?.map((order, index) =>
+          <div className="flex gap-x-1 bg-white p-2 rounded-lg mb-2 " key={index}>
+            <div>
+              <img
+                className="w-[80px] h-[80px] rounded-lg mr-[10px]"
+                src={order.item.product.image.thumbnail}
+                alt="Item Image"
+              />
+            </div>
+            <div>
+              <h3 className="text-[18px] font-medium ">{order.item.product.name}</h3>
+              <p>{order.item.product.categories[0].name}</p>
+              <p className="text-[16px] font-medium"> {`N${order.item.total_price}`}</p>
+            </div>
+          </div>
+        )
+        }
+      </div>
+
       <ProductOrderDetails orderDetails={selectedOrder} statuses={statuses} />
     </div>
   );
