@@ -83,7 +83,7 @@ const ProductsManagement = () => {
         refetch,
     } = useGetProductOrdersManager({
         filter: "",
-        enable: true,
+        enable: Boolean(shopId),
         shop: shopId,
         status: choosenOrderStatus.id,
     });

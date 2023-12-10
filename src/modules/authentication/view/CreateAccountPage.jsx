@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 const CreateAccountPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [viewPassword, setViewPassword] = useState(false);
 
@@ -21,6 +23,8 @@ const CreateAccountPage = () => {
     const details = {
       email: email.toLowerCase(),
       password: password,
+      username,
+      fullname
     };
 
     await postCaller(details);
@@ -48,16 +52,41 @@ const CreateAccountPage = () => {
   return (
     <AuthenticationBase
       title={"Create an account"}
-      subtitle={"Securely create your Raizon account"}
+      // subtitle={"Securely create your Raizon account"}
       inputFields={
         <div>
           <InputWithFullBoarder
+            label={"Fullname"}
+            type="text"
+            id="Fullname"
+            value={fullname}
+            onChange={(e) => {
+              setFullname(e.target.value)
+            }}
+          />
+          <InputWithFullBoarder
+            label={"Username"}
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value)
+            }}
+          />
+          <InputWithFullBoarder
+            label={"Email address"}
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          {/* <InputWithFullBoarder
             label={"Email address"}
             type="text"
             id="email"
             value={email}
             onChange={handleEmailChange}
-          />
+          /> */}
           <InputWithFullBoarder
             label={"Password"}
             type={viewPassword ? "text" : "password"}
