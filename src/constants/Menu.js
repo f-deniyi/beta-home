@@ -144,6 +144,7 @@ export const adminMenu = [
   //   icon: promotion,
   //   activeIcon: promotion_active,
   // },
+  
   {
     title: "Repayment Management",
     path: "/admin/repayment-management",
@@ -171,6 +172,12 @@ export const adminMenu = [
     activeIcon: wallet_active,
   },
   {
+    title: "Messages",
+    path: "/messages",
+    icon: message,
+    activeIcon: message_active,
+  },
+  {
     title: "Settings",
     path: "/admin/settings",
     icon: wallet,
@@ -179,6 +186,54 @@ export const adminMenu = [
   {
     title: "Account",
     path: "/admin/profile",
+    icon: account,
+    activeIcon: account_active,
+  },
+];
+export const customerMenu = [
+  {
+    title: "Home",
+    path: "/dashboard",
+    icon: home,
+    activeIcon: home_active,
+  },
+ 
+ 
+
+  // {
+  //   title: "Promotion Management",
+  //   path: "/promotion-management",
+  //   icon: promotion,
+  //   activeIcon: promotion_active,
+  // },
+  {
+    title: "Referrals",
+    path: "/referral",
+    icon: product,
+    activeIcon: product_active,
+    isSalesRep: true,
+  },
+  {
+    title: "Messages",
+    path: "/messages",
+    icon: message,
+    activeIcon: message_active,
+  },
+  {
+    title: "Wallet",
+    path: "/wallet",
+    icon: wallet,
+    activeIcon: wallet_active,
+  },
+  {
+    title: "Support Management",
+    path: "/support-management",
+    icon: support,
+    activeIcon: activeSupport,
+  },
+  {
+    title: "Account",
+    path: "/profile",
     icon: account,
     activeIcon: account_active,
   },

@@ -91,7 +91,7 @@ const Profile = () => {
         </div >
 
 
-        <div className='p-3 mt-[30px] ml-[160px] h-[calc(100vh-400px)] overflow-auto'>
+        <div className='p-3 mt-[70px] md:mt-[30px] md:ml-[160px] h-[calc(100vh-400px)] overflow-auto'>
           <form>
             <div className='mb-[17px]'>
               {/* <label className='w-full text-[15px] font-medium mb-3'>Name</label> */}

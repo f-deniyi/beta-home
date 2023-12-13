@@ -35,7 +35,7 @@ const ReferralTable = ({debouncedSearchValue}) => {
     <Loader />
   ) : (
     <>
-      <div class=" bg-white sm:py-2 lg:py-3 rounded-lg">
+      <div class=" bg-white py-2 lg:py-3 rounded-lg">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-2 mb-5 mt-2">
             {salesType.map((el) => (

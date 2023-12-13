@@ -18,7 +18,7 @@ const DeleteAccount = () => {
     return (
 
         <div className='h-[calc(100vh-185px)] flex items-center justify-center '>
-            <div className=' bg-white py-10 flex-col w-1/2 mx-auto rounded-lg '>
+            <div className=' bg-white py-10 flex-col w-[90%] md:w-1/2 mx-auto rounded-lg '>
                 <div className='flex items-center justify-center flex-col'>
                     <div className='mb-[16px]'>
                         <img src={warning} alt='icon' />

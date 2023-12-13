@@ -16,12 +16,12 @@ const ReferralManagement = () => {
 
     return (
         <BaseDashboardNavigation title={"Referral Management"} hideSearch={true}>
-            <div className="flex items-center justify-between my-3">
+            <div className="flex flex-wrap md:flex-nowrap items-center justify-between my-3">
                 <p className="text-[20px] font-normal mb-3">List of vendor referral leads</p>
                 <div className="">
                     <InputWithFullBoarder
                         placeholder={'Search lead...'}
-                        className={'!border-black border sm:w-full md:w-[230px]'}
+                        className={'!border-black border w-full md:w-[230px]'}
                         onChange={(e) => {
                             setSearchValue(e.target.value.toLowerCase())
                         }}

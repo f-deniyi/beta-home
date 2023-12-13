@@ -16,10 +16,11 @@ const InputWithFullBoarder = ({
   icon,
   accept,
   isTextArea = false,
+  wrapperClassName,
   ...props
 }) => {
   return (
-    <div className="flex flex-col mb-4">
+    <div className={`flex flex-col mb-4 ${wrapperClassName}`}>
       <label className="text-13px md:text-16px font-semibold mb-2" htmlFor={id}>
         {label}
       </label>

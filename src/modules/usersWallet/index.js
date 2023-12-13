@@ -42,13 +42,13 @@ const UsersWallet = () => {
     })
 
     return (
-        <BaseDashboardNavigation title={"User Management"} hideSearch={true}>
+        <BaseDashboardNavigation title={"Users Wallet"} hideSearch={true}>
             <p className="text-[20px] font-normal mb-3">List of users</p>
 
             <div className="bg-white p-3 rounded-[10px]">
 
-                <div className="flex gap-x-2 items-center justify-between">
-                    <div className='flex gap-2 mb-3'>
+                <div className="flex gap-x-2 items-center justify-between flex-wrap">
+                    <div className='flex gap-2 mb-3 flex-wrap'>
                         {
                             userType.map(el => <p
                                 onClick={() => {

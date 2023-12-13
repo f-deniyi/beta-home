@@ -112,13 +112,14 @@ const ProductsManagement = () => {
         <>
             <div className="flex items-center justify-between my-3">
                 {/* <p className="text-[20px] font-normal mb-3">List of uploaded products</p> */}
-                <div className="flex  flex-wrap items-center justify-between mt-3 mb-4 w-full ">
+                <div className="flex  flex-wrap md:flex-nowrap items-center justify-between mt-3 mb-4 w-full ">
                     <h3 className="text-[20px] flex-shrink-0">List of uploaded products</h3>
                     <div className="flex gap-x-3 items-center justify-between md:justify-end w-full">
-                        <div className="">
+                        <div className=" sm:w-full md:w-[230px]">
                             <InputWithFullBoarder
+                                wrapperClassName='w-full'
                                 placeholder={'Search product...'}
-                                className={'!border-black border sm:w-full md:w-[230px] mt2 py-3'}
+                                className={'!border-black border mt2 py-3 w-full'}
                                 onChange={(e) => {
                                     setSearchValue(e.target.value.toLowerCase())
                                 }}
@@ -126,7 +127,7 @@ const ProductsManagement = () => {
                         </div>
                         <div>
                             {isAdmin ? (
-                                <div className="flex items-center">
+                                <div className="hidden md:block flex items-center">
                                     <button
                                         className="bg-brandPrimary px-6 py-5 rounded-full px-3 text-[15px] font-medium flex items-center gap-x-2"
                                         onClick={() =>
@@ -171,7 +172,7 @@ const ProductsManagement = () => {
                     <div className="  w-full block md:hidden">
                         {
                             isAdmin ? <button
-                                className="w-full bg-brandPrimary px-6 py-5 rounded-3 px-3 text-[15px] font-medium flex items-center gap-x-2"
+                                className=" justify-center w-full bg-brandPrimary px-6 py-5 rounded-3 px-3 text-[15px] font-medium flex items-center gap-x-2"
                                 onClick={() =>
                                     document.getElementById("product_orders").showModal()
                                 }

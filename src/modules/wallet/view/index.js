@@ -26,7 +26,7 @@ const WalletManagement = () => {
     return (
         <BaseDashboardNavigation title={"Wallet"} hideSearch={false}>
             <div class="grid grid-cols-7 h-screen gap-2">
-                <div class="col-span-5 w-full">
+                <div class="col-span-7 md:col-span-5 w-full">
                     <div className="w-full  h-[310px] mb-1 rounded-[10px] flex items-center justify-center text-center"
                         style={{
                             backgroundImage: `linear-gradient(180deg, rgba(255, 241, 18, 0.83) 0%, #FFF112 100%), url(${walletbg2})`,
@@ -41,6 +41,20 @@ const WalletManagement = () => {
                             <p className="text-[13.93px] font-normal mb-0 -mt-5">{`Last Updated: ${moment(lastRefetchTime).calendar()}`}</p>
                         </div>
                     </div>
+                    <div className=" md:hidden my-4 flex  gap-x-2">
+                        <button className="bg-brandPrimary rounded-md text-[15px] py-[18px] font-medium w-full  cursor-pointer "
+                            onClick={() => document.getElementById('fund_wallet').showModal()}
+                        >
+                            Fund Wallet
+                        </button>
+                        <button className="bg-[#065f46] text-white  rounded-md text-[15px] py-[18px] font-medium w-full"
+
+                            onClick={() => document.getElementById('withdraw_fund').showModal()}
+                        >
+                            Withdraw
+                        </button>
+
+                    </div>
                     <div>
                         <h3 className="text-[15px] font-semibold mt-4">Transactions History</h3>
                         <div className='overflow-scroll' style={{ maxHeight: 'calc(100vh - 400px - 1rem - 1.25rem)' }}>
@@ -52,7 +66,8 @@ const WalletManagement = () => {
                         </div>
                     </div>
                 </div>
-                <div class="col-span-2  w-full">
+
+                <div class="col-span-2  w-full hidden md:block">
                     <div className="bg-white rounded-[10px] p-[45px] mb-[10px]">
                         <button className="bg-brandPrimary rounded-full text-[15px] py-[18px] w-full mb-[16px] cursor-pointer"
                             onClick={() => document.getElementById('fund_wallet').showModal()}

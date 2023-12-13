@@ -84,13 +84,13 @@ const PromotionManagement = ({ isAdmin = true }) => {
       ) : (
         <>
           <div className="mb-5">
-            <div className="flex items-center justify-between mt-2 mb-6">
+            <div className="md:flex items-center justify-between mt-2 mb-6">
               <p className="text-[20px] font-normal ">
                 List of promotional banners
               </p>
-              <div>
+              <div className="w-full text-center">
                 <button
-                  className="bg-brandPrimary flex  py-3 shadow-lg px-[25px] rounded-full "
+                  className="bg-brandPrimary flex  py-3 shadow-lg px-[25px] mt-3 rounded-3  md:mt-0 md:rounded-full "
                   onClick={() => {
                     document.getElementById("upload_banner").showModal();
                   }}

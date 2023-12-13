@@ -24,11 +24,11 @@ const Messages = () => {
     <BaseDashboardNavigation
       title={'Messages'}
     >
-      <div className="flex  bg-gray-100" style={{
+      <div className="flex w-full flex-grow bg-gray-100" style={{
         height: 'calc(100vh - 119px)'
       }}>
         {/* Left Side (Message List) */}
-        <div className="w-[30%] bg-white p-4 overflow-y-auto rounded-[10px]">
+        <div className={`w-[100%] md:w-[30%] bg-white p-4 overflow-y-auto rounded-[10px] ${channel && 'hidden md:block'}`}>
           <div className='flex gap-x-[8px] w-full justify-between'>
             <div className='col-span-10 w-full'>
               <input
@@ -54,8 +54,10 @@ const Messages = () => {
         </div>
 
         {/* Right Side (Your Messages) */}
-        <div className="w-[70%]  px-4 overflow-y-auto relative">
+        <div className={`flex-1 w-100% md:w-[70%] px-0 md:px-4 overflow-y-auto relative ${channel === null && 'hidden md:block'}`}>
+
           <Chat
+            setChannel={setChannel}
             messages={channel_messages}
             channel={channel === null ? channels[0] : channel}
             userId={userId}

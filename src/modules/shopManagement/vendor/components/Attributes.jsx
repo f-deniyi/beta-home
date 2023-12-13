@@ -190,7 +190,7 @@ const Attributes = () => {
                             </button>
                           )}
                         </div>
-                        <div className="mt-[17px] ml-3 flex gap-2">
+                        <div className="mt-[17px] ml-3 flex flex-wrap gap-2">
                           {el.values?.map((value) =>
                             containsColor ? (
                               <div
@@ -215,7 +215,7 @@ const Attributes = () => {
                                 />
                               </div>
                             ) : (
-                              <div className="flex items-center bg-black rounded-full  justify-between">
+                              <div className="flex flex-wrap items-center bg-black rounded-full  justify-between">
                                 <p className="text-[#f2f2f2] py-[5px] px-[10px]  font-medium">{`${value}`}</p>
                                 <div
                                   className="cursor-pointer ml-auto pr-2"
