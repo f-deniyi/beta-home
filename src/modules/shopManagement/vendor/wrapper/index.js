@@ -38,7 +38,7 @@ const ShopManagementWrapper = ({ title, setTitle, children, hasShop,isAdmin }) =
 
         <div className="w-full">
           <div className=" ">
-            <div className="text-left ml-3 z-40 bg-white rounded-[10px] px-4 py-[15px] mb-[12px]">
+            <div className="text-left ml-0 md:ml-3 z-40 bg-white rounded-[10px] px-4 py-[15px] mb-[12px]">
               <div className="">
                 <h3 className="text-[20px] font-semibold ">{title}</h3>
               </div>

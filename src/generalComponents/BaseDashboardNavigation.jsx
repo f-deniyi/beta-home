@@ -48,7 +48,7 @@ import {
   searchIcon,
 } from "../assets/icons";
 
-import { adminMenu, vendorMenu } from "../constants/Menu";
+import { adminMenu, customerMenu, vendorMenu } from "../constants/Menu";
 
 const BaseDashboardNavigation = ({
   children,
@@ -108,12 +108,13 @@ const BaseDashboardNavigation = ({
 
   // console.log('--->>user<<---', data)
   const isSalesRep = data?.data?.user?.referral_code?.length > 0;
-  const activeMenu =
-    data?.data?.user?.role?.name === "customer"
-      ? vendorMenu.filter(
-        (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep)
-      )
-      : adminMenu;
+  const activeMenu = data?.data?.user?.shops?.length > 0
+    ? vendorMenu.filter(
+      (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep)
+    ) : data?.data?.user?.role?.name === "admin" ? adminMenu :
+      customerMenu.filter(
+        (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep))
+    ;
   // const activeMenu = adminMenu;
 
   return (
@@ -142,7 +143,7 @@ const BaseDashboardNavigation = ({
         ))}
       </div>
       {/* this is where the mobile menu is */}
-      
+
       <div
         className={`fixed md:hidden ${showMenu ? "left-0" : "left-[-100%]"
           } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-4  flex flex-col  items-start space-y-10 mr-7`}
@@ -203,9 +204,9 @@ const BaseDashboardNavigation = ({
                 <img src={notificationIcon} alt="notification_icon" />
               </button>
               <button className="mr-[10px]"
-              onClick={() => {
-                navigate('/messages')
-              }}>
+                onClick={() => {
+                  navigate('/messages')
+                }}>
                 <img src={messageIcon} alt="message_icon" />
               </button>
               {/* notification display */}
@@ -213,7 +214,7 @@ const BaseDashboardNavigation = ({
                 <NotificationList showNotification={showNotification} />
               )}
               <div className="rounded-full border-brandPrimary border-solid border-2 mr-[13px] cursor-pointer"
-                
+
               >
                 {" "}
                 <img
@@ -234,8 +235,8 @@ const BaseDashboardNavigation = ({
                 </p>
                 <p className="text-[#8E8E8E] text-[10px] capitalize">
                   {data?.data?.user?.role?.name === "admin"
-                    ? "Admin"
-                    : "Vendor"}
+                    ? "Admin" :
+                    data?.data?.user.shops.length > 0 ? 'Vendor' : "Customer"}
                 </p>
               </div>
             </div>
