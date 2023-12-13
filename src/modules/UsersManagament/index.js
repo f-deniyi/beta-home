@@ -111,8 +111,8 @@ const UsersManagement = () => {
       <p className="text-[20px] font-normal mb-3">List of users</p>
 
       <div className="bg-white p-3 rounded-[10px] ">
-        <div className="flex items-center justify-between">
-          <div className="flex gap-2 mb-3">
+        <div className="flex items-center justify-between flex-wrap">
+          <div className="flex gap-2 mb-3 ">
             {userType.map((el) => (
               <p
                 onClick={() => {

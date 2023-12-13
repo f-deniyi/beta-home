@@ -52,7 +52,7 @@ const ChangePassword = () => {
     }, [isSuccess])
 
     return (
-        <div className='p-3 mt-[30px] ml-[130px] overflow-auto'>
+        <div className='px-2 md:p-3 mt-[10px] md:mt-[30px] md:ml-[130px] overflow-auto'>
             <form onSubmit={handlePasswordChange} ref={formRef}>
                 <div className='mb-[17px]'>
                     <InputWithFullBoarder

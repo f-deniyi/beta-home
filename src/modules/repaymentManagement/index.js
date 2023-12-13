@@ -20,7 +20,7 @@ const ReferralManagement = () => {
 
     return (
         <BaseDashboardNavigation title={"Repayment Management"} hideSearch={true}>
-            <div className="flex items-center justify-between my-3">
+            <div className="flex flex-wrap items-center justify-between my-3">
                 <p className="text-[20px] font-normal mb-3">List of repayment</p>
                 <div className="">
                     <InputWithFullBoarder

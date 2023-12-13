@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react'
 import { SendMessageManager } from '../../controller/send_message'
 import formatRelativeTime from '../../../../utils/format_time';
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 
-const Chat = ({ messages, channel, userId }) => {
+const Chat = ({ messages, channel, userId, setChannel }) => {
 
-    console.log(messages, userId)
+    // console.log(messages, userId)
     const inputRef = useRef(null);
     const { sendMessageController } = SendMessageManager()
     const [text, setText] = useState('')
@@ -23,14 +24,22 @@ const Chat = ({ messages, channel, userId }) => {
         <div className='flex flex-col justify-between  h-full'>
             <div>
                 <div className='flex  gap-x-[11px] items-center mb-[11px]  bg-white rounded-[10px] p-[14px]'>
-                    <div className='flex-shrink-0'>
-                        <img src={channel?.initiator?.user_id !== userId ?
-                            (
-                                channel?.initiator?.profile_picture.length > 0 ? channel?.initiator?.profile_picture : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-                            ) : (
-                                channel?.receiver?.profile_picture.length > 0 ? channel?.receiver?.profile_picture : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')}
-                            className='h-[40px] w-[40px] rounded-full object-cover' />
+                    <div className='flex gap-x-3 items-center'>
+                        <div className='md:hidden block' onClick={() => {
+                            setChannel(null)
+                        }}>
+                            <IoIosArrowRoundBack size={30} />
+                        </div>
+                        <div className='flex-shrink-0'>
+                            <img src={channel?.initiator?.user_id !== userId ?
+                                (
+                                    channel?.initiator?.profile_picture.length > 0 ? channel?.initiator?.profile_picture : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+                                ) : (
+                                    channel?.receiver?.profile_picture.length > 0 ? channel?.receiver?.profile_picture : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')}
+                                className='h-[40px] w-[40px] rounded-full object-cover' />
+                        </div>
                     </div>
+
                     <h3 className='text-black text-[15px] font-semibold'>{channel?.initiator?.user_id !== userId ? channel?.initiator?.full_name : channel?.receiver?.full_name}</h3>
                 </div>
             </div>

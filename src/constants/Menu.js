@@ -144,6 +144,7 @@ export const adminMenu = [
   //   icon: promotion,
   //   activeIcon: promotion_active,
   // },
+  
   {
     title: "Repayment Management",
     path: "/admin/repayment-management",
@@ -169,6 +170,12 @@ export const adminMenu = [
     path: "/admin/wallet",
     icon: wallet,
     activeIcon: wallet_active,
+  },
+  {
+    title: "Messages",
+    path: "/messages",
+    icon: message,
+    activeIcon: message_active,
   },
   {
     title: "Settings",

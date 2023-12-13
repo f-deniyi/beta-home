@@ -29,7 +29,7 @@ const ShopManagement = () => {
   return (
     <BaseDashboardNavigation title={"Package Management"} hideSearch={true}>
       <div className="mb-5">
-        <div className="flex items-center justify-between mt-2 mb-6">
+        <div className="flex flex-wrap items-center justify-between mt-2 mb-6">
           <p className="text-[20px] font-normal ">List of packages</p>
           <div className=" flex gap-x-2 items-center">
             <div >
@@ -56,11 +56,11 @@ const ShopManagement = () => {
           </div>
 
         </div>
-        <div className="bg-white rounded-lg py-[23px] px-[25px]  ">
+        <div className="bg-white rounded-lg p-1 md:py-[23px] md:px-[25px]  ">
           {isLoading ? (
             <Loader />
           ) : (
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap md:gap-3 gap-1">
               {data.data.map((item, index) => (
                 <PackageCard
                   onClick={() => {

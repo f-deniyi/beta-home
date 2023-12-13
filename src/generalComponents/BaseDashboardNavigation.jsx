@@ -120,9 +120,9 @@ const BaseDashboardNavigation = ({
   return (
     <div className="relative md:fixed flex h-[100vh] w-full text-blackColor p-3">
       <div
-        className={`hidden md:flex ease-in-out duration-500 w-[25%] bg-[#fff122] z-50 h-full pt-2  md:overflow-auto scrollbar-hide  flex-col  items-start space-y-10  pb-10 rounded-[10px]`}
+        className={` o hidden md:flex ease-in-out duration-500 w-[25%] bg-[#fff122] z-50 h-full pt-2  md:overflow-auto scrollbar-hide  flex-col  items-start space-y-10  pb-10 rounded-[10px]`}
       >
-        <div className="pb-2 border-b border-black w-[90%] mx-auto mb-3">
+        <div className="pb-2 border-b border-black w-[90%] mx-auto mb-3 ">
           <img
             className="object-contain w-[64px] h-[67.98px] mx-2"
             src={logo}
@@ -146,7 +146,7 @@ const BaseDashboardNavigation = ({
 
       <div
         className={`fixed md:hidden ${showMenu ? "left-0" : "left-[-100%]"
-          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-4  flex flex-col  items-start space-y-10 mr-7`}
+          } ease-in-out duration-500 w-4/5 bg-lightGrey z-50 h-full pt-4  flex flex-col  items-start space-y-10 mr-7 overflow-y-scroll`}
       >
         <img
           className="object-contain w-[64px] h-[67.98px] mx-7"
@@ -169,7 +169,7 @@ const BaseDashboardNavigation = ({
       {/* this is where the top section starts */}
       <div className="w-screen">
         <div className="flex flex-col   max-h-[100vh] overflow-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between text-left ml-3 z-40 bg-white rounded-[10px] px-4 py-[15px] mb-[12px]">
+          <div className="flex flex-col md:flex-row items-center justify-between text-left ml-0 md:ml-3 z-40 bg-white rounded-[10px] px-4 py-[15px] mb-[12px]">
             <div className="w-full md:w-auto flex items-center justify-between">
               <h3 className="text-[20px] font-bold ">{title}</h3>
               <div
@@ -241,7 +241,7 @@ const BaseDashboardNavigation = ({
               </div>
             </div>
           </div>
-          <div className="max-h-[90%] ml-3  pb-10"> {children}</div>
+          <div className="max-h-[90%] ml-0 md:ml-3  pb-10"> {children}</div>
         </div>
       </div>
     </div>

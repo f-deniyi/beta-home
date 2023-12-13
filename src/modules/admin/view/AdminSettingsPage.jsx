@@ -26,7 +26,7 @@ const AdminSettingsPage = () => {
   return (
     <BaseDashboardNavigation title={"Shop Settings"} hideSearch={true}>
       <div className="mb-5">
-        <div className="flex items-center justify-between my-3">
+        <div className="flex items-center justify-between my-3 flex-wrap">
           <p className="text-[20px] font-normal mb-3">Product Category</p>
           <div>
             <button
@@ -63,7 +63,7 @@ const AdminSettingsPage = () => {
         </div>
       </div>
       <div className="mb-5">
-        <div className="flex items-center justify-between my-3">
+        <div className="flex items-center justify-between my-3 flex-wrap">
           <p className="text-[20px] font-normal mb-3">Service Category</p>
           <div>
             <button
@@ -101,7 +101,7 @@ const AdminSettingsPage = () => {
       </div>
 
       <div className="mb-5">
-        <div className="flex items-center justify-between my-3">
+        <div className="flex items-center justify-between my-3 flex-wrap">
           <p className="text-[20px] font-normal mb-3">Brand Category</p>
           <div>
             <button
