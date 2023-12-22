@@ -31,6 +31,7 @@ import VendorShopManagement from "./modules/shopManagement/vendor";
 import Messages from './modules/messages'
 import SupportManagement from "./modules/supportManagement";
 import SupportDetails from "./modules/supportManagement/Details";
+import Support from "./modules/support";
 
 function App() {
   return (
@@ -72,13 +73,13 @@ function App() {
             path="/admin/support-management"
             element={<SupportManagement />}
           />
-           <Route
+          <Route
             path="/support-management"
             element={<SupportManagement />}
           />
           <Route
             path="/support-management/:ticketId"
-            element={<SupportDetails/>}
+            element={<SupportDetails />}
           />
           <Route
             path="/admin/referral-management"
@@ -119,6 +120,7 @@ function App() {
           />
           <Route path="/create-account" element={<CreateAccountPage />} />
           <Route path="/admin/shop-details/:shopId" element={<ShopDetails />} />
+          <Route path='/support' element={<Support />} />
 
           {/* <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route
