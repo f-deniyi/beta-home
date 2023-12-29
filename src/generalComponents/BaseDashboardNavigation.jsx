@@ -108,13 +108,13 @@ const BaseDashboardNavigation = ({
 
   // console.log('--->>user<<---', data)
   const isSalesRep = data?.data?.user?.referral_code?.length > 0;
-  const activeMenu = data?.data?.user?.shops?.length > 0
-    ? vendorMenu.filter(
-      (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep)
-    ) : data?.data?.user?.role?.name === "admin" ? adminMenu :
-      customerMenu.filter(
-        (item) => !item.isSalesRep || (item.isSalesRep && isSalesRep))
-    ;
+  const activeMenu =
+    data?.data?.user?.role?.name === "admin"
+      ? adminMenu
+      : data?.data?.user?.shops?.length > 0
+        ? vendorMenu.filter((item) => !item.isSalesRep || (item.isSalesRep && isSalesRep))
+        : customerMenu.filter((item) => !item.isSalesRep || (item.isSalesRep && isSalesRep));
+
   // const activeMenu = adminMenu;
 
   return (
