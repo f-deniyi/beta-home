@@ -17,7 +17,7 @@ const UploadBanner = ({ shopId }) => {
 
 
 
-    // console.log('---data----', userData)
+    // //console.log('---data----', userData)
     const { uploadBannerController, isLoading, isSuccess: bannerUploaded } = UploadBannerManager()
 
     const {
@@ -30,7 +30,7 @@ const UploadBanner = ({ shopId }) => {
 
     // const handleFile = async (file) => {
     //     const response = await uploadFile(file)
-    //     console.log(response, uploadUrl)
+    //     //console.log(response, uploadUrl)
     // }
     // useEffect(() => {
     //     if (uploadedImages) {
@@ -63,7 +63,7 @@ const UploadBanner = ({ shopId }) => {
             },
             is_service: bannerType === 'service' ? true : false
         }
-        // console.log(data)
+        // //console.log(data)
         uploadBannerController(data)
     }
 

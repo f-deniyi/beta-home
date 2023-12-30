@@ -9,7 +9,7 @@ import useGetAllServiceCategoriesQuery from "../../shopManagement/controllers/ge
 
 const AddService = () => {
   const shopId = localStorage.getItem("beta-vendor-shop");
-  console.log(shopId);
+  //console.log(shopId);
   const { categories } = useGetAllServiceCategoriesQuery({ enabled: true });
   const { isLoading: updating, editPackageController } =
     UpdateShopManager(shopId);
@@ -55,13 +55,13 @@ const AddService = () => {
             backgroundColor={"#fff"}
             // de
             onChange={(e, opt) => {
-              console.log(e, opt.value);
+              //console.log(e, opt.value);
               const categoryIds = e.map((el) => el?._id);
-              console.log("idss", categoryIds);
+              //console.log("idss", categoryIds);
               setCategoryIds(categoryIds);
             }}
           />
-          {/* {console.log('shops--->>>',userShop?.shops[0])} */}
+          {/* {//console.log('shops--->>>',userShop?.shops[0])} */}
         </div>
 
         <div className="w-full">

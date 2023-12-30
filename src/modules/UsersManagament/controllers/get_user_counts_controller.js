@@ -6,15 +6,15 @@ const useGetUserCountManager = () => {
   const { data, refetch, isLoading } = useQuery(["userCounts"], async () => {
     try {
       const [response] = [await AxiosWithToken.get(`/user/role-count`)];
-      console.log(response.status);
+      //console.log(response.status);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   });
 
-  console.log(data);
+  //console.log(data);
   return {
     users: data?.data,
     refetch: refetch,

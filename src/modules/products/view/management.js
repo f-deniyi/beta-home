@@ -58,14 +58,14 @@ const ProductsManagement = () => {
     ]);
 
     useEffect(() => {
-        console.log("categories:", categories);
+        //console.log("categories:", categories);
 
         if (categories) {
             let formattedStatuses = categories;
             const newOrderStatus = [{ name: "All", id: "" }];
 
             newOrderStatus.push(...formattedStatuses);
-            console.log("newOrderStatus:", newOrderStatus);
+            //console.log("newOrderStatus:", newOrderStatus);
 
             setModifiedCategories(newOrderStatus);
         }
@@ -95,14 +95,14 @@ const ProductsManagement = () => {
     } = useGetOrderStatusManager();
 
     useEffect(() => {
-        console.log("statuses:", statuses);
+        //console.log("statuses:", statuses);
 
         if (fetchedStatuses && statuses) {
             let formattedStatuses = statuses.data;
             const newOrderStatus = [{ name: "All", id: "" }];
 
             newOrderStatus.push(...formattedStatuses);
-            console.log("newOrderStatus:", newOrderStatus);
+            //console.log("newOrderStatus:", newOrderStatus);
 
             setOrderStatuses(newOrderStatus);
         }

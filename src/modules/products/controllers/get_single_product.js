@@ -10,13 +10,13 @@ const useGetSingleProductQuery = ({ enabled, productId, ...params }) => {
                 const [response] = [await AxiosWithToken.get(`products/${productId}`)];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
         { enabled: enabled }
     );
-    console.log(data)
+    //console.log(data)
     return {
         product: data ?? {},
         pagination: data?.pagination ?? {}

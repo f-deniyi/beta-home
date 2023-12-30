@@ -14,13 +14,13 @@ const useGetUseRefferal = ({ userId, enabled }) => {
         ];
         return response.data;
       } catch (error) {
-        console.log(error.response.data);
+        //console.log(error.response.data);
         throw new Error(`Sorry: ${error.response.data.message}`);
       }
     },
     { enabled: enabled }
   );
-  // console.log("-->>data-referrals<<---", data)
+  // //console.log("-->>data-referrals<<---", data)
 
   return {
     referrals: data?.data?.referals ?? [],

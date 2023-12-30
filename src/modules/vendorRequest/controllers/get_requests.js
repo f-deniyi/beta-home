@@ -12,7 +12,7 @@ const UseGetVendorRequestsQuery = ({ ...params }) => {
                 return response.data;
 
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 toast.error(error.response.data.message)
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
@@ -23,7 +23,7 @@ const UseGetVendorRequestsQuery = ({ ...params }) => {
             // retry: false
         }
     );
-    console.log(data)
+    //console.log(data)
     return {
         requests: data?.requests,
         pagination: data?.pagination,

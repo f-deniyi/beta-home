@@ -96,7 +96,7 @@ const PersonalAccountComponent = () => {
       await updateCaller(details);
     } else {
       // Display a message to the user that no changes were made
-      console.log("No changes were made.");
+      //console.log("No changes were made.");
     }
   };
 
@@ -151,7 +151,7 @@ const PersonalAccountComponent = () => {
     return new Promise(async (resolve, reject) => {
       try {
         const fileUrl = await uploadFile(picture);
-        console.log(`this is the url ${fileUrl}`);
+        //console.log(`this is the url ${fileUrl}`);
 
         resolve(fileUrl); // Resolve the promise with the photo value
         setSelectedFileName("");

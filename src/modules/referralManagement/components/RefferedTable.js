@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import LeadDetails from "../../repaymentManagement/components/RepaymentDetails";
 
 const ReferredTable = ({ referrals }) => {
-  // console.log(referrals)
+  // //console.log(referrals)
   const [selectedEnrollment, setSelectedEnrollment] = useState(null);
 
   return (

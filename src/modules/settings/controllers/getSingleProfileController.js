@@ -8,10 +8,10 @@ const useGetSingleProfileManager = (profileId) => {
       const [response] = [
         await AxiosWithToken.get(`/user/profiles/${profileId}`),
       ];
-      console.log(`i am checking this ${response.data.data}`);
+      //console.log(`i am checking this ${response.data.data}`);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   });

@@ -9,10 +9,10 @@ const useSignupManager = (email) => {
   const signupController = async (details) => {
     try {
       const [response] = [await Axios.post(`/auth/register`, details)];
-      console.log(`i am checking this ${response.data}`);
+      //console.log(`i am checking this ${response.data}`);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`${error.response.data.message}`);
     }
   };

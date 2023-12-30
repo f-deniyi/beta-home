@@ -36,14 +36,14 @@ const UserTable = ({ filter,debouncedSearchValue }) => {
   const [orderStatuses, setOrderStatuses] = useState([{ name: "All", id: "" }]);
 
   useEffect(() => {
-    console.log("statuses:", statuses);
+    //console.log("statuses:", statuses);
 
     if (fetchedStatuses && statuses) {
       let formattedStatuses = statuses.data;
       const newOrderStatus = [{ name: "All", id: "" }];
 
       newOrderStatus.push(...formattedStatuses);
-      console.log("newOrderStatus:", newOrderStatus);
+      //console.log("newOrderStatus:", newOrderStatus);
 
       setOrderStatuses(newOrderStatus);
     }

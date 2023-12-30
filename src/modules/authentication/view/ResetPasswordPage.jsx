@@ -45,7 +45,7 @@ const ResetPasswordPage = () => {
     };
 
     await postCaller(details);
-    console.log(details);
+    //console.log(details);
     setOtp("");
     setPassword("");
   };

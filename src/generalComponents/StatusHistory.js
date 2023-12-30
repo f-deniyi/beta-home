@@ -7,7 +7,7 @@ const StatusHistory = ({ history, activeStatus }) => {
 
     // }];
 
-    console.log(history)
+    //console.log(history)
     const items = history?.map(el => {
         return (
             {

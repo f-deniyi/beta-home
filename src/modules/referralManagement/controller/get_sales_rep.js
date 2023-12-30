@@ -11,13 +11,13 @@ const useGetSalesRep = ({ status, ...params }) => {
                 const [response] = [await AxiosWithToken.get(`/user/sales-rep/requests?approved=${status}`, { params })];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
         // { enabled: enabled }
     );
-    // console.log("-->>data-enrolments<<---", data)
+    // //console.log("-->>data-enrolments<<---", data)
 
     return {
         requests: data?.requests ?? [],

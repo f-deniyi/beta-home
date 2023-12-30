@@ -82,7 +82,7 @@ const ShopDetails = () => {
     shopId: shopId,
   });
 
-  // console.log('---statutes---', statuses.data)
+  // //console.log('---statutes---', statuses.data)
 
   return (
     <BaseDashboardNavigation title={"Shop Management"} hideSearch={true}>
@@ -113,7 +113,7 @@ const ShopDetails = () => {
                     : "rounded-full bg-rose-700 text-white shadow-xl  mr-[5px] flex items-center justify-center px-6 py-2"
                 }
                 onClick={(e) => {
-                  console.log(e);
+                  //console.log(e);
                   verifyShop({
                     verified: !shop?.isVerified,
                   });
@@ -128,7 +128,7 @@ const ShopDetails = () => {
                   "rounded-full bg-slate-700 text-white shadow-lg  flex items-center justify-center px-6 py-2"
                 }
                 onClick={(e) => {
-                  // console.log(e)
+                  // //console.log(e)
                   suspendShop();
                 }}
               />

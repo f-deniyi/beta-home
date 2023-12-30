@@ -12,7 +12,7 @@ const LeadDetails = ({ enrollmentId }) => {
     enrollmentId,
   });
 
-  console.log("--->>enrollment<<---", enrollment);
+  //console.log("--->>enrollment<<---", enrollment);
 
   return (
     <>

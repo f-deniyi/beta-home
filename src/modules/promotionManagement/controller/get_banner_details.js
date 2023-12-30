@@ -4,7 +4,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 
 const useGetBannerDetails = ({ enabled, bannerId }) => {
     // const query = filter ? `?customer=${filter}` : "";
-    // console.log(query);
+    // //console.log(query);
     const { data, isLoading, isSuccess, isFetching, isRefetching } = useQuery(
         [`banner_details`, enabled, bannerId],
         async () => {
@@ -12,14 +12,14 @@ const useGetBannerDetails = ({ enabled, bannerId }) => {
                 const [response] = [await AxiosWithToken.get(`/promo/banners/${bannerId}`)];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
         { enabled: enabled }
     );
 
-    // console.log("-->>new banner details<<---", data)
+    // //console.log("-->>new banner details<<---", data)
 
     return {
         banner: data?.data ?? null,

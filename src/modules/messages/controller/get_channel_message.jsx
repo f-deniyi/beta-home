@@ -12,7 +12,7 @@ const useGetChannelMessage = ({ channelId, enabled }) => {
                 const [response] = [await AxiosWithToken.get(`/chat/${channelId}/fetch-messages`)];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },

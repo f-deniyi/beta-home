@@ -55,7 +55,7 @@ const AddCategory = ({ type }) => {
       const gallery = await uploadFile(uploadedImages.file);
       // const gallery = uploadUrl
       // const galleries = await Promise.all(galleryPromises);
-      // console.log(gallery);
+      // //console.log(gallery);
       let data;
       if (type === "brand") {
         data = {
@@ -82,7 +82,7 @@ const AddCategory = ({ type }) => {
           type: null,
         };
       }
-      console.log(data);
+      //console.log(data);
       type === "brand" ? addBrandController(data) : addCategoryController(data);
     } else {
       setImageError(true);

@@ -10,7 +10,7 @@ const useGetOrderDetails = ({ enabled, requestId, ...params }) => {
                 const [response] = [await AxiosWithToken.get(`/service-center/requests/${requestId}`)];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
@@ -19,7 +19,7 @@ const useGetOrderDetails = ({ enabled, requestId, ...params }) => {
             // refetchOnWindowFocus: false
         }
     );
-    // console.log("----->>>order-details<<<----", data)
+    // //console.log("----->>>order-details<<<----", data)
     return {
         orderDetails: data?.data ?? {},
         isLoading,

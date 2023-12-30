@@ -48,7 +48,7 @@ const Profile = () => {
       // address,
       profile_picture: profilePicture
     }
-    // console.log(data)
+    // //console.log(data)
     updateProfileCaller(data)
   }
   // useEffect(() => {

@@ -15,7 +15,7 @@ const UpdatePasswordComponent = () => {
   const handlePasswordUpdate = async () => {
     if (currentPassword === newPassword) {
       // Display a message that new password is the same as the current password
-      console.log("New password is the same as the current password.");
+      //console.log("New password is the same as the current password.");
       return;
     }
 

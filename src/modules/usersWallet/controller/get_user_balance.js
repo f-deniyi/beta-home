@@ -8,10 +8,10 @@ const UseGetUserBalance = ({ enabled = true, userId }) => {
     const { data, refetch, isLoading } = useQuery(["user_balance", userId], async () => {
         try {
             const [response] = [await AxiosWithToken.get(`/wallet/balance/${userId}`)];
-            console.log(response.status);
+            //console.log(response.status);
             return response.data;
         } catch (error) {
-            console.log(error.response.data);
+            //console.log(error.response.data);
             throw new Error(`Sorry: ${error.response.data.message}`);
         }
     }, {

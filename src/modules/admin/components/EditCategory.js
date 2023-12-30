@@ -52,7 +52,7 @@ const EditCategory = ({ type, categoryDetails }) => {
             details: details ? details : categoryDetails?.details,
         }
         type === 'brand' ? editBrandManager(data) : editCategoryController(data)
-        // console.log(data)
+        // //console.log(data)
     };
 
     useEffect(() => {

@@ -28,7 +28,7 @@ const Withdraw = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            // console.log('--->>data<<---', data)
+            // //console.log('--->>data<<---', data)
             formRef.current.reset()
             document.getElementById('withdraw_fund').close()
         }

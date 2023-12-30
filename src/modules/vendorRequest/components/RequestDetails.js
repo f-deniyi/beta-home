@@ -20,7 +20,7 @@ const RequestDetails = ({ user }) => {
       reason: "",
     };
     updateVendorRequests(data);
-    // console.log('---data---', data)
+    // //console.log('---data---', data)
   };
 
   useEffect(() => {

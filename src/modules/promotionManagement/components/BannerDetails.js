@@ -16,7 +16,7 @@ const BannerDetails = ({ type, bannerId }) => {
         bannerId
     })
 
-    // console.log(bannerDetails, isLoading, isFetching, isRefetching)
+    // //console.log(bannerDetails, isLoading, isFetching, isRefetching)
     const [banner, setBannerDetails] = useState(null)
     const { deletePromotionController, isLoading: deleting, isSuccess: bannerDeleted } = DeletePromotionManager({ bannerId })
 

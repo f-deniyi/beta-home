@@ -106,7 +106,7 @@ const BaseDashboardNavigation = ({
 
   // const tokenExists = localStorage.getItem("token") !== null;
 
-  // console.log('--->>user<<---', data)
+  // //console.log('--->>user<<---', data)
   const isSalesRep = data?.data?.user?.referral_code?.length > 0;
   const activeMenu =
     data?.data?.user?.role?.name === "admin"

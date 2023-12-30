@@ -23,9 +23,9 @@ const AccountVerification = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(
-        `this is the place i am checking for the feedback ${data.message}`
-      );
+      //console.log(
+      //   `this is the place i am checking for the feedback ${data.message}`
+      // );
       toast.success(data.message);
     }
     if (error) {

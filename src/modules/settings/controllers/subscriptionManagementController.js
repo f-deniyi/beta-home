@@ -27,25 +27,25 @@ const useSubscriptionManager = (subscriptionId, action) => {
       const confirmationResponse = await AxiosWithToken.get(
         `/wallet/confirmation?status=${status}&tx_ref=${txRef}&transaction_id=${transactionId}`
       );
-      console.log(`i am checking this ${confirmationResponse.status}`);
+      //console.log(`i am checking this ${confirmationResponse.status}`);
       return confirmationResponse.data;
     } catch (error) {
-      console.log(error.confirmationResponse.data);
+      //console.log(error.confirmationResponse.data);
       throw new Error(`Sorry: ${error.confirmationResponse.data.message}`);
     }
     // Call the confirmTransaction function
   };
 
   const updateController = async (details) => {
-    console.log(`subscriptionId:${subscriptionId}`);
-    console.log(`action:${action}`);
+    //console.log(`subscriptionId:${subscriptionId}`);
+    //console.log(`action:${action}`);
 
     try {
       if (action === "cancel") {
         const [response] = [
           await AxiosWithToken.put(`/subscription/${subscriptionId}/${action}`),
         ];
-        console.log(`i am checking this ${response.data}`);
+        //console.log(`i am checking this ${response.data}`);
         return response.data;
       } else {
         const [response] = [
@@ -54,7 +54,7 @@ const useSubscriptionManager = (subscriptionId, action) => {
             details
           ),
         ];
-        console.log(`i am checking this ${response.data.data.checkoutUrl}`);
+        //console.log(`i am checking this ${response.data.data.checkoutUrl}`);
 
         const checkoutUrl = response.data.data.checkoutUrl;
 
@@ -69,7 +69,7 @@ const useSubscriptionManager = (subscriptionId, action) => {
         return cleanup;
       }
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   };

@@ -74,7 +74,7 @@ const EditProduct = ({ productId }) => {
     } = useFileUpload();
 
     const handleCategoryChange = (e) => {
-        // console.log(e)
+        // //console.log(e)
         setCategories(e)
     }
 
@@ -167,7 +167,7 @@ const EditProduct = ({ productId }) => {
                 selectedCategories.map(el => el?.id)
             ] : product?.categories
         }
-        console.log(data)
+        //console.log(data)
         updateProductDetails(data)
     }
 
@@ -191,7 +191,7 @@ const EditProduct = ({ productId }) => {
                     return { name: value.value, id: value.value, attribute_name: ele?.name, price: value.price }
                 }
                 )).flat()
-                // console.log('<<product--attributes>>', productsAttributes, productsAttributes?.flat())
+                // //console.log('<<product--attributes>>', productsAttributes, productsAttributes?.flat())
                 setSelectedAttribute(productsAttributes)
             }
 
@@ -429,7 +429,7 @@ const EditProduct = ({ productId }) => {
                                                         <div className='ml-[25px]'>
                                                             {
                                                                 selectedAttribute?.filter(ele => el?.name === ele?.attribute_name)?.map((el, index) =>
-                                                                    // console.log('Outer map:', el);
+                                                                    // //console.log('Outer map:', el);
 
                                                                     <InputWithFullBoarder
                                                                         type={'number'}

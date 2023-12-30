@@ -18,7 +18,7 @@ const PaymentVerification = () => {
         ...data
     })
 
-    console.log(trxRef, reference)
+    //console.log(trxRef, reference)
     return (
         <Loader />
     )

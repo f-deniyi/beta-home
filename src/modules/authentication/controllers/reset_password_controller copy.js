@@ -9,19 +9,19 @@ const useResetPasswordManager = () => {
   const resetPasswordController = async (details) => {
     try {
       const [response] = [await Axios.put(`/auth/password-reset`, details)];
-      console.log(`i am checking this ${response.status}`);
+      //console.log(`i am checking this ${response.status}`);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   };
 
   const mutation = useMutation(resetPasswordController, {
     onSuccess: async (data) => {
-      // console.log(data);
-      // console.log(data.data.token);
-      // console.log(localStorage.getItem("token"));
+      // //console.log(data);
+      // //console.log(data.data.token);
+      // //console.log(localStorage.getItem("token"));
       // Update other caches using useQuery
       navigate(`/login`);
     },

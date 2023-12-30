@@ -42,7 +42,7 @@ const CreateTicket = () => {
             "type": ticketType?.id,
             // "order": null
         }
-        // console.log(data)
+        // //console.log(data)
         CreateTicketCaller(data)
 
     }

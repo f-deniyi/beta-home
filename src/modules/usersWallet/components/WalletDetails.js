@@ -23,7 +23,7 @@ const CustomerDetails = ({ userId }) => {
         setActivePage(page)
     }
 
-    // console.log('->>transactions<<---', transactions, pagination)
+    // //console.log('->>transactions<<---', transactions, pagination)
 
 
     return (

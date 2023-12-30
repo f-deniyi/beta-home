@@ -28,7 +28,7 @@ const SupportDetails = () => {
         enabled: Boolean(ticketId),
         ticketId: ticketId
     })
-    // console.log('support_messages', messages)
+    // //console.log('support_messages', messages)
 
     function getFileType(fileUrl) {
         const extension = fileUrl.split('.').pop().toLowerCase();
@@ -95,7 +95,7 @@ const SupportDetails = () => {
                                                     <div
                                                         className='rounded-[5px] object-cover h-[100px]  cursor-pointer w-[48%]'
                                                         onClick={() => {
-                                                            console.log('element', el)
+                                                            //console.log('element', el)
                                                             window.open(el, '_blank')
                                                         }}
                                                     >

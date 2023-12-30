@@ -9,11 +9,11 @@ const useDeleteManager = (endpoint, queryKey) => {
   const deleteController = async (details) => {
     try {
       const [response] = [await AxiosWithToken.delete(endpoint, details)];
-      console.log(`i am checking this ${response.status}`);
+      //console.log(`i am checking this ${response.status}`);
 
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   };

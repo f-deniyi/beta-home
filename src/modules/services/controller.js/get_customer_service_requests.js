@@ -4,7 +4,7 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 
 const useGetCustomerServiceRequests = ({ enabled, filter = "" }) => {
   const query = filter ? `?customer=${filter}` : "";
-  console.log(query);
+  //console.log(query);
   return useQuery(
     ["customer_service_request", enabled],
     async () => {
@@ -14,13 +14,13 @@ const useGetCustomerServiceRequests = ({ enabled, filter = "" }) => {
         ];
         return response.data;
       } catch (error) {
-        console.log(error.response.data);
+        //console.log(error.response.data);
         throw new Error(`Sorry: ${error.response.data.message}`);
       }
     },
     { enabled: enabled }
   );
-  // console.log("provider_service_request", data)
+  // //console.log("provider_service_request", data)
   //   return {
   //     requests: data?.requests ?? [],
   //     isLoading,
