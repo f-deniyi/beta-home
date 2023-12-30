@@ -11,13 +11,13 @@ const useGetEnrollmentDetails = ({ enrollmentId, enabled }) => {
                 const [response] = [await AxiosWithToken.get(`/packages/enrollments/${enrollmentId}`)];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
         { enabled: enabled }
     );
-    console.log(data?.data)
+    //console.log(data?.data)
     return {
         enrollment: data?.data ?? {},
         isLoading,

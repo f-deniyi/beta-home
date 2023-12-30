@@ -9,10 +9,10 @@ const useAdminVerificationManager = () => {
   const resetPasswordController = async (details) => {
     try {
       const [response] = [await Axios.get(`/auth/verify-admin/${details}`)];
-      console.log(`i am checking this ${response.status}`);
+      //console.log(`i am checking this ${response.status}`);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   };
@@ -31,7 +31,7 @@ const useAdminVerificationManager = () => {
           }
         }, 100);
       });
-      console.log(`this is the token ${localStorage.getItem("beta-vendor-token")} `);
+      //console.log(`this is the token ${localStorage.getItem("beta-vendor-token")} `);
       navigate(`/admin/dashboard`);
     },
 

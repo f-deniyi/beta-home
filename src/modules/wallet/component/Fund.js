@@ -28,7 +28,7 @@ const FundWallet = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            // console.log('--->>data<<---', data)
+            // //console.log('--->>data<<---', data)
             formRef.current.reset()
             window.location.href = data.data.checkoutUrl.authorization_url;
             document.getElementById('fund_wallet').close()

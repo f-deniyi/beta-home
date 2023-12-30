@@ -8,16 +8,16 @@ const UseGetShopDetailsQuery = ({ enabled, shopId, ...params }) => {
         async () => {
             try {
                 const [response] = [await AxiosWithToken.get(`/shops/${shopId}`, { params })];
-                console.log(`this is the current subscription status ${response}`);
+                //console.log(`this is the current subscription status ${response}`);
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
         { enabled: enabled }
     );
-    console.log(data)
+    //console.log(data)
     return {
         shop: data?.data ?? {},
         isLoading,

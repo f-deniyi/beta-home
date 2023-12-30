@@ -34,7 +34,7 @@ const VendorShopManagement = () => {
 
   const has_shop = userShop?.shops.length > 0;
   const isAdmin= data?.data?.user?.role?.name==='admin'
-  console.log("has---shop", has_shop);
+  //console.log("has---shop", has_shop);
 
   return (
     <BaseDashboardNavigation title={"Shop Settings"} hideSearch={true}>

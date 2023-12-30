@@ -150,9 +150,9 @@ const OrderDetails = ({ orderId, setOrderId, statuses }) => {
                         backgroundColor={'#fdfdfd'}
                         // de
                         onChange={(e, opt) => {
-                            console.log(e?.id)
+                            //console.log(e?.id)
                             // const categoryIds = e.map(el => el?._id)
-                            // console.log('idss', categoryIds)
+                            // //console.log('idss', categoryIds)
                             // setCategoryIds(categoryIds)
                             setSelectedStatus(e.id)
 

@@ -7,16 +7,16 @@ const useGetTermsAndConditions = () => {
         async () => {
             try {
                 const [response] = [await AxiosWithToken.get(`/terms`)];
-                // console.log(`this is the current subscription status ${response}`);
+                // //console.log(`this is the current subscription status ${response}`);
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
         // { enabled: enabled }
     );
-    console.log('data---->>>', data)
+    //console.log('data---->>>', data)
     return {
         terms: data?.data ?? null,
         isLoading: isLoading,

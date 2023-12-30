@@ -12,13 +12,13 @@ const useGetAllServiceCategoriesQuery = ({ enabled, ...params }) => {
         ];
         return response.data;
       } catch (error) {
-        console.log(error.response.data);
+        //console.log(error.response.data);
         throw new Error(`Sorry: ${error.response.data.message}`);
       }
     },
     { enabled: enabled }
   );
-  // console.log('-----data-order', data)
+  // //console.log('-----data-order', data)
   return {
     categories: data ?? [],
     categoryLoading: isLoading,

@@ -6,7 +6,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Chat = ({ messages, channel, userId, setChannel }) => {
 
-    // console.log(messages, userId)
+    // //console.log(messages, userId)
     const inputRef = useRef(null);
     const { sendMessageController } = SendMessageManager()
     const [text, setText] = useState('')

@@ -57,7 +57,7 @@ const EditBanner = ({ banner, shopId }) => {
             },
             is_service: bannerType === 'service' ? true : false
         }
-        // console.log(data)
+        // //console.log(data)
         updateBannerCaller(data)
     }
 

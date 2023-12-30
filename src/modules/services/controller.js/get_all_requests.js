@@ -10,7 +10,7 @@ const useGetAllServiceRequest = ({ enabled, shopId, ...params }) => {
                 const [response] = [await AxiosWithToken.get(`/service-center/requests`, { params })];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },

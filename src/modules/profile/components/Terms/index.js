@@ -11,7 +11,7 @@ const Terms = () => {
     const location = useLocation();
     const isAdmin = location.pathname.includes("/admin");
     const { terms, isLoading } = useGetTermsAndConditions()
-    // console.log('--->>.terms', terms)
+    // //console.log('--->>.terms', terms)
     const { createTermsAndCondtionsController, isLoading: creating } = CreateTermsAndCondtionsManager()
     const { updateTermsAndConditionsCaller, isLoading: updating } = UpdateTermsAndConditions()
 

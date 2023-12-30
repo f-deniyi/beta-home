@@ -10,7 +10,7 @@ const useGetSCategoriesQuery = ({ enabled, ...params }) => {
                 const [response] = [await AxiosWithToken.get(`/categories`, { params })];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },

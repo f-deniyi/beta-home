@@ -34,8 +34,8 @@ const LoginPage = () => {
       password: password,
     };
 
-    console.log(email);
-    console.log(password);
+    //console.log(email);
+    //console.log(password);
     if (isAdmin) {
       await AdminPostCaller(details)
     } else {

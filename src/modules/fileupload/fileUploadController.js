@@ -16,16 +16,16 @@ const useFileUpload = () => {
         ),
       ];
 
-      console.log(
-        "this is the signedRequest: ",
-        response.data.data.signedRequest
-      );
+      //console.log(
+      //   "this is the signedRequest: ",
+      //   response.data.data.signedRequest
+      // );
 
       await axios.put(response.data.data.signedRequest, file);
 
       return response.data.data;
     } catch (error) {
-      // console.log(error.response.data);
+      // //console.log(error.response.data);
       throw new Error(`Sorry: ${error}`);
     }
   };
@@ -33,11 +33,11 @@ const useFileUpload = () => {
   const mutation = useMutation(uploadFile, {
     onError: (error) => {
       // Handle error if necessary
-      console.log("File upload error2:", error);
+      //console.log("File upload error2:", error);
     },
     onSuccess: (data) => {
       // Update the URL in state
-      console.log(data);
+      //console.log(data);
       return data;
     },
   });
@@ -46,10 +46,10 @@ const useFileUpload = () => {
     // let url;
     try {
       const respondins = await mutation.mutateAsync(file);
-      console.log(`somethign here. ${respondins.url}`);
+      //console.log(`somethign here. ${respondins.url}`);
       return respondins.url;
     } catch (error) {
-      console.log(mutation.error);
+      //console.log(mutation.error);
       // Handle error if necessary
       console.error("File upload error1:", error);
     }

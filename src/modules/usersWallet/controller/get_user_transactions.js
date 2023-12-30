@@ -6,10 +6,10 @@ const UseGetUserTransactions = ({ enabled = true, userId }) => {
     const { data, isLoading } = useQuery(["user_transactions", userId], async () => {
         try {
             const [response] = [await AxiosWithToken.get(`/wallet/transactions/${userId}`)];
-            console.log(response.status);
+            //console.log(response.status);
             return response.data;
         } catch (error) {
-            console.log(error.response.data);
+            //console.log(error.response.data);
             throw new Error(`Sorry: ${error.response.data.message}`);
         }
     }, {

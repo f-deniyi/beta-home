@@ -60,7 +60,7 @@ const GenerateInvoice = ({ requestId }) => {
         }
         await acceptRequestCaller(payload)
         data.items = formData.items;
-        console.log(data)
+        //console.log(data)
         generateInvoiceCaller(data)
     }
 

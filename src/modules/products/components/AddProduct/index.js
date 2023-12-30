@@ -64,7 +64,7 @@ const AddProduct = () => {
     } = useFileUpload();
 
     const handleCategoryChange = (e) => {
-        // console.log(e)
+        // //console.log(e)
         setCategories(e)
     }
 
@@ -356,7 +356,7 @@ const AddProduct = () => {
                                         <div className='ml-[25px]'>
                                             {
                                                 selectedAttribute?.filter(ele => el?.name === ele?.attribute_name)?.map((el, index) =>
-                                                    // console.log('Outer map:', el);
+                                                    // //console.log('Outer map:', el);
 
                                                     <InputWithFullBoarder
                                                         type={'number'}

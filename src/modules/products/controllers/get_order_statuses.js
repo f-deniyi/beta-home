@@ -6,15 +6,15 @@ const useGetOrderStatusManager = () => {
   return useQuery(["orders_statuses"], async () => {
     try {
       const [response] = [await AxiosWithToken.get(`/order/statuses`)];
-      console.log(response.status);
+      //console.log(response.status);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   });
 
-  // console.log(data);
+  // //console.log(data);
   // return {
   //   statuses: data?.data ?? [],
   //   isSuccess: isSuccess,

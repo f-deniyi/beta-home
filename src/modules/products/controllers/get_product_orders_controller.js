@@ -4,23 +4,23 @@ import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithTo
 
 const useGetProductOrdersManager = ({ filter = "", enable, ...params }) => {
   // const query = filter ? `?customer=${filter}` : "";
-  // console.log(query);
+  // //console.log(query);
   return useQuery(
     ["orders", params?.status],
     async () => {
       try {
         const [response] = [await AxiosWithToken.get(`/order/all`, { params })];
-        console.log(response.status);
+        //console.log(response.status);
         return response.data;
       } catch (error) {
-        console.log(error.response.data);
+        //console.log(error.response.data);
         throw new Error(`Sorry: ${error.response.data.message}`);
       }
     },
     { enabled: enable }
   );
 
-  // console.log(data);
+  // //console.log(data);
   // return {
   //   orders: data.orders,
   //   pagination: data?.pagination ?? {},

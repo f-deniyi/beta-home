@@ -7,10 +7,10 @@ const useSendSupportManager = () => {
   const sendSupportController = async (details) => {
     try {
       const response = await Axios.post(`/support/create`, details);
-      console.log(`i am checking this ${response.status}`);
+      //console.log(`i am checking this ${response.status}`);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   };

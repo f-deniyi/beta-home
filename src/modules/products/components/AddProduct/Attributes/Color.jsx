@@ -11,9 +11,9 @@ const ColorAttribute = ({
 
     const handleChangeComplete = (color) => {
         setColor(color.hex)
-        // console.log(arr)
+        // //console.log(arr)
         setColorArray(arr => [...arr, color.hex])
-        // console.log('-<<color>>--', color, colorArray)
+        // //console.log('-<<color>>--', color, colorArray)
         document.getElementById('color_picker').close()
     };
 

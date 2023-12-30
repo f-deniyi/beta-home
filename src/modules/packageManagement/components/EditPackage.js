@@ -31,9 +31,9 @@ const EditPackage = ({ packageDetails }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Title:", title);
-    console.log("Amount:", amount);
-    console.log("Package Items:", packageItems);
+    //console.log("Title:", title);
+    //console.log("Amount:", amount);
+    //console.log("Package Items:", packageItems);
     const details = {
       title: title,
       items: packageItems,

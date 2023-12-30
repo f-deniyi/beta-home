@@ -11,12 +11,12 @@ const useLoginManager = (email) => {
   const loginController = async (details) => {
     try {
       const response = await Axios.post(`/auth/login`, details);
-      // console.log(`i am checking this ${response.status}`);
+      // //console.log(`i am checking this ${response.status}`);
 
       return response?.data;
     } catch (error) {
-      console.log(error)
-      console.log(error?.response?.data);
+      //console.log(error)
+      //console.log(error?.response?.data);
       statusCode = error?.response?.status;
       throw new Error(`${error?.response?.data?.message}`);
     }
@@ -24,7 +24,7 @@ const useLoginManager = (email) => {
 
   const mutation = useMutation(loginController, {
     onSuccess: async (data) => {
-      console.log(data)
+      //console.log(data)
       const token = data?.data?.token;
       const hasShop = data?.data?.user?.shops.length > 0;
       const isAdmin = data?.data?.user?.role?.name === "admin";
@@ -42,9 +42,7 @@ const useLoginManager = (email) => {
           }
         }, 100);
       });
-      console.log(
-        `this is the token ${localStorage.getItem("beta-vendor-token")} `
-      );
+     
       if (isAdmin) {
         navigate(`/admin/dashboard`);
       } else {
@@ -55,7 +53,7 @@ const useLoginManager = (email) => {
     onError: (error) => {
       // Handle error if necessary
       toast.error(error?.message);
-      console.log(`this is the status code for error: ${statusCode}`);
+      //console.log(`this is the status code for error: ${statusCode}`);
       if (statusCode === 402) {
         navigate(`/account-verification?email=${email}`);
       }

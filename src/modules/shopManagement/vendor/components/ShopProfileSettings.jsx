@@ -60,7 +60,7 @@ const ShopProfileSettings = ({ hasShop }) => {
 
   const handleFileUpload = (e, type) => {
     const file = e.target.files[0];
-    console.log(file);
+    //console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -111,7 +111,7 @@ const ShopProfileSettings = ({ hasShop }) => {
       categories:
         categoryIds.length > 0 ? categoryIds : userShop?.shops[0]?.categories,
     };
-    // console.log(data)
+    // //console.log(data)
     hasShop ? editPackageController(data) : createShopController(data);
 
     // ;
@@ -206,14 +206,14 @@ const ShopProfileSettings = ({ hasShop }) => {
                   backgroundColor={"#fff"}
                   // de
                   onChange={(e, opt) => {
-                    console.log(e, opt.value);
+                    //console.log(e, opt.value);
                     const categoryIds = e.map((el) => el?._id);
-                    console.log("idss", categoryIds);
+                    //console.log("idss", categoryIds);
                     setCategoryIds(categoryIds);
                   }}
                   defaultValue={userShop?.shops[0]?.categories}
                 />
-                {/* {console.log('shops--->>>',userShop?.shops[0])} */}
+                {/* {//console.log('shops--->>>',userShop?.shops[0])} */}
               </div>
 
               <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-x-2">

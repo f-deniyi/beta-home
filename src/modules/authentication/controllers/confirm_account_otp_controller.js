@@ -10,10 +10,10 @@ const useConfirmAccountManager = () => {
   const confirmAccountController = async (token) => {
     try {
       const [response] = [await Axios.get(`/auth/verify/${token}`)];
-      // console.log(`i am checking this ${response.data.message}`);
+      // //console.log(`i am checking this ${response.data.message}`);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`${error.response.data.message}`);
     }
   };
@@ -21,7 +21,7 @@ const useConfirmAccountManager = () => {
   const mutation = useMutation(confirmAccountController, {
     onSuccess: async (data) => {
       localStorage.setItem("token", data.data.token);
-      console.log(data.message);
+      //console.log(data.message);
       toast.success(data.message);
       navigate(`/login`);
     },

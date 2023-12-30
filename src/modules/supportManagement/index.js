@@ -14,7 +14,7 @@ const SupportManagement = () => {
         page: 1,
         isAdmin
     })
-    console.log('supports', supports)
+    //console.log('supports', supports)
     return (
         <BaseDashboardNavigation title={'Support Management'}>
             <div className='mt-[17px]'>

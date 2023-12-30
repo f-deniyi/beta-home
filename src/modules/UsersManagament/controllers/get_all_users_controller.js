@@ -7,17 +7,17 @@ const useGetAllUsersManager = ({ filter, enabled = true, ...params }) => {
   const { data, refetch, isLoading } = useQuery(["all_users", params.fullname, filter], async () => {
     try {
       const [response] = [await AxiosWithToken.get(`/user/list${query}`, { params })];
-      console.log(response.status);
+      //console.log(response.status);
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      //console.log(error.response.data);
       throw new Error(`Sorry: ${error.response.data.message}`);
     }
   }, {
     enabled
   });
 
-  console.log(data);
+  //console.log(data);
   return {
     users: data?.data?.users ?? [],
     pagination: data?.data?.pagination ?? {},

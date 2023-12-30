@@ -10,13 +10,13 @@ const useGetProviderServiceRequest = ({ enabled, shopId, ...params }) => {
                 const [response] = [await AxiosWithToken.get(`/service-center/requests/provider`, { params })];
                 return response.data;
             } catch (error) {
-                console.log(error.response.data);
+                //console.log(error.response.data);
                 throw new Error(`Sorry: ${error.response.data.message}`);
             }
         },
         { enabled: enabled }
     );
-    // console.log("provider_service_request", data)
+    // //console.log("provider_service_request", data)
     return {
         requests: data?.requests ?? [],
         isLoading,

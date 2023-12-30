@@ -51,7 +51,7 @@ const AddAttribute = ({ shopId }) => {
       ],
     };
 
-    console.log(details);
+    //console.log(details);
     addAttributeController(details);
   };
 

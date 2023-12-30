@@ -13,7 +13,7 @@ const LeadDetails = ({ user }) => {
     userId: user?._id,
   });
 
-  // console.log('--->>user----', user, referrals)
+  // //console.log('--->>user----', user, referrals)
   return (
     <>
       <ModalManagement id={"lead_details"} hideCancel={true}>

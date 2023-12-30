@@ -45,7 +45,7 @@ const Attributes = () => {
       name: attribute.name,
       values: action === 'add' ? [...attribute.values, value] : attribute.values.filter(el => el !== value)
     }
-    console.log(data, attribute)
+    //console.log(data, attribute)
     editAttributeManager(attribute?._id, data)
 
   };

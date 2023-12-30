@@ -7,7 +7,7 @@ const WeightAttribute = ({
     setWeightArray
 }) => {
 
-    console.log('---weight-array--', weightArray)
+    //console.log('---weight-array--', weightArray)
     const [weightValue, setWeightValue] = useState('')
 
     const handleChangeComplete = () => {
