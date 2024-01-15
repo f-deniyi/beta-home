@@ -120,8 +120,8 @@ const AdminDashboard = () => {
             <FiArrowRight size="16" color="#555F7E" />
           </div>
         </div>
-        <div className="h-[400px]">
-          <Chart />
+        <div className="h-[400px] ">
+          <Chart data={users}/>
         </div>
       </div>
       <div className="bg-white p-5 rounded-[16px] mb-3">
