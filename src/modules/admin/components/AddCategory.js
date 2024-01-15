@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ModalManagement from "../../../generalComponents/ModalManagement";
 import CustomButton from "../../../generalComponents/Button";
 import InputWithFullBoarder from "../../../generalComponents/InputWithFullBoarder";
@@ -52,6 +52,7 @@ const AddCategory = ({ type }) => {
       if (imageError) {
         setImageError(false);
       }
+
       const gallery = await uploadFile(uploadedImages.file);
       // const gallery = uploadUrl
       // const galleries = await Promise.all(galleryPromises);
@@ -82,23 +83,29 @@ const AddCategory = ({ type }) => {
           type: null,
         };
       }
-      //console.log(data);
+      // console.log(data);
       type === "brand" ? addBrandController(data) : addCategoryController(data);
     } else {
       setImageError(true);
     }
   };
 
+  const formRef = useRef();
+
   useEffect(() => {
     if (categoryUploaded || brandUploaded) {
+      formRef.current.reset();
+      setUploadedImages(null);
       document.getElementById("add_category").close();
     }
   }, [categoryUploaded, brandUploaded]);
 
+
+
   return (
     <>
       <ModalManagement id={"add_category"} hideCancel={true}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={formRef}>
           <div className="flex items-center justify-between mb-6">
             <p className="text-[18px] font-medium ">Add category for {type}</p>
             <div
@@ -133,7 +140,7 @@ const AddCategory = ({ type }) => {
                         type !== "brand" ? ".svg" : ".jpeg, .jpg, .png, .gif"
                       }
                       onChange={(e) => handleFileUpload(e)}
-                      // required
+                    // required
                     />
                   </label>
                   <p className="text-[12px] font-medium">

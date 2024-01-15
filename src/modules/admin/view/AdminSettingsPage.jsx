@@ -56,6 +56,8 @@ const AdminSettingsPage = () => {
                   key={index}
                   icon={item.icon}
                   name={item.name}
+                  type={"icon"}
+
                 />
               ))}
             </div>
@@ -89,6 +91,8 @@ const AdminSettingsPage = () => {
                   key={index}
                   icon={item.icon}
                   name={item.name}
+                  type={"icon"}
+
                   onClick={() => {
                     setSelectedItem(item);
                   }}
