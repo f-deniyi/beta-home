@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ModalManagement from "../../../generalComponents/ModalManagement";
 import CustomButton from "../../../generalComponents/Button";
 import InputWithFullBoarder from "../../../generalComponents/InputWithFullBoarder";
@@ -11,6 +11,7 @@ import { UpdateBrandManager } from "../controllers/update_brands_controller";
 import { UpdateCategoryManager } from "../controllers/update_categories_controller";
 
 const EditCategory = ({ type, categoryDetails }) => {
+    // console.log('------>>type', type)
     const { isLoading: editingBrandCategory, isSuccess: brandUpdated, editBrandManager } = UpdateBrandManager(categoryDetails?._id)
     const { isLoading: editngCategory, isSuccess: categoryUpdated, editCategoryController } = UpdateCategoryManager(categoryDetails?._id)
 
@@ -34,6 +35,7 @@ const EditCategory = ({ type, categoryDetails }) => {
         data: uploadUrl,
     } = useFileUpload();
 
+
     const [name, setName] = useState("");
     // const [parent, setParent] = useState(null);
     const [details, setDetails] = useState("");
@@ -52,13 +54,19 @@ const EditCategory = ({ type, categoryDetails }) => {
             details: details ? details : categoryDetails?.details,
         }
         type === 'brand' ? editBrandManager(data) : editCategoryController(data)
-        // //console.log(data)
+        // console.log(data)
     };
+
+
+    const formRef = useRef();
+
 
     useEffect(() => {
         if (categoryUpdated || brandUpdated) {
             document.getElementById("edit_category").close()
             document.getElementById("category_details").close()
+            formRef.current.reset();
+            setUploadedImages(null);
         }
     }, [categoryUpdated, brandUpdated])
 
@@ -68,7 +76,7 @@ const EditCategory = ({ type, categoryDetails }) => {
         <>
             <ModalManagement id={"edit_category"} hideCancel={true}>
                 {
-                    categoryDetails ? <form onSubmit={handleSubmit}>
+                    categoryDetails ? <form onSubmit={handleSubmit} ref={formRef}>
                         <div className="flex items-center justify-between mb-6">
                             <p className="text-[18px] font-medium ">Add category for {type}</p>
                             <div

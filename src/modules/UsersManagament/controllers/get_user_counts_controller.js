@@ -16,7 +16,7 @@ const useGetUserCountManager = () => {
 
   //console.log(data);
   return {
-    users: data?.data,
+    users: data?.data ?? [],
     refetch: refetch,
     isLoading: isLoading,
   };

@@ -1,16 +1,24 @@
 import React from 'react'
-
 import ReactApexChart from 'react-apexcharts'
+import useGetAllUsersManager from '../modules/UsersManagament/controllers/get_all_users_controller';
 
-const Chart = ({ data }) => {
-    const series = data ?
+const Chart = () => {
+    const { users } = useGetAllUsersManager({ filter: "" });
+    const monthlyUserCounts = Array.from({ length: 12 }).fill(0);
+
+    users?.forEach(user => {
+        const month = new Date(user?.createdAt).getMonth();
+        monthlyUserCounts[month]++;
+    });
+
+    const series = users ?
         [{
             name: 'Registered Users',
-            data: data,
+            data: monthlyUserCounts
 
         }] : [{
             name: 'Registered Users',
-            data: [10, 120, 50, 70, 90, 100, 140, 30, 90, 60, 150, 200],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
         }]
 
@@ -32,8 +40,8 @@ const Chart = ({ data }) => {
         yaxis: {
             title: {
                 text: '',
-                min:0,
-                max:10000
+                min: 0,
+                // max: 12
             },
 
         },

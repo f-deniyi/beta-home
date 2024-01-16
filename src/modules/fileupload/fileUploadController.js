@@ -12,7 +12,7 @@ const useFileUpload = () => {
     try {
       const [response] = [
         await AxiosWithToken.post(
-          `/services/file/presign-url/?file_name=${fileName}&file_type=${fileType}`
+          `/services/file/presign-url/?file_name=${fileName}&file_type='svg'`
         ),
       ];
 
