@@ -2,11 +2,11 @@ import { useQuery } from "react-query";
 import AxiosWithToken from "../../../constants/api_management/MyHttpHelperWithToken";
 
 
-const useGetTermsAndConditions = () => {
-    const { data, isLoading, isSuccess } = useQuery(["terms_and_conditions"],
+const useGetTermsAndConditions = ({ type }) => {
+    const { data, isLoading, isSuccess } = useQuery(["terms_and_conditions", type],
         async () => {
             try {
-                const [response] = [await AxiosWithToken.get(`/terms`)];
+                const [response] = [await AxiosWithToken.get(type === 'general' ? `/terms` : `/terms/${type}`)];
                 // //console.log(`this is the current subscription status ${response}`);
                 return response.data;
             } catch (error) {
