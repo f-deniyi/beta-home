@@ -9,11 +9,13 @@ import { AddCategoryManager } from "../controllers/add_category_controller";
 import { brand } from "../../../assets/icons";
 import { UpdateBrandManager } from "../controllers/update_brands_controller";
 import { UpdateCategoryManager } from "../controllers/update_categories_controller";
+import { UpdateServiceCategoryManager } from "../controllers/update_servicecategories_controller"
 
 const EditCategory = ({ type, categoryDetails }) => {
-    // console.log('------>>type', type)
     const { isLoading: editingBrandCategory, isSuccess: brandUpdated, editBrandManager } = UpdateBrandManager(categoryDetails?._id)
     const { isLoading: editngCategory, isSuccess: categoryUpdated, editCategoryController } = UpdateCategoryManager(categoryDetails?._id)
+    const { isLoading: editngServiceCategory, isSuccess: serviceCategoryUpdated, editCategoryController: editServiceCategoryController } = UpdateServiceCategoryManager(categoryDetails?._id)
+
 
     const [uploadedImages, setUploadedImages] = useState(null);
     const handleFileUpload = (e) => {
@@ -43,6 +45,8 @@ const EditCategory = ({ type, categoryDetails }) => {
     // const [imageError, setImageError] = useState(false)
 
     const handleSubmit = async (e) => {
+    console.log('------>>type', type)
+
         e.preventDefault()
         const data = {
             name: name ? name : categoryDetails?.name,
@@ -53,7 +57,7 @@ const EditCategory = ({ type, categoryDetails }) => {
             },
             details: details ? details : categoryDetails?.details,
         }
-        type === 'brand' ? editBrandManager(data) : editCategoryController(data)
+        type === 'brand' ? editBrandManager(data) :  type === 'service' ? editServiceCategoryController(data) :editCategoryController(data)
         // console.log(data)
     };
 
@@ -62,13 +66,13 @@ const EditCategory = ({ type, categoryDetails }) => {
 
 
     useEffect(() => {
-        if (categoryUpdated || brandUpdated) {
+        if (categoryUpdated || brandUpdated || serviceCategoryUpdated) {
             document.getElementById("edit_category").close()
             document.getElementById("category_details").close()
             formRef.current.reset();
             setUploadedImages(null);
         }
-    }, [categoryUpdated, brandUpdated])
+    }, [categoryUpdated, brandUpdated,serviceCategoryUpdated])
 
 
 
@@ -78,7 +82,7 @@ const EditCategory = ({ type, categoryDetails }) => {
                 {
                     categoryDetails ? <form onSubmit={handleSubmit} ref={formRef}>
                         <div className="flex items-center justify-between mb-6">
-                            <p className="text-[18px] font-medium ">Add category for {type}</p>
+                            <p className="text-[18px] font-medium ">Edit category for {type}</p>
                             <div
                                 onClick={() => document.getElementById("edit_category").close()}
                                 role="button"
@@ -156,8 +160,8 @@ const EditCategory = ({ type, categoryDetails }) => {
                             </div>
                             <CustomButton
                                 buttonText={"Proceed"}
-                                disabled={editingBrandCategory || editngCategory}
-                                isLoading={editingBrandCategory || editngCategory}
+                                disabled={editingBrandCategory || editngCategory || editngServiceCategory}
+                                isLoading={editingBrandCategory || editngCategory || editngServiceCategory}
                                 type={'submit'}
                                 className={
                                     "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary  !py-[15px]"

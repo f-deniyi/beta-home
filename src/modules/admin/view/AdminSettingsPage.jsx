@@ -8,6 +8,8 @@ import useGetServiceCategoriesManager from "../controllers/get_servicecategories
 import useGetAllBrandsManager from "../controllers/get_brands_controller";
 import Loader from "../../../generalComponents/Loader";
 import AddCategory from "../components/AddCategory";
+import { productCategory, brand } from "../../../assets/icons";
+import CategoryDetails from "../components/CategoryDetails";
 
 const AdminSettingsPage = () => {
   const [selectedItem, setSelectedItem] = useState("");
@@ -49,6 +51,7 @@ const AdminSettingsPage = () => {
               {productCategories.map((item, index) => (
                 <CategoryCard
                   details={item?.details}
+                  item={item}
                   onClick={() => {
                     setSelectedItem(item);
                   }}
@@ -56,7 +59,7 @@ const AdminSettingsPage = () => {
                   key={index}
                   icon={item.icon}
                   name={item.name}
-                  type={"icon"}
+                  type={categoryType}
 
                 />
               ))}
@@ -88,10 +91,11 @@ const AdminSettingsPage = () => {
               {serviceCategories.map((item, index) => (
                 <CategoryCard
                   details={item?.details}
+                  item={item}
                   key={index}
                   icon={item.icon}
                   name={item.name}
-                  type={"icon"}
+                  type={categoryType}
 
                   onClick={() => {
                     setSelectedItem(item);
@@ -130,8 +134,9 @@ const AdminSettingsPage = () => {
               {brands.map((item, index) => (
                 <CategoryCard
                   details={item?.details}
+                  item={item}
                   type={"brand"}
-                  image={item?.image?.original}
+                  image={item?.image}
                   name={item.name}
                   onClick={() => {
                     setSelectedItem(item);
@@ -145,6 +150,14 @@ const AdminSettingsPage = () => {
       </div>
 
       <AddCategory type={categoryType} />
+      <CategoryDetails
+        category={selectedItem}
+        // type={type}
+        image={selectedItem?.image}
+        name={selectedItem?.name}
+        icon={selectedItem?.icon}
+        details={selectedItem?.details}
+      />
     </BaseDashboardNavigation>
   );
 };

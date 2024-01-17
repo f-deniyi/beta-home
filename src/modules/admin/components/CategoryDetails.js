@@ -8,30 +8,43 @@ import CustomButton from "../../../generalComponents/Button";
 import EditCategory from "./EditCategory";
 import { DeleteCategoryManager } from '../controllers/delete_category_controller'
 import { DeleteBrandManager } from '../controllers/delete_brands_controller'
+import { DeleteServiceCategoryManager } from "../controllers/delete_servicecategory_controller";
 
 
-const CategoryDetails = ({ type, icon, image = productCategory, name, details, category }) => {
+const CategoryDetails = ({
+  // type,
+  icon, image = productCategory, name, details, category }) => {
   const categoryIds = [
     category?._id
   ]
   const { deletePackageController, isLoading: deletingCategory, isSuccess: deletedCategory } = DeleteCategoryManager()
   const { deleteBrandController, isLoading: deletingBrandCategory, isSuccess: deletedBrandCategory } = DeleteBrandManager()
+  const { deletePackageController: deleteServicePackage, isLoading, isSuccess } = DeleteServiceCategoryManager()
 
   const handleCategoryDelete = () => {
     const data = categoryIds
-    type === 'brand' ? deleteBrandController(data) : deletePackageController(data)
+    type === 'brand' ? deleteBrandController(data) : type === 'service' ? deleteServicePackage(data) : deletePackageController(data)
   }
 
   useEffect(() => {
-    if (deletedCategory || deletedBrandCategory) {
+    if (deletedCategory || deletedBrandCategory || isSuccess) {
       document.getElementById("category_details").close()
     }
-  }, [deletedCategory, deletedBrandCategory])
+  }, [deletedCategory, deletedBrandCategory, isSuccess])
+
+  const [type, setCategoryType] = useState('')
+
+  useEffect(() => {
+    if (category) {
+      'product_count' in category ? setCategoryType('product') : 'is_service' in category ? setCategoryType('service') : setCategoryType('brand')
+    }
+
+  }, [category])
   return (
     <>
       <ModalManagement id={"category_details"} hideCancel={true}>
         <div className="flex items-center justify-between mb-6">
-          <p className="text-[18px] font-medium ">Product Category</p>
+          <p className="text-[18px] font-medium "><span className="capitalize">{type}</span> Category</p>
           <div
             onClick={() => document.getElementById("category_details").close()}
             role="button"
@@ -51,7 +64,7 @@ const CategoryDetails = ({ type, icon, image = productCategory, name, details, c
                 <img
                   src={type === "brand" ? image ?? brand : icon}
                   alt={name}
-                  className="object-cover"
+                  className={type === "brand" ? "object-cover h-full w-full" : "object-cover "}
                 />
               </div>
             </div>
@@ -86,6 +99,8 @@ const CategoryDetails = ({ type, icon, image = productCategory, name, details, c
 
             }
             onClick={() => {
+              // console.log('-->>type<<----', type)
+
               document.getElementById("edit_category").showModal()
             }}
           />
@@ -94,7 +109,7 @@ const CategoryDetails = ({ type, icon, image = productCategory, name, details, c
             className={
               "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandRed text-white !py-[15px]"
             }
-            disabled={deletingCategory || deletingBrandCategory}
+            disabled={deletingCategory || deletingBrandCategory || isLoading}
             onClick={() => {
               handleCategoryDelete()
             }}
