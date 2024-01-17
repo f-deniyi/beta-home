@@ -3,7 +3,7 @@ import usePostManager from "../../../constants/controller_templates/post_control
 export const AddServiceCategoryManager = () => {
   const { postCaller, isLoading, isSuccess, error, data } = usePostManager(
     `/service-categories`,
-    ["product_categories"]
+    ["service-categories"]
   );
   const addCategoryController = async (details) => {
     try {

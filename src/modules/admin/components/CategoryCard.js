@@ -11,7 +11,6 @@ const CategoryCard = ({
   type,
   image
 }) => {
-  // //console.log('details', categoryDetails,icon)
   return (
     <>
       <div
@@ -31,7 +30,7 @@ const CategoryCard = ({
           <img
             src={type === "brand" ? image ?? brand : icon}
             alt={name}
-            className="object-cover"
+            className={type === "brand" ? "object-cover h-full w-full" : "object-cover "}
           />
         </div>
         <p className="text-[15px] font-normal mb-2 text-center">{name}</p>

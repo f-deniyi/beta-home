@@ -56,7 +56,7 @@ const AdminSettingsPage = () => {
                   key={index}
                   icon={item.icon}
                   name={item.name}
-                  type={"icon"}
+                  type={categoryType}
 
                 />
               ))}
@@ -91,7 +91,7 @@ const AdminSettingsPage = () => {
                   key={index}
                   icon={item.icon}
                   name={item.name}
-                  type={"icon"}
+                  type={categoryType}
 
                   onClick={() => {
                     setSelectedItem(item);
@@ -131,7 +131,7 @@ const AdminSettingsPage = () => {
                 <CategoryCard
                   details={item?.details}
                   type={"brand"}
-                  image={item?.image?.original}
+                  image={item?.image}
                   name={item.name}
                   onClick={() => {
                     setSelectedItem(item);

@@ -7,6 +7,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import useFileUpload from "../../fileupload/fileUploadController";
 import { AddBrandsManager } from "../controllers/add_brands_controller";
 import { AddCategoryManager } from "../controllers/add_category_controller";
+import { AddServiceCategoryManager } from "../controllers/add__servicecategory_controller";
 
 const AddCategory = ({ type }) => {
   const {
@@ -19,6 +20,12 @@ const AddCategory = ({ type }) => {
     isSuccess: categoryUploaded,
     addCategoryController,
   } = AddCategoryManager();
+
+  const {
+    isLoading: addingServiceCategory,
+    isSuccess: serviceCategoryUploaded,
+    addCategoryController: addServiceCategoryManager,
+  } = AddServiceCategoryManager();
 
   const [uploadedImages, setUploadedImages] = useState(null);
   const handleFileUpload = (e) => {
@@ -84,7 +91,7 @@ const AddCategory = ({ type }) => {
         };
       }
       // console.log(data);
-      type === "brand" ? addBrandController(data) : addCategoryController(data);
+      type === "brand" ? addBrandController(data) : type === "service" ? addServiceCategoryManager(data) : addCategoryController(data);
     } else {
       setImageError(true);
     }
@@ -93,12 +100,12 @@ const AddCategory = ({ type }) => {
   const formRef = useRef();
 
   useEffect(() => {
-    if (categoryUploaded || brandUploaded) {
+    if (categoryUploaded || brandUploaded || serviceCategoryUploaded) {
       formRef.current.reset();
       setUploadedImages(null);
       document.getElementById("add_category").close();
     }
-  }, [categoryUploaded, brandUploaded]);
+  }, [categoryUploaded, brandUploaded, serviceCategoryUploaded]);
 
 
 
@@ -199,8 +206,8 @@ const AddCategory = ({ type }) => {
 
             <CustomButton
               buttonText={"Proceed"}
-              disabled={addingBrandCategory || addingCategory || fileLoading}
-              isLoading={addingBrandCategory || addingCategory || fileLoading}
+              disabled={addingBrandCategory || addingCategory || fileLoading || addingServiceCategory}
+              isLoading={addingBrandCategory || addingCategory || fileLoading || addingServiceCategory}
               type={"submit"}
               className={
                 "!text-[15px] font-light w-full mt-3 rounded-full mt-[25px] !bg-brandPrimary  !py-[15px]"
