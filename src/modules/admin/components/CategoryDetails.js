@@ -11,7 +11,9 @@ import { DeleteBrandManager } from '../controllers/delete_brands_controller'
 import { DeleteServiceCategoryManager } from "../controllers/delete_servicecategory_controller";
 
 
-const CategoryDetails = ({ type, icon, image = productCategory, name, details, category }) => {
+const CategoryDetails = ({
+  // type,
+  icon, image = productCategory, name, details, category }) => {
   const categoryIds = [
     category?._id
   ]
@@ -29,6 +31,15 @@ const CategoryDetails = ({ type, icon, image = productCategory, name, details, c
       document.getElementById("category_details").close()
     }
   }, [deletedCategory, deletedBrandCategory, isSuccess])
+
+  const [type, setCategoryType] = useState('')
+
+  useEffect(() => {
+    if (category) {
+      'product_count' in category ? setCategoryType('product') : 'is_service' in category ? setCategoryType('service') : setCategoryType('brand')
+    }
+
+  }, [category])
   return (
     <>
       <ModalManagement id={"category_details"} hideCancel={true}>
@@ -53,7 +64,7 @@ const CategoryDetails = ({ type, icon, image = productCategory, name, details, c
                 <img
                   src={type === "brand" ? image ?? brand : icon}
                   alt={name}
-                  className="object-cover"
+                  className={type === "brand" ? "object-cover h-full w-full" : "object-cover "}
                 />
               </div>
             </div>

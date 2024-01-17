@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { productCategory, brand } from "../../../assets/icons";
 import CategoryDetails from "./CategoryDetails";
 
 const CategoryCard = ({
   categoryDetails,
+  details,
   icon = productCategory,
   name = "Home Decor",
   count = "1500",
   onClick,
   type,
-  image
+  image,
+  item
 }) => {
+ 
   return (
     <>
       <div
@@ -36,14 +39,7 @@ const CategoryCard = ({
         <p className="text-[15px] font-normal mb-2 text-center">{name}</p>
         {/* <p className="text-[15px] font-normal mb-2 bg-black rounded-full text-white text-[10px] font-medium py-2 px-3 text-center">{`${count}/products`}</p> */}
       </div>
-      <CategoryDetails
-        category={categoryDetails}
-        type={type}
-        image={brand}
-        name={categoryDetails?.name}
-        icon={categoryDetails?.icon}
-        details={categoryDetails?.details}
-      />
+      
     </>
   );
 };
