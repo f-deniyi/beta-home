@@ -64,8 +64,8 @@ const AddProduct = () => {
     } = useFileUpload();
 
     const handleCategoryChange = (e) => {
-        // //console.log(e)
-        setCategories(e)
+        console.log(e)
+        // setCategories(e)
     }
 
 
@@ -156,9 +156,9 @@ const AddProduct = () => {
                 )
 
             ,
-            "categories": [
+            "categories": 
                 selectedCategories.map(el => el?.id)
-            ]
+            
         }
         createProduct(data)
     }

@@ -162,10 +162,10 @@ const EditProduct = ({ productId }) => {
                 )
 
             ,
-            "categories": selectedCategories.length > 0 ? [
+            "categories": selectedCategories.length > 0 ? 
 
                 selectedCategories.map(el => el?.id)
-            ] : product?.categories
+             : product?.categories
         }
         //console.log(data)
         updateProductDetails(data)
